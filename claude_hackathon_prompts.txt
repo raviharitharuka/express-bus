@@ -1,0 +1,309 @@
+=========================================================
+CLAUDE AI HACKATHON PROMPTS
+AI-Powered Express Bus Resource Optimization Platform
+=========================================================
+
+IMPORTANT
+
+Before starting, read project_context.md completely.
+
+Use project_context.md as the single source of truth for all decisions, designs, code, and recommendations.
+
+=========================================================
+PROMPT 1 - SOLUTION ARCHITECTURE
+=========================================================
+
+Read project_context.md completely.
+
+Act as a Senior Solution Architect.
+
+Create a complete architecture for this project.
+
+Requirements:
+
+- FastAPI Backend
+- React Frontend
+- PostgreSQL Database
+- Google OR-Tools Optimization Engine
+- Emergency Recovery Engine
+- Future Prediction Engine
+- AI Dispatcher Copilot
+
+Provide:
+
+1. High-level architecture
+2. Component diagram
+3. Data flow diagram
+4. Backend service design
+5. Frontend module design
+6. AI service design
+7. Deployment architecture
+
+Do not generate code yet.
+
+Think like a Principal Engineer preparing a hackathon MVP.
+
+=========================================================
+PROMPT 2 - PROJECT STRUCTURE
+=========================================================
+
+Using project_context.md and the generated architecture:
+
+Create the complete project folder structure.
+
+Technology Stack:
+
+Frontend:
+- Next.js
+- React
+- Tailwind
+
+Backend:
+- FastAPI
+- Python
+
+Database:
+- PostgreSQL
+
+Optimization:
+- OR-Tools
+
+Prediction:
+- XGBoost
+
+I need:
+
+1. Folder hierarchy
+2. Purpose of each folder
+3. All backend modules
+4. All frontend modules
+5. All AI modules
+6. Naming conventions
+
+Generate production-quality structure.
+
+=========================================================
+PROMPT 3 - DATABASE DESIGN
+=========================================================
+
+Read project_context.md.
+
+Design the complete PostgreSQL database.
+
+Entities include:
+
+- Drivers
+- Buses
+- Bus Stations
+- Routes
+- Trips
+- Timetables
+- Emergencies
+- Predictions
+- Overtime Records
+
+Generate:
+
+1. ER diagram (text form)
+2. Table definitions
+3. Primary keys
+4. Foreign keys
+5. Relationships
+6. Index recommendations
+
+Also provide SQL CREATE TABLE statements.
+
+=========================================================
+PROMPT 4 - HARDCODED DEMO DATA
+=========================================================
+
+Generate realistic demo data for the hackathon.
+
+Requirements:
+
+Stations:
+- Central Station
+- Airport
+- North Station
+- South Station
+- University
+
+Drivers:
+- 20 Drivers
+
+Buses:
+- 50 Buses
+
+Routes:
+- 10 Routes
+
+Trips:
+- 1 Month Timetable
+
+Generate:
+
+1. drivers.json
+2. buses.json
+3. stations.json
+4. routes.json
+5. timetable.json
+
+Make the data realistic and internally consistent.
+
+=========================================================
+PROMPT 5 - OR-TOOLS OPTIMIZATION ENGINE
+=========================================================
+
+Read project_context.md.
+
+Design the OR-Tools optimization engine.
+
+Goal:
+
+Launch additional express routes using existing resources.
+
+Constraints:
+
+Driver Constraints:
+- Maximum shift length
+- Maximum driving hours
+- Vacation days
+- Rest periods
+- Overtime availability
+
+Bus Constraints:
+- Bus availability
+- Maintenance windows
+- Current location
+
+Operational Constraints:
+- No overlapping trips
+- Route frequency requirements
+- Station capacity
+
+Objective:
+
+Maximize:
+- Driver utilization
+- Fleet utilization
+- Passenger coverage
+
+Minimize:
+- Driver idle time
+- Empty bus movements
+- Overtime cost
+
+Provide:
+
+1. Optimization model
+2. Decision variables
+3. Constraints
+4. Objective function
+5. Pseudocode
+6. Python implementation approach
+
+Act as an operations research expert.
+
+=========================================================
+PROMPT 6 - EMERGENCY RECOVERY ENGINE
+=========================================================
+
+Read project_context.md.
+
+Design the Emergency Recovery Engine.
+
+Scenario:
+
+A bus breaks down.
+
+Requirements:
+
+1. Identify nearest station with available buses.
+2. Identify nearest available driver.
+3. Choose optimal replacement.
+4. Update schedules.
+5. Reallocate resources.
+
+Generate:
+
+1. Recovery workflow
+2. Decision-making algorithm
+3. Python service design
+4. API endpoints
+5. Sample inputs
+6. Sample outputs
+
+Use graph search techniques.
+
+Explain how Dijkstra algorithm can be used.
+
+=========================================================
+PROMPT 7 - PREDICTION ENGINE
+=========================================================
+
+Read project_context.md.
+
+Design the AI Prediction Engine.
+
+Predictions:
+
+1. Passenger Demand
+2. Driver Shortage
+3. Bus Maintenance Risk
+
+Requirements:
+
+- Historical Data
+- Future Forecasting
+- Recommendation Generation
+
+Provide:
+
+1. Features
+2. Training data structure
+3. Models
+4. Inputs
+5. Outputs
+6. APIs
+7. Python implementation
+
+Prefer XGBoost.
+
+=========================================================
+PROMPT 8 - AI DISPATCHER COPILOT
+=========================================================
+
+Read project_context.md.
+
+Design the AI Dispatcher Copilot.
+
+The user should be able to ask:
+
+- Can we add a new express route tomorrow?
+- Which drivers are idle today?
+- What happens if Bus B021 fails?
+- Which station needs additional buses?
+
+Provide:
+
+1. Architecture
+2. Prompt templates
+3. Retrieval strategy
+4. Function calling design
+5. Backend service
+6. Frontend chat UI
+
+Make it feel like ChatGPT for transit operators.
+
+=========================================================
+PROMPT 9 - REACT DASHBOARD
+=========================================================
+
+Read project_context.md.
+
+Design the complete dashboard.
+
+Pages:
+
+1. Overview Dashboard
+2. Timetable 
