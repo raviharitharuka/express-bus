@@ -3,9 +3,11 @@
 Run from backend/ after scripts/filter_gtfs.py:
     python scripts/build_real_timetable.py
 
-Reads data/filtered/*.csv and meta.json (repo root) and writes backend/data/*_real.json:
-timetable, stations, drivers, buses and routes, each in the same shape as the demo file
-without the suffix. The demo files are never touched. Select them with DATA_SOURCE=real.
+Reads data/filtered/*.csv and meta.json (repo root) and writes, in the same shapes as the demo files
+(which are never touched):
+    backend/data/timetable_gtfs.json, stations_gtfs.json, routes_gtfs.json   real GTFS parts + synthetic parts
+    backend/data/drivers_gtfs_synthetic.json, buses_gtfs_synthetic.json      fully synthetic
+Each file has a "provenance" key saying which parts are real. Select them with DATA_SOURCE=gtfs.
 
 What is real and what is derived:
 - Real: route numbers (route_short_name), stop names, trip departure/arrival times,
@@ -36,11 +38,14 @@ import pandas as pd
 
 BACKEND = Path(__file__).resolve().parents[1]
 FILTERED = BACKEND.parent / "data" / "filtered"
-OUT_TIMETABLE = BACKEND / "data" / "timetable_real.json"
-OUT_STATIONS = BACKEND / "data" / "stations_real.json"
-OUT_DRIVERS = BACKEND / "data" / "drivers_real.json"
-OUT_BUSES = BACKEND / "data" / "buses_real.json"
-OUT_ROUTES = BACKEND / "data" / "routes_real.json"
+OUT_TIMETABLE = BACKEND / "data" / "timetable_gtfs.json"
+OUT_STATIONS = BACKEND / "data" / "stations_gtfs.json"
+OUT_ROUTES = BACKEND / "data" / "routes_gtfs.json"
+OUT_DRIVERS = BACKEND / "data" / "drivers_gtfs_synthetic.json"  # GTFS has no rosters: fully synthetic
+OUT_BUSES = BACKEND / "data" / "buses_gtfs_synthetic.json"
+
+SOURCE = "VGN GTFS feed, VAG Nürnberg city buses"
+SCRIPT = "backend/scripts/build_real_timetable.py"
 
 ROAD_FACTOR = 1.35  # same as the demo generator
 MIN_LAYOVER_MIN = 5  # shortest turnaround before a bus takes its next trip
@@ -283,8 +288,21 @@ def main():
     buses = build_buses(blocks, departures)
     routes = build_routes(trips_df, trips, out_trips, dist, departures)
 
+    day = meta["serviceDate"]
+    provenance = {
+        OUT_TIMETABLE: {"real": [f"trips: tripId, route, stations, departure/arrival times ({SOURCE}, {day})"],
+                        "synthetic": [f"duties and each trip's dutyId/driverId/busId: trips chained by {SCRIPT}"]},
+        OUT_STATIONS: {"real": [f"stations: names and coordinates of trip terminals ({SOURCE})"],
+                       "synthetic": ["distanceKm: straight-line distance x 1.35, not road distance"]},
+        OUT_ROUTES: {"real": [f"routes: line numbers, names, terminals; duration/frequency from trip times ({SOURCE})"],
+                     "synthetic": [f"expressCandidates: chosen by {SCRIPT}"]},
+        OUT_DRIVERS: {"real": [], "synthetic": ["everything: one invented driver per synthetic duty; GTFS has no driver data"]},
+        OUT_BUSES: {"real": [], "synthetic": ["everything: one invented bus per synthetic block plus a 10% spare reserve; "
+                                              "GTFS has no fleet data"]},
+    }
     for path, payload in [(OUT_STATIONS, {"stations": stations, "distanceKm": dist}), (OUT_TIMETABLE, timetable),
                           (OUT_DRIVERS, {"drivers": drivers}), (OUT_BUSES, {"buses": buses}), (OUT_ROUTES, routes)]:
+        payload = {"provenance": provenance[path], **payload}
         path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n")
 
     types = Counter(d["type"] for d in duties)
@@ -298,7 +316,8 @@ def main():
     print(f"drivers:   {len(drivers)}, buses: {len(buses)} ({len(buses) - len(blocks)} spare), "
           f"lines: {len(routes['routes'])}")
     print("express candidates: " + "; ".join(f"{e['routeId']} {e['name']}" for e in routes["expressCandidates"]))
-    print("-> backend/data/{timetable,stations,drivers,buses,routes}_real.json")
+    print("-> backend/data/{timetable,stations,routes}_gtfs.json (real trips + synthetic parts)")
+    print("-> backend/data/{drivers,buses}_gtfs_synthetic.json (fully synthetic)")
 
 
 if __name__ == "__main__":

@@ -18,12 +18,24 @@ from services.time_utils import to_min, today
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 
-DATA_FILES = ("timetable.json", "stations.json", "drivers.json", "buses.json", "routes.json")
+# File used for each logical data file, per DATA_SOURCE. The gtfs names say what's in them:
+# *_gtfs.json mix real GTFS trips/stops/lines with synthetic parts (see their "provenance" key);
+# *_gtfs_synthetic.json are fully synthetic rosters, because GTFS has no driver or bus data.
+DATA_FILES = {
+    "synthetic": {name: name for name in ("timetable.json", "stations.json", "drivers.json", "buses.json", "routes.json")},
+    "gtfs": {
+        "timetable.json": "timetable_gtfs.json",
+        "stations.json": "stations_gtfs.json",
+        "routes.json": "routes_gtfs.json",
+        "drivers.json": "drivers_gtfs_synthetic.json",
+        "buses.json": "buses_gtfs_synthetic.json",
+    },
+}
 
 
 def _path(name: str) -> Path:
-    """DATA_SOURCE=real swaps every data file for its _real twin; nothing else changes."""
-    return DATA_DIR / (name if config.DATA_SOURCE == "synthetic" else name.replace(".json", "_real.json"))
+    """The file DATA_SOURCE selects for `name`; the services never see the difference."""
+    return DATA_DIR / DATA_FILES[config.DATA_SOURCE][name]
 
 
 @cache
@@ -33,7 +45,7 @@ def _load(name: str) -> dict:
 
 def preload() -> None:
     """Load every data file once at startup so a missing file fails fast."""
-    for name in DATA_FILES:
+    for name in DATA_FILES[config.DATA_SOURCE]:
         if not _path(name).exists():
             raise RuntimeError(f"DATA_SOURCE={config.DATA_SOURCE} needs {_path(name).name}; "
                                "run scripts/build_real_timetable.py")

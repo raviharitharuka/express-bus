@@ -1,4 +1,10 @@
 {
+  "provenance": {
+    "real": [],
+    "synthetic": [
+      "everything: one invented bus per synthetic block plus a 10% spare reserve; GTFS has no fleet data"
+    ]
+  },
   "buses": [
     {
       "busId": "RB0001",

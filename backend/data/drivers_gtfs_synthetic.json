@@ -1,4 +1,10 @@
 {
+  "provenance": {
+    "real": [],
+    "synthetic": [
+      "everything: one invented driver per synthetic duty; GTFS has no driver data"
+    ]
+  },
   "drivers": [
     {
       "driverId": "RD0001",

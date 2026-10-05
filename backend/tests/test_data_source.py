@@ -1,4 +1,4 @@
-"""DATA_SOURCE switches every data file to its _real twin without touching the services."""
+"""DATA_SOURCE=gtfs switches every data file to its GTFS-based twin without touching the services."""
 
 import pytest
 
@@ -11,8 +11,8 @@ from services.optimizer import optimize
 
 
 @pytest.fixture
-def real_data(monkeypatch):
-    monkeypatch.setattr(config, "DATA_SOURCE", "real")
+def gtfs_data(monkeypatch):
+    monkeypatch.setattr(config, "DATA_SOURCE", "gtfs")
     data._load.cache_clear()
     data.reset_live_state()
     yield
@@ -26,9 +26,11 @@ def test_synthetic_is_the_default_for_tests():
     assert len(data.station_names()) == 5
 
 
-def test_real_files_load_and_services_run(real_data):
+def test_gtfs_files_load_and_services_run(gtfs_data):
     data.preload()
-    assert all(data._path(n).name.endswith("_real.json") for n in data.DATA_FILES)
+    assert data._path("drivers.json").name == "drivers_gtfs_synthetic.json"
+    assert data._path("buses.json").name == "buses_gtfs_synthetic.json"
+    assert all("gtfs" in data._path(n).name for n in data.DATA_FILES["gtfs"])
     assert len(data.station_names()) > 5
     assert set(data.drivers()) >= {d["driverId"] for d in data.duties()}  # every duty's driver exists
     assert get_idle_drivers("2026-07-01").working_drivers == len(data.duties())
@@ -36,11 +38,11 @@ def test_real_files_load_and_services_run(real_data):
     assert get_dashboard("2026-07-01").kpis.available_buses > 0
 
 
-# --- /idle-drivers and /optimize over HTTP on real data, checked against API_CONTRACT.md ----------
+# --- /idle-drivers and /optimize over HTTP on GTFS data, checked against API_CONTRACT.md ----------
 
 from tests.test_contract import _check_tables, _compare, _json_blocks, _response_part, _section, client  # noqa: E402
 
-REAL_DATE = "2026-07-01"
+GTFS_DATE = "2026-07-01"
 
 
 def _contract_example(heading: str) -> tuple[dict, str]:
@@ -48,13 +50,13 @@ def _contract_example(heading: str) -> tuple[dict, str]:
     return _json_blocks(part)[0], part
 
 
-@pytest.mark.parametrize("params", [{}, {"date": REAL_DATE}])
-def test_real_idle_drivers_matches_contract(real_data, monkeypatch, params):
+@pytest.mark.parametrize("params", [{}, {"date": GTFS_DATE}])
+def test_gtfs_idle_drivers_matches_contract(gtfs_data, monkeypatch, params):
     monkeypatch.setenv("DEMO_DATE", "2026-06-30")  # default date = tomorrow = the real service date
     r = client.get("/idle-drivers", params=params)
     assert r.status_code == 200, r.text
     body = r.json()
-    assert body["date"] == REAL_DATE and body["idleDriverCount"] > 0
+    assert body["date"] == GTFS_DATE and body["idleDriverCount"] > 0
     example, part = _contract_example("## 1. `GET /idle-drivers`")
     _compare(example, body)
     _check_tables(part, body)
@@ -62,29 +64,53 @@ def test_real_idle_drivers_matches_contract(real_data, monkeypatch, params):
 
 @pytest.mark.parametrize("payload", [
     None,
-    {"date": REAL_DATE},
-    {"date": REAL_DATE, "candidates": [{
+    {"date": GTFS_DATE},
+    {"date": GTFS_DATE, "candidates": [{
         "startStation": "Nürnberg, Frankenstraße", "endStation": "Nürnberg Röthenbach",
         "headwayMin": 60, "serviceStart": "9:00", "serviceEnd": "12:00", "tripDurationMin": 15}]},
 ])
-def test_real_optimize_matches_contract(real_data, monkeypatch, payload):
+def test_gtfs_optimize_matches_contract(gtfs_data, monkeypatch, payload):
     monkeypatch.setenv("DEMO_DATE", "2026-06-30")
     r = client.post("/optimize", json=payload) if payload is not None else client.post("/optimize")
     assert r.status_code == 200, r.text
     body = r.json()
-    assert body["date"] == REAL_DATE and body["recommendations"]
+    assert body["date"] == GTFS_DATE and body["recommendations"]
     example, part = _contract_example("## 2. `POST /optimize`")
     _compare(example, body)
     _check_tables(part, body)
-    for rec in body["recommendations"]:  # every assigned driver is a real-data driver working that day
+    for rec in body["recommendations"]:  # every assigned driver exists in the GTFS-based roster
         drivers = {a["driver"] for a in rec["assignments"] if a["driver"] and not a["driver"].startswith("NEW-")}
         assert drivers <= set(data.drivers())
 
 
-def test_overtime_starts_where_the_duty_ends(real_data):
+def test_overtime_starts_where_the_duty_ends(gtfs_data):
     from services.idle import overtime_windows
-    day = data.resolve_day(REAL_DATE)
+    day = data.resolve_day(GTFS_DATE)
     trips = data.trips_by_duty()
     last_stop = {d["driverId"]: trips[d["dutyId"]][-1]["endStation"] for d in day.working_duties()}
     windows = overtime_windows(day)
     assert windows and all(w.station == last_stop[w.driver_id] for w in windows)
+
+
+def test_every_gtfs_file_says_what_is_synthetic():
+    import json
+    for name in data.DATA_FILES["gtfs"].values():
+        provenance = json.loads((data.DATA_DIR / name).read_text())["provenance"]
+        assert provenance["synthetic"], name
+        if name.endswith("_synthetic.json"):
+            assert provenance["real"] == [], f"{name} is named synthetic but claims real parts"
+
+
+def test_old_real_value_is_rejected(monkeypatch):
+    import importlib
+    monkeypatch.setenv("DATA_SOURCE", "real")
+    with pytest.raises(RuntimeError, match="renamed to DATA_SOURCE=gtfs"):
+        importlib.reload(config)
+    monkeypatch.setenv("DATA_SOURCE", "synthetic")
+    importlib.reload(config)
+
+
+def test_health_says_what_is_real(gtfs_data, monkeypatch):
+    monkeypatch.setattr(config, "DATA_NOTE", config.DATA_NOTES["gtfs"])
+    body = client.get("/health").json()
+    assert body["dataSource"] == "gtfs" and "synthetic" in body["dataNote"]

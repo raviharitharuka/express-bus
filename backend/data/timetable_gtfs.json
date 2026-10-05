@@ -1,4 +1,12 @@
 {
+  "provenance": {
+    "real": [
+      "trips: tripId, route, stations, departure/arrival times (VGN GTFS feed, VAG Nürnberg city buses, 2026-07-01)"
+    ],
+    "synthetic": [
+      "duties and each trip's dutyId/driverId/busId: trips chained by backend/scripts/build_real_timetable.py"
+    ]
+  },
   "template": "weekday",
   "duties": [
     {

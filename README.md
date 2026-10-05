@@ -37,11 +37,11 @@ DEMO_DATE=2026-10-05 DEMO_TIME=09:15 uvicorn main:app --reload
 **Data source.** `backend/.env` selects the dataset loaded at startup (copy `backend/.env.example` to start; restart the server after changing it):
 
 ```bash
-DATA_SOURCE=synthetic   # default: the hand-designed demo data (5 stations, 20 drivers, 50 buses)
-DATA_SOURCE=real        # VAG Nürnberg city buses from the VGN GTFS feed (data/*_real.json, service date 2026-07-01)
+DATA_SOURCE=synthetic   # default: the hand-made demo dataset (5 stations, 20 drivers, 50 buses), all invented
+DATA_SOURCE=gtfs        # real VAG Nürnberg city bus trips from the VGN GTFS feed (service date 2026-07-01)
 ```
 
-Real data keeps the real route numbers, stop names and trip times; drivers, duties and buses are derived from the trips (the feed has no vehicle schedules). Pair it with `DEMO_DATE=2026-07-01`. `GET /health` shows which source is active.
+What is real in `gtfs` mode: route numbers, stop names and coordinates, and trip departure/arrival times. What is **synthetic**: driver duties, drivers and buses (GTFS has no rosters, so `scripts/build_real_timetable.py` chains the real trips into invented duties and buses: `data/drivers_gtfs_synthetic.json`, `data/buses_gtfs_synthetic.json`), the express candidates and the distances (straight line x 1.35). Every `data/*_gtfs*.json` file has a `provenance` key listing its real and synthetic parts, and `GET /health` returns the same summary as `dataNote`. Pair it with `DEMO_DATE=2026-07-01`.
 
 **Tests and helper scripts** (from `backend/`):
 
@@ -50,7 +50,7 @@ python -m pytest -q                         # rules, endpoints and API contract 
 python scripts/top_idle.py 2026-10-06       # top 10 idle-time pools, per-driver hours
 python scripts/generate_data.py             # rebuild data/*.json from the specs in the script
 python scripts/filter_gtfs.py               # data/gtfs/ (full VGN feed) -> data/filtered/ (VAG buses, one weekday)
-python scripts/build_real_timetable.py      # data/filtered/ -> backend/data/*_real.json
+python scripts/build_real_timetable.py      # data/filtered/ -> backend/data/*_gtfs*.json (real trips + synthetic roster)
 ```
 
 ## Endpoint examples

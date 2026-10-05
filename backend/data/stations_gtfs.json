@@ -1,4 +1,12 @@
 {
+  "provenance": {
+    "real": [
+      "stations: names and coordinates of trip terminals (VGN GTFS feed, VAG Nürnberg city buses)"
+    ],
+    "synthetic": [
+      "distanceKm: straight-line distance x 1.35, not road distance"
+    ]
+  },
   "stations": [
     {
       "id": "de:09574:7825",

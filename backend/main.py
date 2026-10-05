@@ -30,4 +30,4 @@ app.include_router(dashboard.router)
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "dataSource": config.DATA_SOURCE}
+    return {"status": "ok", "dataSource": config.DATA_SOURCE, "dataNote": config.DATA_NOTE}

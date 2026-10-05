@@ -1,4 +1,12 @@
 {
+  "provenance": {
+    "real": [
+      "routes: line numbers, names, terminals; duration/frequency from trip times (VGN GTFS feed, VAG Nürnberg city buses)"
+    ],
+    "synthetic": [
+      "expressCandidates: chosen by backend/scripts/build_real_timetable.py"
+    ]
+  },
   "routes": [
     {
       "routeId": "20",
