@@ -490,9 +490,9 @@ Schedule Preventive Maintenance
 
 ---
 
-# AI Dispatcher Copilot
+# Lotse: AI Dispatcher Assistant
 
-A conversational assistant for transportation managers.
+Lotse (German for "pilot", as in a harbour pilot) is a conversational assistant for transportation managers.
 
 ### Example Questions
 

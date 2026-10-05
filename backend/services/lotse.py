@@ -1,4 +1,4 @@
-"""Rule-based dispatcher copilot.
+"""Lotse: the rule-based dispatcher assistant (served at POST /copilot, its old name).
 
 Keyword matching picks an intent, the intent calls an existing engine, and the
 result comes back as answer text plus a structured `data` payload the UI can
@@ -10,7 +10,7 @@ from dataclasses import dataclass
 from typing import Callable
 
 from errors import ApiError
-from schemas.copilot import CopilotRequest, CopilotResponse
+from schemas.lotse import LotseRequest, LotseResponse
 from schemas.emergency import EmergencyRequest
 from schemas.optimize import OptimizeRequest
 from services import data
@@ -190,13 +190,13 @@ def match_intent(q: str) -> tuple[str, Callable[[str], Reply]] | None:
     return (name, fn) if score else None
 
 
-def ask(req: CopilotRequest) -> CopilotResponse:
+def ask(req: LotseRequest) -> LotseResponse:
     q = req.question.lower()
     matched = match_intent(q)
     if not matched:
-        return CopilotResponse(
+        return LotseResponse(
             question=req.question, intent="unknown", confidence=30, data=None,
-            answer="I didn't catch that. I can check new express routes, idle drivers, "
+            answer="I'm Lotse, your dispatch assistant. I didn't catch that, but I can check new express routes, idle drivers, "
                    "bus breakdowns, stations that need buses and driver shortages. Try one of these:",
             suggested_questions=list(SUGGESTED_QUESTIONS.values()),
         )
@@ -205,7 +205,7 @@ def ask(req: CopilotRequest) -> CopilotResponse:
         reply = handler(q)
     except ApiError as e:
         reply = Reply(e.message, None, 60)
-    return CopilotResponse(
+    return LotseResponse(
         question=req.question, intent=intent, answer=reply.answer, confidence=reply.confidence, data=reply.data,
         suggested_questions=[s for name, s in SUGGESTED_QUESTIONS.items() if name != intent][:3],
     )

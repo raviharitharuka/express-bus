@@ -171,7 +171,7 @@ Top level = the **recommended plan** (all `recommended` routes solved together),
 | `currentUtilization` / `optimizedUtilization` | number | Driver utilization % (driving time ÷ duty span) before / after the plan, computed from the model solution |
 | `totalIdleHoursUsed`, `overtimeHoursUsed` | number | For the recommended plan                                   |
 | `recommended`                          | string[] | Feasible routes that also fit **together** with 0 new drivers |
-| `summary`                              | string   | One paragraph for the UI / copilot                           |
+| `summary`                              | string   | One paragraph for the UI / Lotse                             |
 | `recommendations[]`                    | array    | One entry per candidate, each solved **alone** against the roster |
 | `recommendations[].feasible`           | boolean  | Every trip covered by existing drivers (idle or allowed overtime) with a spare bus |
 | `recommendations[].newDriversRequired` | integer  | 0 if existing capacity covers the route                      |
@@ -285,9 +285,11 @@ Demo helper: undoes all breakdowns and dispatches since the server started. Resp
 
 ---
 
-## 4. `POST /copilot`
+## 4. `POST /copilot` (Lotse)
 
-Natural-language Q&A for dispatchers. No LLM: keyword matching picks an intent (one point per matching keyword, highest wins), the intent calls an existing service, and the result comes back as text plus a structured `data` payload for the UI.
+**Lotse** is the dispatcher assistant: natural-language Q&A for dispatchers. No LLM: keyword matching picks an intent (one point per matching keyword, highest wins), the intent calls an existing service, and the result comes back as text plus a structured `data` payload for the UI.
+
+The URL path `/copilot` and the mock file name `copilot.json` are kept from the assistant's earlier name ("AI Dispatcher Copilot") for compatibility; the request and response fields are unchanged.
 
 **Request**
 
@@ -384,7 +386,7 @@ Everything the KPI dashboard needs in one call.
 | `stations[]`                       | array   | Always 5 entries; `totalBuses` sums to 50                   |
 | `stations[].availableBuses`        | integer | Spare buses ready to dispatch (live, after emergencies)     |
 | `stations[].driversOnDuty`         | integer | Working drivers based at this station today                 |
-| `alerts[]`                         | array   | Stations with 0 spare buses, rebalancing moves (same logic as the copilot's `station_buses`), predicted shortage, buses in maintenance |
+| `alerts[]`                         | array   | Stations with 0 spare buses, rebalancing moves (same logic as Lotse's `station_buses` intent), predicted shortage, buses in maintenance |
 | `alerts[].level`                   | enum    | `info` \| `warning` \| `critical`                           |
 
 ---

@@ -143,7 +143,7 @@ def test_emergency():
     assert client.post("/emergency/reset").json() == {"status": "reset"}
 
 
-def test_copilot():
+def test_lotse():  # endpoint path is still /copilot
     sec = _section("## 4. `POST /copilot`")
     request = _json_blocks(sec)[0]
     r = client.post("/copilot", json=request)

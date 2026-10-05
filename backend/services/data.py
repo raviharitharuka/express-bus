@@ -127,7 +127,7 @@ def driver_busy_until(driver_id: str) -> int:
 
 @contextmanager
 def what_if():
-    """Run hypothetical changes (e.g. a copilot "what happens if...") and roll them back afterwards."""
+    """Run hypothetical changes (e.g. a Lotse "what happens if...") and roll them back afterwards."""
     saved = copy.deepcopy(_bus_changes), dict(_driver_busy_until)
     try:
         yield

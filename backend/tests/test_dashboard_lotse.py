@@ -1,11 +1,11 @@
-"""Dashboard KPIs and copilot intents: run from backend/ with  python -m pytest -q"""
+"""Dashboard KPIs and Lotse intents: run from backend/ with  python -m pytest -q"""
 
 import pytest
 
-from schemas.copilot import CopilotRequest
+from schemas.lotse import LotseRequest
 from schemas.emergency import EmergencyRequest
 from services import data
-from services.copilot import ask
+from services.lotse import ask
 from services.dashboard import get_dashboard
 from services.emergency import handle_incident
 from services.idle import get_idle_drivers
@@ -50,31 +50,31 @@ def test_dashboard_follows_live_breakdowns():
     ("Are we short of drivers this month?", "driver_shortage"),
 ])
 def test_intents(question, intent):
-    r = ask(CopilotRequest(question=question))
+    r = ask(LotseRequest(question=question))
     assert r.intent == intent
     assert r.answer and r.data is not None
     assert len(r.suggested_questions) == 3
 
 
 def test_launch_payload_matches_optimizer():
-    r = ask(CopilotRequest(question="Can we launch a new express route tomorrow?"))
+    r = ask(LotseRequest(question="Can we launch a new express route tomorrow?"))
     assert r.data["recommended"] == ["E1", "E3"]
     assert {x["route"] for x in r.data["routes"]} == {"E1", "E2", "E3"}
 
 
 def test_station_buses_suggests_rebalancing():
-    r = ask(CopilotRequest(question="Which station needs more buses?"))
+    r = ask(LotseRequest(question="Which station needs more buses?"))
     assert r.data["moves"] == [{"from": "North Station", "to": "Airport", "buses": 2, "distanceKm": 4}]
     assert "move 2 buses" in r.answer
 
 
 def test_breakdown_question_is_hypothetical():
-    r = ask(CopilotRequest(question="What happens if bus B021 breaks down at 09:15?"))
+    r = ask(LotseRequest(question="What happens if bus B021 breaks down at 09:15?"))
     assert r.data["hypothetical"] and r.data["status"] == "DISPATCHED"
     assert next(b for b in data.buses() if b["busId"] == "B021")["status"] == "active"
 
 
 def test_unknown_question_returns_suggestions():
-    r = ask(CopilotRequest(question="What's the weather like?"))
+    r = ask(LotseRequest(question="What's the weather like?"))
     assert r.intent == "unknown" and r.data is None
     assert len(r.suggested_questions) == 5

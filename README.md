@@ -70,7 +70,7 @@ curl -X POST http://localhost:8000/emergency \
 curl -X POST http://localhost:8000/emergency/reset
 ```
 
-**`POST /copilot`** — ask in plain English; returns answer text, the matched intent and a structured `data` payload
+**`POST /copilot`** — ask **Lotse**, the dispatcher assistant, in plain English; returns answer text, the matched intent and a structured `data` payload. The URL path `/copilot` is kept from the assistant's earlier name for compatibility.
 
 ```bash
 curl -X POST http://localhost:8000/copilot \
@@ -573,9 +573,9 @@ Schedule Preventive Maintenance
 
 ---
 
-# AI Dispatcher Copilot
+# Lotse: AI Dispatcher Assistant
 
-A conversational assistant for transportation managers.
+Lotse (German for "pilot", as in a harbour pilot) is a conversational assistant for transportation managers.
 
 ### Example Questions
 
