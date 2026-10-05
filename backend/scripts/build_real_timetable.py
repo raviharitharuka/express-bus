@@ -19,7 +19,7 @@ What is real and what is derived:
 - Duties, drivers and buses are SYNTHETIC: the feed has no usable block_id, so trips are
   chained into vehicle blocks (same terminal, >= MIN_LAYOVER_MIN layover, same line
   preferred, shortest wait first; no empty repositioning trips) and blocks are cut into
-  driver duties of at most MAX_DUTY_MIN. Ids are prefixed RB/RD/RDU to keep them apart from
+  driver duties of at most MAX_DUTY_MIN, also cut at any wait of MAX_DUTY_GAP_MIN or more. Ids are prefixed RB/RD/RDU to keep them apart from
   the demo's B/D/DU ids. Drivers are based at the station where their duty starts, accept
   overtime 2 in 3 times, max shift 9 h, no vacations. Each block is one active bus parked at
   its first terminal, plus a RESERVE_SHARE of spare buses at the busiest terminals.
@@ -50,6 +50,8 @@ SCRIPT = "backend/scripts/build_real_timetable.py"
 ROAD_FACTOR = 1.35  # same as the demo generator
 MIN_LAYOVER_MIN = 5  # shortest turnaround before a bus takes its next trip
 MAX_DUTY_MIN = 8 * 60 + 30  # cut a block into a new duty when the span would exceed this
+MAX_DUTY_GAP_MIN = 3 * 60  # ...or when the bus waits this long: the bus goes back to the depot, the driver
+                           # signs off, so a 6 h wait never counts as one paid duty (1-3 h stays a split shift)
 LONG_LAYOVER_MIN = 60  # same thresholds the idle-time engine reports
 SPLIT_BREAK_MIN = 120
 SHORT_DUTY_MIN = 5 * 60
@@ -137,10 +139,12 @@ def chain_blocks(trips: list[dict]) -> list[list[dict]]:
 
 
 def cut_duties(block: list[dict]) -> list[list[dict]]:
-    """Split a block into driver duties no longer than MAX_DUTY_MIN (relief at a terminal)."""
+    """Split a block into driver duties: at most MAX_DUTY_MIN long, and no wait of MAX_DUTY_GAP_MIN or more inside."""
     duties, current = [], []
     for trip in block:
-        if current and trip["arr"] - current[0]["dep"] > MAX_DUTY_MIN:
+        too_long = current and trip["arr"] - current[0]["dep"] > MAX_DUTY_MIN
+        long_wait = current and trip["dep"] - current[-1]["arr"] >= MAX_DUTY_GAP_MIN
+        if too_long or long_wait:
             duties.append(current)
             current = []
         current.append(trip)

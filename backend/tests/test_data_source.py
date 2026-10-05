@@ -114,3 +114,30 @@ def test_health_says_what_is_real(gtfs_data, monkeypatch):
     monkeypatch.setattr(config, "DATA_NOTE", config.DATA_NOTES["gtfs"])
     body = client.get("/health").json()
     assert body["dataSource"] == "gtfs" and "synthetic" in body["dataNote"]
+
+
+def test_gtfs_timetable_is_clean(gtfs_data):
+    """No overlapping or duplicate trips, no empty fields, no unrealistic waits inside a duty."""
+    from collections import defaultdict
+    from services.time_utils import to_min
+    day = data.resolve_day(GTFS_DATE)
+    trips_by_duty = data.trips_by_duty()
+    trips = [t for d in day.working_duties() for t in trips_by_duty[d["dutyId"]]]
+
+    by_bus = defaultdict(list)
+    for t in trips:
+        by_bus[t["busId"]].append(t)
+    for groups in (trips_by_duty, by_bus):
+        for legs in groups.values():
+            legs = sorted(legs, key=lambda t: t["departureTime"])
+            assert all(to_min(a["arrivalTime"]) <= to_min(b["departureTime"]) for a, b in zip(legs, legs[1:]))
+
+    key = [(t["route"], t["startStation"], t["endStation"], t["departureTime"]) for t in trips]
+    assert len(key) == len(set(key)), "duplicate trips"
+    rows = trips + day.working_duties() + list(data.drivers().values()) + data.buses() + data.stations()
+    assert all(v not in (None, "") for r in rows for v in r.values()), "empty fields"
+    assert all(to_min(t["arrivalTime"]) > to_min(t["departureTime"]) for t in trips)
+
+    waits = [to_min(b["departureTime"]) - to_min(a["arrivalTime"])
+             for legs in trips_by_duty.values() for a, b in zip(legs, legs[1:])]
+    assert max(waits) < 180, "a duty contains a wait of 3 h or more"
