@@ -1,0 +1,519 @@
+{
+  "routes": [
+    {
+      "routeId": "20",
+      "name": "Nürnberg Am Wegfeld - Boxdorf - Erlangen Tennenlohe - Arcaden - Hugenottenplatz",
+      "from": "Nürnberg Am Wegfeld",
+      "to": "Erlangen Arcaden",
+      "distanceKm": 16.0,
+      "durationMin": 34,
+      "frequencyMin": 20
+    },
+    {
+      "routeId": "21",
+      "name": "Ziegelstein Süd - Buchenbühl - Ziegelstein Süd",
+      "from": "Nürnberg Ziegelstein Süd",
+      "to": "Nürnberg Ziegelstein Süd",
+      "distanceKm": 0,
+      "durationMin": 14,
+      "frequencyMin": 20
+    },
+    {
+      "routeId": "30",
+      "name": "Nürnberg Nordostbahnhof - Flughafen - Am Wegfeld - Erlangen Arcaden - Hauptbahnhof - Hugenottenplatz",
+      "from": "Erlangen Arcaden",
+      "to": "Nürnberg, Nordostbahnhof",
+      "distanceKm": 20.7,
+      "durationMin": 61,
+      "frequencyMin": 25
+    },
+    {
+      "routeId": "31",
+      "name": "Herrnhütte - Am Wegfeld - Neunhof - Großgründlach",
+      "from": "Nürnberg Hansengarten",
+      "to": "Nürnberg Herrnhütte",
+      "distanceKm": 11.4,
+      "durationMin": 59,
+      "frequencyMin": 30
+    },
+    {
+      "routeId": "32",
+      "name": "Herrnhütte - Sieboldstraße Schleife",
+      "from": "Nürnberg Herrnhütte",
+      "to": "Nürnberg Sieboldstr. Schleife",
+      "distanceKm": 1.6,
+      "durationMin": 7,
+      "frequencyMin": 30
+    },
+    {
+      "routeId": "34",
+      "name": "Plärrer - St. Johannisfriedhof - Klinikum Nord - Friedrich-Ebert-Platz",
+      "from": "Nürnberg Plärrer",
+      "to": "Nürnberg Friedrich-Ebert-Platz",
+      "distanceKm": 2.2,
+      "durationMin": 15,
+      "frequencyMin": 15
+    },
+    {
+      "routeId": "35",
+      "name": "Röthenbach - Maximilianstraße - Nordwestring - Nordostbahnhof",
+      "from": "Nürnberg, Nordostbahnhof",
+      "to": "Nürnberg Röthenbach",
+      "distanceKm": 10.5,
+      "durationMin": 40,
+      "frequencyMin": 10
+    },
+    {
+      "routeId": "36",
+      "name": "Plärrer - Rathaus - Rathenauplatz - Doku-Zentrum",
+      "from": "Nürnberg Plärrer",
+      "to": "Nürnberg Doku-Zentrum",
+      "distanceKm": 5.0,
+      "durationMin": 26,
+      "frequencyMin": 10
+    },
+    {
+      "routeId": "37",
+      "name": "Rathaus - Stadtgrenze - Fürth Hauptbahnhof",
+      "from": "Nürnberg Rathaus",
+      "to": "Fürth Hauptbahnhof",
+      "distanceKm": 8.9,
+      "durationMin": 45,
+      "frequencyMin": 25
+    },
+    {
+      "routeId": "38",
+      "name": "Virnsberger Straße Wende - Maximilianstraße - Stadtgrenze",
+      "from": "Fürth Stadtgrenze",
+      "to": "Nürnberg Virnsberg.Str. Wende",
+      "distanceKm": 3.0,
+      "durationMin": 27,
+      "frequencyMin": 20
+    },
+    {
+      "routeId": "39",
+      "name": "Fürth Hauptbahnhof - Nürnberg Nordwestring - Maximilianstr.",
+      "from": "Fürth Hauptbahnhof",
+      "to": "Nürnberg Maximilianstr.",
+      "distanceKm": 5.5,
+      "durationMin": 34,
+      "frequencyMin": 20
+    },
+    {
+      "routeId": "40",
+      "name": "Heinemannbrücke - Laufamholz - Schwaig  bzw. Behringersdorf Schwaig Am Bahnhof - Max-Reger-Straße bzw. Behringersdorf",
+      "from": "Nürnberg Heinemannbrü.",
+      "to": "Nürnberg Hammer",
+      "distanceKm": 5.3,
+      "durationMin": 13,
+      "frequencyMin": 30
+    },
+    {
+      "routeId": "43",
+      "name": "Hauptbahnhof - Zerzabelshof  - Passauer Straße",
+      "from": "Nürnberg Passauer Str.",
+      "to": "Nürnberg Hbf",
+      "distanceKm": 4.0,
+      "durationMin": 13,
+      "frequencyMin": 15
+    },
+    {
+      "routeId": "44",
+      "name": "Hauptbahnhof - Zerzabelshof Mitte - Klinikum Süd - Langwasser Mitte",
+      "from": "Nürnb. Langwasser Mitte",
+      "to": "Nürnberg Hbf",
+      "distanceKm": 8.1,
+      "durationMin": 29,
+      "frequencyMin": 20
+    },
+    {
+      "routeId": "45",
+      "name": "Frankenstraße - Wodanstr. - Mögeldorf - Nordostbahnhof - Ziegelstein",
+      "from": "Nürnberg Ziegelstein Süd",
+      "to": "Nürnberg, Frankenstraße",
+      "distanceKm": 8.4,
+      "durationMin": 55,
+      "frequencyMin": 20
+    },
+    {
+      "routeId": "46",
+      "name": "Rathaus - Nordostbahnhof - Martha-Maria-Krankenhaus",
+      "from": "Nürnberg Rathaus",
+      "to": "Nürnberg Martha-Maria-Krkhs.",
+      "distanceKm": 6.8,
+      "durationMin": 35,
+      "frequencyMin": 20
+    },
+    {
+      "routeId": "47",
+      "name": "Rathaus - Kilianstraße - Forchheimer Straße",
+      "from": "Nürnberg Rathaus",
+      "to": "Nürnberg Forchheimer Str.",
+      "distanceKm": 3.6,
+      "durationMin": 20,
+      "frequencyMin": 25
+    },
+    {
+      "routeId": "49",
+      "name": "Nordostbahnhof - Martha-Maria-Krankenhaus",
+      "from": "Nürnberg, Nordostbahnhof",
+      "to": "Nürnberg Martha-Maria-Krkhs.",
+      "distanceKm": 3.3,
+      "durationMin": 7,
+      "frequencyMin": 55
+    },
+    {
+      "routeId": "50",
+      "name": "Langwasser Mitte - Gewerbepark Nbg./Feucht - Feucht Bahnhof - Am Reichswald",
+      "from": "Nürnb. Langwasser Mitte",
+      "to": "Nürnberg GNF Am Tower",
+      "distanceKm": 5.0,
+      "durationMin": 14,
+      "frequencyMin": 55
+    },
+    {
+      "routeId": "51",
+      "name": "Frankenstraße - Herpersdorf - Kornburg - Kleinschwarzenlohe Nord",
+      "from": "Kleinschwarzenlohe Nord",
+      "to": "Nürnberg, Frankenstraße",
+      "distanceKm": 12.2,
+      "durationMin": 34,
+      "frequencyMin": 15
+    },
+    {
+      "routeId": "52",
+      "name": "Langwasser Mitte - Worzeldorf - Herpersdorf - Katzwang",
+      "from": "Nürnberg Katzwang Süd",
+      "to": "Nürnb. Langwasser Mitte",
+      "distanceKm": 11.2,
+      "durationMin": 26,
+      "frequencyMin": 20
+    },
+    {
+      "routeId": "53",
+      "name": "Luitpoldhain - Meistersingerhalle - Bauernfeindstraße - Worzeldorf - Kornburg - Schwand",
+      "from": "Schwand (Schwanst) Marktpl.",
+      "to": "Nürnberg Luitpoldhain",
+      "distanceKm": 21.0,
+      "durationMin": 42,
+      "frequencyMin": 30
+    },
+    {
+      "routeId": "54",
+      "name": "Langwasser Süd - Altenfurt - Fischbach - Brunn",
+      "from": "Nürnberg Brunn Schleife",
+      "to": "Nürnberg Langwasser Süd",
+      "distanceKm": 12.7,
+      "durationMin": 22,
+      "frequencyMin": 35
+    },
+    {
+      "routeId": "55",
+      "name": "Max-Grundig-Platz - (Meistersingerhalle) - Langwasser Mitte",
+      "from": "Nürnberg Max-Grundig-Platz",
+      "to": "Nürnb. Langwasser Mitte",
+      "distanceKm": 3.0,
+      "durationMin": 9,
+      "frequencyMin": 15
+    },
+    {
+      "routeId": "56",
+      "name": "Langwasser Mitte - Klinikum Süd - Fischbach - Flachsröste",
+      "from": "Nürnb. Langwasser Mitte",
+      "to": "Nürnberg Flachsröste",
+      "distanceKm": 5.9,
+      "durationMin": 23,
+      "frequencyMin": 20
+    },
+    {
+      "routeId": "57",
+      "name": "Langwasser Mitte - Moorenbrunn - Altenfurt - Fischbach Bahnhof",
+      "from": "Nürnb. Langwasser Mitte",
+      "to": "Nürnberg Fischbach Bahnhof Wende",
+      "distanceKm": 4.3,
+      "durationMin": 21,
+      "frequencyMin": 15
+    },
+    {
+      "routeId": "58",
+      "name": "Frankenstraße - Dianaplatz - Werderau / Wacholderweg",
+      "from": "Nürnberg Wacholderweg",
+      "to": "Nürnberg Vogelweiherstr.",
+      "distanceKm": 2.1,
+      "durationMin": 8,
+      "frequencyMin": 30
+    },
+    {
+      "routeId": "59",
+      "name": "Langwasser Süd - Altenfurt - Fischbach - Birnthon",
+      "from": "Nürnberg Langwasser Süd",
+      "to": "Nürnberg Birnthon",
+      "distanceKm": 12.2,
+      "durationMin": 19,
+      "frequencyMin": 40
+    },
+    {
+      "routeId": "60",
+      "name": "Röthenbach - Schulzentrum Südwest - Wertachstr. - Bremer Straße Wende",
+      "from": "Nürnberg Röthenbach",
+      "to": "Nürnberg Bremer Str. Wende",
+      "distanceKm": 4.8,
+      "durationMin": 20,
+      "frequencyMin": 105
+    },
+    {
+      "routeId": "61",
+      "name": "Nürnberg Röthenbach - Reichelsdorf - Holzheim - Schwabach Wolkersdorf - Bahnhof bzw. W.- v.- Eschenbach-Gymnasium",
+      "from": "Nürnberg Röthenbach",
+      "to": "Schwabach, Schwabach Bf.",
+      "distanceKm": 14.3,
+      "durationMin": 31,
+      "frequencyMin": 30
+    },
+    {
+      "routeId": "62",
+      "name": "Röthenbach - Koppenhof - Reichelsdorf - Katzwang - Kornburg",
+      "from": "Nürnb. Kornburg Schleife",
+      "to": "Nürnberg Röthenbach",
+      "distanceKm": 12.4,
+      "durationMin": 37,
+      "frequencyMin": 20
+    },
+    {
+      "routeId": "65",
+      "name": "Röthenbach - Frankenstraße - Ostring - Nordostbahnhof",
+      "from": "Nürnberg Röthenbach",
+      "to": "Nürnberg, Nordostbahnhof",
+      "distanceKm": 10.5,
+      "durationMin": 44,
+      "frequencyMin": 10
+    },
+    {
+      "routeId": "66",
+      "name": "Röthenbach - Eibach Bahnhof - Pillenreuth",
+      "from": "Nürnberg Pillenreuth",
+      "to": "Nürnberg Röthenbach",
+      "distanceKm": 7.3,
+      "durationMin": 27,
+      "frequencyMin": 30
+    },
+    {
+      "routeId": "67",
+      "name": "Nürnberg Frankenstr. - Röthenbach - Fürth Süd - Fürth Hauptbahnhof",
+      "from": "Nürnberg, Frankenstraße",
+      "to": "Fürth Hauptbahnhof",
+      "distanceKm": 11.3,
+      "durationMin": 56,
+      "frequencyMin": 15
+    },
+    {
+      "routeId": "68",
+      "name": "Gustav-Adolf-Straße - Dianaplatz - Finkenbrunn - Langwasser Mitte",
+      "from": "Nürnb. Langwasser Mitte",
+      "to": "Nürnberg, Gustav-Adolf-Str.",
+      "distanceKm": 10.6,
+      "durationMin": 46,
+      "frequencyMin": 20
+    },
+    {
+      "routeId": "69",
+      "name": "Gustav-Adolf-Straße - Südwestpark - Röthenbach",
+      "from": "Nürnberg Röthenbach",
+      "to": "Nürnberg, Gustav-Adolf-Str.",
+      "distanceKm": 2.7,
+      "durationMin": 17,
+      "frequencyMin": 15
+    },
+    {
+      "routeId": "70",
+      "name": "Nürnberg Gustav-Adolf-Straße - Fürth Süd - Zirndorf Kneippallee",
+      "from": "Zirndorf Kneippallee",
+      "to": "Nürnberg, Gustav-Adolf-Str.",
+      "distanceKm": 9.1,
+      "durationMin": 35,
+      "frequencyMin": 30
+    },
+    {
+      "routeId": "71",
+      "name": "Nürnberg Gustav-Adolf-Straße - Fürth Süd - Oberasbach Linder Siedlung",
+      "from": "Nürnberg, Gustav-Adolf-Str.",
+      "to": "Oberasbach Leipziger Pl.",
+      "distanceKm": 8.5,
+      "durationMin": 31,
+      "frequencyMin": 30
+    },
+    {
+      "routeId": "72",
+      "name": "Nürnberg Gustav-Adolf-Straße - Fürth Süd - Zirndorf Realschule",
+      "from": "Zirndorf Realschule",
+      "to": "Nürnberg, Gustav-Adolf-Str.",
+      "distanceKm": 9.1,
+      "durationMin": 34,
+      "frequencyMin": 30
+    },
+    {
+      "routeId": "73",
+      "name": "Gustav-Adolf-Straße - Kleinreuth b. Schweinau - Stadtgrenze",
+      "from": "Nürnberg, Gustav-Adolf-Str.",
+      "to": "Fürth Stadtgrenze",
+      "distanceKm": 4.7,
+      "durationMin": 20,
+      "frequencyMin": 30
+    },
+    {
+      "routeId": "82",
+      "name": "Koppenhof Wende - Krottenbach - Reichelsdorf Bahnhof",
+      "from": "Nürnberg Reichelsdorf Bahnhof",
+      "to": "Nürnberg Koppenhof Wende",
+      "distanceKm": 1.0,
+      "durationMin": 12,
+      "frequencyMin": 40
+    },
+    {
+      "routeId": "83",
+      "name": "Katzwang - Wolkersdorf - Dietersdorf - Reichelsdorf - Koppenhof",
+      "from": "Nürnberg Koppenhof Wende",
+      "to": "Nürnberg Katzwang Sportplatz",
+      "distanceKm": 5.5,
+      "durationMin": 26,
+      "frequencyMin": 40
+    },
+    {
+      "routeId": "84",
+      "name": "Plärrer - Dr. Erler Kliniken",
+      "from": "Nürnberg Plärrer",
+      "to": "Nürnberg Dr. Erler Kliniken",
+      "distanceKm": 0.8,
+      "durationMin": 5,
+      "frequencyMin": 20
+    },
+    {
+      "routeId": "89",
+      "name": "Frankenstraße - Kornburg - Wendelstein Gymnasium",
+      "from": "Wendelstein Gymnasium",
+      "to": "Nürnberg, Frankenstraße",
+      "distanceKm": 14.3,
+      "durationMin": 53,
+      "frequencyMin": 60
+    },
+    {
+      "routeId": "91",
+      "name": "Schulzentrum Südwest - Weiherhaus - Kornburg",
+      "from": "Nürnberg Schulzentr. Südwest",
+      "to": "Nürnb. Kornburg Schleife",
+      "distanceKm": 10.7,
+      "durationMin": 28,
+      "frequencyMin": 5
+    },
+    {
+      "routeId": "92",
+      "name": "Meistersingerhalle - Langwasser Mitte - Katzwang Süd Wende",
+      "from": "Nürnberg Meistersingerhalle",
+      "to": "Nürnberg Katzwang Süd",
+      "distanceKm": 14.5,
+      "durationMin": 39,
+      "frequencyMin": 5
+    },
+    {
+      "routeId": "93",
+      "name": "Meistersingerhalle - Langwasser Mitte - Kornburg",
+      "from": "Nürnberg Meistersingerhalle",
+      "to": "Nürnb. Kornburg Schleife",
+      "distanceKm": 13.1,
+      "durationMin": 31,
+      "frequencyMin": 5
+    },
+    {
+      "routeId": "94",
+      "name": "Zerzabelshof Mitte bzw. Sportanlage FCN - Rathenauplatz - Rathaus",
+      "from": "Nürnberg Sportanlage FCN",
+      "to": "Nürnberg Rathaus",
+      "distanceKm": 6.1,
+      "durationMin": 23,
+      "frequencyMin": 5
+    },
+    {
+      "routeId": "95",
+      "name": "Mögeldorf - Schoppershof - Nordostbahnhof",
+      "from": "Nürnberg Mögeldorf",
+      "to": "Nürnberg, Nordostbahnhof",
+      "distanceKm": 3.3,
+      "durationMin": 15,
+      "frequencyMin": 5
+    },
+    {
+      "routeId": "96",
+      "name": "Meistersingerhalle - Moorenbrunn - Altenfurt - Birnthon",
+      "from": "Nürnberg Meistersingerhalle",
+      "to": "Nürnberg Birnthon",
+      "distanceKm": 15.8,
+      "durationMin": 41,
+      "frequencyMin": 5
+    },
+    {
+      "routeId": "97",
+      "name": "Nordwestring - Wetzendorf - Berufsförderungswerk - Forchheimer Str.",
+      "from": "Nürnberg Forchheimer Str.",
+      "to": "Nürnberg Nordwestring",
+      "distanceKm": 1.0,
+      "durationMin": 15,
+      "frequencyMin": 65
+    },
+    {
+      "routeId": "98",
+      "name": "Röthenbach - Schulzentrum Südwest - Finkenbrunn - Langwasser Mitte",
+      "from": "Nürnberg Röthenbach",
+      "to": "Nürnb. Langwasser Mitte",
+      "distanceKm": 10.0,
+      "durationMin": 36,
+      "frequencyMin": 10
+    },
+    {
+      "routeId": "99",
+      "name": "Höfles West - Am Wegfeld - Buch Süd",
+      "from": "Nürnberg Buch Süd",
+      "to": "Nürnberg Höfles West",
+      "distanceKm": 2.0,
+      "durationMin": 22,
+      "frequencyMin": 55
+    }
+  ],
+  "expressCandidates": [
+    {
+      "routeId": "E1",
+      "name": "Nürnberg, Frankenstraße - Nürnberg Röthenbach Express",
+      "startStation": "Nürnberg, Frankenstraße",
+      "endStation": "Nürnberg Röthenbach",
+      "distanceKm": 5.5,
+      "tripDurationMin": 15,
+      "turnaroundMin": 10,
+      "headwayMin": 30,
+      "serviceStart": "09:00",
+      "serviceEnd": "13:00"
+    },
+    {
+      "routeId": "E2",
+      "name": "Nürnberg Meistersingerhalle - Nürnberg Röthenbach Express",
+      "startStation": "Nürnberg Meistersingerhalle",
+      "endStation": "Nürnberg Röthenbach",
+      "distanceKm": 7.6,
+      "tripDurationMin": 20,
+      "turnaroundMin": 10,
+      "headwayMin": 30,
+      "serviceStart": "09:00",
+      "serviceEnd": "13:00"
+    },
+    {
+      "routeId": "E3",
+      "name": "Nürnberg Röthenbach - Nürnb. Langwasser Mitte Express",
+      "startStation": "Nürnberg Röthenbach",
+      "endStation": "Nürnb. Langwasser Mitte",
+      "distanceKm": 10.0,
+      "tripDurationMin": 25,
+      "turnaroundMin": 10,
+      "headwayMin": 30,
+      "serviceStart": "09:00",
+      "serviceEnd": "13:00"
+    }
+  ]
+}

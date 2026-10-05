@@ -39,15 +39,19 @@ def idle_windows(day: data.Day) -> list[Window]:
 
 
 def overtime_windows(day: data.Day) -> list[Window]:
-    """Time after the duty ends, up to maxShiftHours, for drivers who accept overtime."""
+    """Time after the duty ends, up to maxShiftHours, for drivers who accept overtime.
+
+    The driver is where their last trip ended. That's the home station in the synthetic data, but
+    real duties (cut from a bus's day) often end elsewhere."""
     drivers = data.drivers()
+    trips = data.trips_by_duty()
     out = []
     for duty in day.working_duties():
         drv = drivers[duty["driverId"]]
         start = to_min(duty["start"])
         end, limit = to_min(duty["end"]), start + drv["maxShiftHours"] * 60
         if drv["overtimeAvailable"] and limit - end >= MIN_IDLE_MIN:
-            out.append(Window(drv["driverId"], drv["homeStation"], end, limit, "overtime"))
+            out.append(Window(drv["driverId"], trips[duty["dutyId"]][-1]["endStation"], end, limit, "overtime"))
     return out
 
 

@@ -1,8 +1,15 @@
+import logging
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+import config
 from errors import register_error_handlers
 from routers import dashboard, emergency, idle_drivers, lotse, optimize
+from services import data
+
+data.preload()
+logging.getLogger("uvicorn.error").info("DATA_SOURCE=%s", config.DATA_SOURCE)
 
 app = FastAPI(title="Express Bus Optimizer", version="0.1.0")
 
@@ -23,4 +30,4 @@ app.include_router(dashboard.router)
 
 @app.get("/health")
 def health():
-    return {"status": "ok"}
+    return {"status": "ok", "dataSource": config.DATA_SOURCE}

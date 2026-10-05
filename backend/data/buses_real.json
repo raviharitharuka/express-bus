@@ -1,0 +1,2524 @@
+{
+  "buses": [
+    {
+      "busId": "RB0001",
+      "station": "Kleinschwarzenlohe Nord",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0002",
+      "station": "Zirndorf Jahnstr.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0003",
+      "station": "Nürnberg Holzheim Schleife",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0004",
+      "station": "Nürnberg, Fischbach Bahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0005",
+      "station": "Nürnberg Hohe Marter Nord",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0006",
+      "station": "Nürnberg, Frankenstraße",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0007",
+      "station": "Nürnberg Brunn Schleife",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0008",
+      "station": "Nürnberg Jaeckelstr.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0009",
+      "station": "Nürnberg Dianaplatz",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0010",
+      "station": "Zirndorf Kneippallee",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0011",
+      "station": "Nürnberg Zerzabelshof Mitte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0012",
+      "station": "Wolkersdorf Schleife",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0013",
+      "station": "Schwand (Schwanst) Marktpl.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0014",
+      "station": "Kleinschwarzenlohe Nord",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0015",
+      "station": "Nürnberg Am Wegfeld",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0016",
+      "station": "Nürnberg Ellingstr.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0017",
+      "station": "Nürnberg, Nordostbahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0018",
+      "station": "Nürnberg, Nordostbahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0019",
+      "station": "Nürnberg Hammer",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0020",
+      "station": "Nürnberg Katzwang Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0021",
+      "station": "Nürnberg Passauer Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0022",
+      "station": "Nürnberg Hohe Marter Nord",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0023",
+      "station": "Zirndorf Jahnstr.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0024",
+      "station": "Erlangen Arcaden",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0025",
+      "station": "Nürnberg Kriegerdenkmal",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0026",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0027",
+      "station": "Fürth Stadtgrenze",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0028",
+      "station": "Nürnberg Eibach Bahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0029",
+      "station": "Nürnberg Kriegerdenkmal",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0030",
+      "station": "Fürth Hans-Böckler-Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0031",
+      "station": "Nürnberg, Frankenstraße",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0032",
+      "station": "Nürnberg, Nordostbahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0033",
+      "station": "Nürnberg, Nordostbahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0034",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0035",
+      "station": "Nürnberg, Fischbach Bahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0036",
+      "station": "Fürth Hauptbahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0037",
+      "station": "Nürnberg, Frankenstraße",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0038",
+      "station": "Nürnb. Langwasser Mitte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0039",
+      "station": "Schwabach Nördlinger S.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0040",
+      "station": "Nürnb. Kornburg Schleife",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0041",
+      "station": "Fürth Hauptbahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0042",
+      "station": "Nürnberg Dianaplatz",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0043",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0044",
+      "station": "Nürnberg Königshof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0045",
+      "station": "Nürnberg Katzwang Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0046",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0047",
+      "station": "Nürnb. Langwasser Mitte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0048",
+      "station": "Nürnberg Am Wegfeld",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0049",
+      "station": "Nürnberg Zerzabelshof Mitte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0050",
+      "station": "Nürnberg Dianaplatz",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0051",
+      "station": "Nürnberg Rollnerstr./Nordring",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0052",
+      "station": "Nürnberg, Fischbach Bahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0053",
+      "station": "Fürth Stadtgrenze",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0054",
+      "station": "Nürnberg, Nordostbahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0055",
+      "station": "Kleinschwarzenlohe Nord",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0056",
+      "station": "Nürnberg Ziegelstein Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0057",
+      "station": "Nürnberg Maximilianstr.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0058",
+      "station": "Nürnberg Holzheim Schleife",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0059",
+      "station": "Fürth Stadtgrenze",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0060",
+      "station": "Nürnberg Am Wegfeld",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0061",
+      "station": "Nürnberg Holzstatt",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0062",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0063",
+      "station": "Nürnberg, Nordostbahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0064",
+      "station": "Nürnberg, Nordostbahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0065",
+      "station": "Nürnberg Henfenfelder Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0066",
+      "station": "Nürnberg Virnsberg.Str. Wende",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0067",
+      "station": "Zirndorf Jahnstr.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0068",
+      "station": "Fürth Hauptbahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0069",
+      "station": "Erlangen Arcaden",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0070",
+      "station": "Fürth Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0071",
+      "station": "Nürnberg Max-Grundig-Platz",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0072",
+      "station": "Nürnberg Schweinau",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0073",
+      "station": "Erlangen Arcaden",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0074",
+      "station": "Nürnberg Plärrer",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0075",
+      "station": "Nürnberg, Gustav-Adolf-Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0076",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0077",
+      "station": "Nürnberg Flughafen",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0078",
+      "station": "Nürnberg Martha-Maria-Krkhs.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0079",
+      "station": "Nürnberg Am Wegfeld",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0080",
+      "station": "Nürnb. Langwasser Mitte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0081",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0082",
+      "station": "Oberasbach Willy-Brandt-Platz",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0083",
+      "station": "Nürnberg, Gustav-Adolf-Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0084",
+      "station": "Oberasbach Leipziger Pl.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0085",
+      "station": "Nürnberg Wacholderweg",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0086",
+      "station": "Nürnberg Herrnhütte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0087",
+      "station": "Nürnberg Flachsröste",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0088",
+      "station": "Nürnb. Kornburg Schleife",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0089",
+      "station": "Nürnberg, Frankenstraße",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0090",
+      "station": "Nürnberg, Nordostbahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0091",
+      "station": "Nürnberg, Nordostbahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0092",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0093",
+      "station": "Nürnberg, Fischbach Bahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0094",
+      "station": "Fürth Hauptbahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0095",
+      "station": "Nürnberg, Frankenstraße",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0096",
+      "station": "Nürnberg, Gustav-Adolf-Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0097",
+      "station": "Nürnb. Langwasser Mitte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0098",
+      "station": "Nürnberg Hbf",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0099",
+      "station": "Nürnberg Herrnhütte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0100",
+      "station": "Nürnberg Brunn Schleife",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0101",
+      "station": "Nürnberg Ziegelstein Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0102",
+      "station": "Nürnberg Thon",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0103",
+      "station": "Nürnberg Plärrer",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0104",
+      "station": "Fürth Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0105",
+      "station": "Nürnb. Kornburg Schleife",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0106",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0107",
+      "station": "Nürnberg Königshof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0108",
+      "station": "Nürnberg Katzwang Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0109",
+      "station": "Nürnb. Langwasser Mitte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0110",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0111",
+      "station": "Nürnb. Langwasser Mitte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0112",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0113",
+      "station": "Nürnberg Sieboldstr. Schleife",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0114",
+      "station": "Nürnberg Forchheimer Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0115",
+      "station": "Nürnberg Koppenhof Wende",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0116",
+      "station": "Nürnberg Doku-Zentrum",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0117",
+      "station": "Fürth Stadtgrenze",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0118",
+      "station": "Nürnberg, Frankenstraße",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0119",
+      "station": "Schwand (Schwanst) Marktpl.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0120",
+      "station": "Nürnberg Friedrich-Ebert-Platz",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0121",
+      "station": "Kleinschwarzenlohe Nord",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0122",
+      "station": "Fürth Stadtgrenze",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0123",
+      "station": "Schwabach, Schwabach Bf.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0124",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0125",
+      "station": "Nürnberg Hammer",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0126",
+      "station": "Nürnberg Plärrer",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0127",
+      "station": "Nürnberg Virnsberg.Str. Wende",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0128",
+      "station": "Nürnberg Rathaus",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0129",
+      "station": "Fürth Hauptbahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0130",
+      "station": "Erlangen Arcaden",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0131",
+      "station": "Fürth Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0132",
+      "station": "Nürnberg Max-Grundig-Platz",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0133",
+      "station": "Erlangen Arcaden",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0134",
+      "station": "Nürnberg, Gustav-Adolf-Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0135",
+      "station": "Nürnberg Plärrer",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0136",
+      "station": "Nürnberg Maximilianstr.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0137",
+      "station": "Nürnberg Koppenhof Wende",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0138",
+      "station": "Nürnberg Martha-Maria-Krkhs.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0139",
+      "station": "Nürnberg Am Wegfeld",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0140",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0141",
+      "station": "Nürnberg, Frankenstraße",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0142",
+      "station": "Nürnberg Kriegerdenkmal",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0143",
+      "station": "Nürnberg Hansengarten",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0144",
+      "station": "Nürnberg Flachsröste",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0145",
+      "station": "Nürnberg Fischbach Bahnhof Wende",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0146",
+      "station": "Nürnberg Langwasser Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0147",
+      "station": "Nürnberg, Gustav-Adolf-Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0148",
+      "station": "Schwaig Max-Reger-Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0149",
+      "station": "Nürnberg Ziegelstein Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0150",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0151",
+      "station": "Nürnberg Thon",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0152",
+      "station": "Nürnberg, Gustav-Adolf-Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0153",
+      "station": "Nürnberg Plärrer",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0154",
+      "station": "Nürnb. Langwasser Mitte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0155",
+      "station": "Nürnb. Langwasser Mitte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0156",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0157",
+      "station": "Nürnberg Doku-Zentrum",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0158",
+      "station": "Schwand (Schwanst) Marktpl.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0159",
+      "station": "Kleinschwarzenlohe Nord",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0160",
+      "station": "Fürth Stadtgrenze",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0161",
+      "station": "Fürth Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0162",
+      "station": "Fürth Hauptbahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0163",
+      "station": "Erlangen Arcaden",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0164",
+      "station": "Nürnberg Plärrer",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0165",
+      "station": "Nürnberg Maximilianstr.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0166",
+      "station": "Nürnberg Herrnhütte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0167",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0168",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0169",
+      "station": "Kleinschwarzenlohe Nord",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0170",
+      "station": "Zirndorf Jahnstr.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0171",
+      "station": "Nürnberg GNF Am Tower",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0172",
+      "station": "Nürnberg Pillenreuth",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0173",
+      "station": "Nürnberg, Frankenstraße",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0174",
+      "station": "Nürnberg, Gustav-Adolf-Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0175",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0176",
+      "station": "Nürnberg Koppenhof Wende",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0177",
+      "station": "Zirndorf Realschule",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0178",
+      "station": "Schwand (Schwanst) Marktpl.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0179",
+      "station": "Nürnberg, Nordostbahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0180",
+      "station": "Nürnberg Hammer",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0181",
+      "station": "Fürth Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0182",
+      "station": "Nürnberg Moosäckerstr.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0183",
+      "station": "Fürth Hauptbahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0184",
+      "station": "Oberasbach Willy-Brandt-Platz",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0185",
+      "station": "Nürnberg Koppenhof Wende",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0186",
+      "station": "Nürnberg Katzwang Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0187",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0188",
+      "station": "Nürnberg Doku-Zentrum",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0189",
+      "station": "Kleinschwarzenlohe Nord",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0190",
+      "station": "Nürnberg Herrnhütte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0191",
+      "station": "Fürth Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0192",
+      "station": "Wolkersdorf Schleife",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0193",
+      "station": "Nürnberg Langwasser Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0194",
+      "station": "Nürnberg Zerzabelshof Mitte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0195",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0196",
+      "station": "Nürnberg, Gustav-Adolf-Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0197",
+      "station": "Nürnb. Langwasser Mitte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0198",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0199",
+      "station": "Nürnberg Zerzabelshof Ost",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0200",
+      "station": "Nürnberg Hbf",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0201",
+      "station": "Nürnberg GNF Am Tower",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0202",
+      "station": "Nürnberg, Gustav-Adolf-Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0203",
+      "station": "Nürnberg, Nordostbahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0204",
+      "station": "Nürnberg Plärrer",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0205",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0206",
+      "station": "Nürnberg Dianaplatz",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0207",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0208",
+      "station": "Nürnb. Langwasser Mitte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0209",
+      "station": "Nürnberg Doku-Zentrum",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0210",
+      "station": "Nürnb. Kornburg Schleife",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0211",
+      "station": "Nürnberg Hbf",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0212",
+      "station": "Kleinschwarzenlohe Nord",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0213",
+      "station": "Zirndorf Jahnstr.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0214",
+      "station": "Wolkersdorf Schleife",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0215",
+      "station": "Nürnberg Fischbach Bahnhof Wende",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0216",
+      "station": "Nürnb. Langwasser Mitte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0217",
+      "station": "Nürnberg Zerzabelshof Ost",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0218",
+      "station": "Nürnberg Dianaplatz",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0219",
+      "station": "Nürnberg Worzeld. Feuerwehrh.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0220",
+      "station": "Nürnberg, Nordostbahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0221",
+      "station": "Kleinschwarzenlohe Nord",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0222",
+      "station": "Nürnb. Kornburg Schleife",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0223",
+      "station": "Kleinschwarzenlohe Nord",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0224",
+      "station": "Nürnberg Fischbach Bahnhof Wende",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0225",
+      "station": "Nürnberg Langwasser Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0226",
+      "station": "Nürnberg Moosäckerstr.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0227",
+      "station": "Nürnberg, Frankenstraße",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0228",
+      "station": "Nürnberg Ellingstr.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0229",
+      "station": "Nürnberg Ziegelstein Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0230",
+      "station": "Nürnb. Kornburg Schleife",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0231",
+      "station": "Behringersd. Am Neubruch",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0232",
+      "station": "Nürnberg Katzwang Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0233",
+      "station": "Oberasbach Willy-Brandt-Platz",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0234",
+      "station": "Nürnberg Maybachstr.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0235",
+      "station": "Nürnberg Heinemannbrü.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0236",
+      "station": "Nürnb. Kornburg Schleife",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0237",
+      "station": "Schwand (Schwanst) Marktpl.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0238",
+      "station": "Nürnberg Worzeld. Feuerwehrh.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0239",
+      "station": "Nürnberg Altenfurter Straße",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0240",
+      "station": "Nürnberg Schniegling",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0241",
+      "station": "Kleinschwarzenlohe Nord",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0242",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0243",
+      "station": "Nürnb. Langwasser Mitte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0244",
+      "station": "Nürnb. Kornburg Schleife",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0245",
+      "station": "Wolkersdorf Schleife",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0246",
+      "station": "Nürnberg Kornburg Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0247",
+      "station": "Nürnberg Dianaplatz",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0248",
+      "station": "Nürnb. Kornburg Schleife",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0249",
+      "station": "Nürnberg Altenfurter Straße",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0250",
+      "station": "Nürnberg Holzstatt",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0251",
+      "station": "Nürnberg Holzstatt",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0252",
+      "station": "Nürnberg Sportanlage FCN",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0253",
+      "station": "Nürnb. Langwasser Mitte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0254",
+      "station": "Nürnberg Mögeldorf",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0255",
+      "station": "Nürnberg Herrnhütte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0256",
+      "station": "Nürnberg Platz d. Opfer d. F.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0257",
+      "station": "Nürnberg Koppenhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0258",
+      "station": "Nürnberg Zerzabelshof Mitte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0259",
+      "station": "Nürnberg Schleswiger Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0260",
+      "station": "Nürnberg Thon",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0261",
+      "station": "Nürnberg Plärrer",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0262",
+      "station": "Nürnberg Höfles West",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0263",
+      "station": "Nürnberg Heinemannbrü.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0264",
+      "station": "Nürnberg Herrnhütte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0265",
+      "station": "Nürnberg Platz d. Opfer d. F.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0266",
+      "station": "Nürnberg Koppenhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0267",
+      "station": "Nürnberg Nordwestring",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0268",
+      "station": "Kleinschwarzenlohe Nord",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0269",
+      "station": "Nürnberg Herrnhütte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0270",
+      "station": "Nürnberg Röthenbach",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0271",
+      "station": "Nürnberg Dürrenhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0272",
+      "station": "Nürnberg Koppenhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0273",
+      "station": "Nürnberg Herrnhütte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0274",
+      "station": "Nürnberg Wacholderweg",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0275",
+      "station": "Nürnberg Herrnhütte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0276",
+      "station": "Nürnberg, Frankenstraße",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0277",
+      "station": "Nürnberg Brunn Schleife",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0278",
+      "station": "Nürnberg Herrnhütte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0279",
+      "station": "Nürnberg Herrnhütte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0280",
+      "station": "Nürnberg Herrnhütte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0281",
+      "station": "Nürnberg Katzwang Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0282",
+      "station": "Nürnberg Herrnhütte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0283",
+      "station": "Nürnberg Herrnhütte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0284",
+      "station": "Nürnberg Herrnhütte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0285",
+      "station": "Nürnberg Herrnhütte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0286",
+      "station": "Nürnberg Herrnhütte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0287",
+      "station": "Nürnberg Zerzabelshof Mitte",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0288",
+      "station": "Nürnberg Forchheimer Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0289",
+      "station": "Nürnberg Reichelsdorf Bahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0290",
+      "station": "Nürnberg Zerzabelshof Ost",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0291",
+      "station": "Schwaig Max-Reger-Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0292",
+      "station": "Nürnberg Buch Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0293",
+      "station": "Nürnberg Sandreuthstr.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0294",
+      "station": "Nürnberg Eibach Bahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0295",
+      "station": "Nürnberg Forchheimer Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0296",
+      "station": "Schwabach Wolfram-von-Eschenbach-Gymnasium",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0297",
+      "station": "Nürnberg Eibach Bahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0298",
+      "station": "Nürnberg Buch Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0299",
+      "station": "Nürnberg Alemannenstr.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0300",
+      "station": "Nürnberg Meistersingerhalle",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0301",
+      "station": "Nürnberg Sandreuthstr.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0302",
+      "station": "Nürnberg Alemannenstr.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0303",
+      "station": "Nürnberg Eibach Bahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0304",
+      "station": "Nürnberg Hansengarten",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0305",
+      "station": "Nürnberg Forchheimer Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0306",
+      "station": "Nürnberg Schulzentr. Südwest",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0307",
+      "station": "Nürnberg Sandreuthstr.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0308",
+      "station": "Nürnberg Schulzentr. Südwest",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0309",
+      "station": "Nürnberg Mögeldorf",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0310",
+      "station": "Nürnberg Schulzentr. Südwest",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0311",
+      "station": "Nürnberg Ziegelstein Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0312",
+      "station": "Schwand (Schwanst) Marktpl.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0313",
+      "station": "Fürth Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0314",
+      "station": "Nürnberg Kornburg Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0315",
+      "station": "Nürnberg Kornburg Süd",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0316",
+      "station": "Nürnberg Linzer Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0317",
+      "station": "Fürth Hauptbahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0318",
+      "station": "Nürnberg, Nordostbahnhof",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0319",
+      "station": "Nürnberg Raudtener Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0320",
+      "station": "Nürnberg Schulzentr. Südwest",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0321",
+      "station": "Nürnberg Forchheimer Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0322",
+      "station": "Nürnberg Henfenfelder Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0323",
+      "station": "Wendelstein Gymnasium",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0324",
+      "station": "Nürnberg Schulzentr. Südwest",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0325",
+      "station": "Nürnberg Forchheimer Str.",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0326",
+      "station": "Nürnberg Worzeldorf Schule",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0327",
+      "station": "Nürnberg Nötteleinweg",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0328",
+      "station": "Nürnberg Röthenbach",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0329",
+      "station": "Nürnb. Langwasser Mitte",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0330",
+      "station": "Nürnberg, Gustav-Adolf-Str.",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0331",
+      "station": "Nürnberg, Nordostbahnhof",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0332",
+      "station": "Nürnberg, Frankenstraße",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0333",
+      "station": "Nürnberg Plärrer",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0334",
+      "station": "Nürnberg Hbf",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0335",
+      "station": "Fürth Hauptbahnhof",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0336",
+      "station": "Nürnberg Rathaus",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0337",
+      "station": "Nürnberg Ziegelstein Süd",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0338",
+      "station": "Nürnberg Röthenbach",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0339",
+      "station": "Nürnb. Langwasser Mitte",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0340",
+      "station": "Nürnberg, Gustav-Adolf-Str.",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0341",
+      "station": "Nürnberg, Nordostbahnhof",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0342",
+      "station": "Nürnberg, Frankenstraße",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0343",
+      "station": "Nürnberg Plärrer",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0344",
+      "station": "Nürnberg Hbf",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0345",
+      "station": "Fürth Hauptbahnhof",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0346",
+      "station": "Nürnberg Rathaus",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0347",
+      "station": "Nürnberg Ziegelstein Süd",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0348",
+      "station": "Nürnberg Röthenbach",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0349",
+      "station": "Nürnb. Langwasser Mitte",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0350",
+      "station": "Nürnberg, Gustav-Adolf-Str.",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0351",
+      "station": "Nürnberg, Nordostbahnhof",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0352",
+      "station": "Nürnberg, Frankenstraße",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0353",
+      "station": "Nürnberg Plärrer",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0354",
+      "station": "Nürnberg Hbf",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0355",
+      "station": "Fürth Hauptbahnhof",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0356",
+      "station": "Nürnberg Rathaus",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0357",
+      "station": "Nürnberg Ziegelstein Süd",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0358",
+      "station": "Nürnberg Röthenbach",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0359",
+      "station": "Nürnb. Langwasser Mitte",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "RB0360",
+      "station": "Nürnberg, Gustav-Adolf-Str.",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    }
+  ]
+}

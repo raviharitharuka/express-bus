@@ -11,15 +11,33 @@ from datetime import date
 from functools import cache
 from pathlib import Path
 
+import config
 from errors import ApiError
 from services.time_utils import to_min, today
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 
+DATA_FILES = ("timetable.json", "stations.json", "drivers.json", "buses.json", "routes.json")
+
+
+def _path(name: str) -> Path:
+    """DATA_SOURCE=real swaps every data file for its _real twin; nothing else changes."""
+    return DATA_DIR / (name if config.DATA_SOURCE == "synthetic" else name.replace(".json", "_real.json"))
+
+
 @cache
 def _load(name: str) -> dict:
-    return json.loads((DATA_DIR / name).read_text())
+    return json.loads(_path(name).read_text())
+
+
+def preload() -> None:
+    """Load every data file once at startup so a missing file fails fast."""
+    for name in DATA_FILES:
+        if not _path(name).exists():
+            raise RuntimeError(f"DATA_SOURCE={config.DATA_SOURCE} needs {_path(name).name}; "
+                               "run scripts/build_real_timetable.py")
+        _load(name)
 
 
 def stations() -> list[dict]:

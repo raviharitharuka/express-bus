@@ -34,12 +34,23 @@ Run `uvicorn` from inside `backend/`; the imports are relative to that folder. C
 DEMO_DATE=2026-10-05 DEMO_TIME=09:15 uvicorn main:app --reload
 ```
 
+**Data source.** `backend/.env` selects the dataset loaded at startup (copy `backend/.env.example` to start; restart the server after changing it):
+
+```bash
+DATA_SOURCE=synthetic   # default: the hand-designed demo data (5 stations, 20 drivers, 50 buses)
+DATA_SOURCE=real        # VAG Nürnberg city buses from the VGN GTFS feed (data/*_real.json, service date 2026-07-01)
+```
+
+Real data keeps the real route numbers, stop names and trip times; drivers, duties and buses are derived from the trips (the feed has no vehicle schedules). Pair it with `DEMO_DATE=2026-07-01`. `GET /health` shows which source is active.
+
 **Tests and helper scripts** (from `backend/`):
 
 ```bash
 python -m pytest -q                         # rules, endpoints and API contract checks
 python scripts/top_idle.py 2026-10-06       # top 10 idle-time pools, per-driver hours
 python scripts/generate_data.py             # rebuild data/*.json from the specs in the script
+python scripts/filter_gtfs.py               # data/gtfs/ (full VGN feed) -> data/filtered/ (VAG buses, one weekday)
+python scripts/build_real_timetable.py      # data/filtered/ -> backend/data/*_real.json
 ```
 
 ## Endpoint examples
