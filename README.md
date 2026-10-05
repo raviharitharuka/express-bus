@@ -11,6 +11,89 @@
 
 ---
 
+# Running the Backend
+
+FastAPI backend in `backend/`. The API is described field by field in [API_CONTRACT.md](API_CONTRACT.md).
+
+**Requirements:** Python 3.10+ (tested on 3.14). OR-Tools is installed from `requirements.txt`.
+
+```bash
+cd backend
+python3 -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+
+uvicorn main:app --reload          # http://localhost:8000  (interactive docs: /docs)
+```
+
+Run `uvicorn` from inside `backend/`; the imports are relative to that folder. CORS allows the frontend at `http://localhost:3000`.
+
+**Demo clock (recommended for presentations).** By default "today" and "now" are the real date and time, so at night no driver is on shift. Pin them to the demo dataset:
+
+```bash
+DEMO_DATE=2026-10-05 DEMO_TIME=09:15 uvicorn main:app --reload
+```
+
+**Tests and helper scripts** (from `backend/`):
+
+```bash
+python -m pytest -q                         # rules, endpoints and API contract checks
+python scripts/top_idle.py 2026-10-06       # top 10 idle-time pools, per-driver hours
+python scripts/generate_data.py             # rebuild data/*.json from the specs in the script
+```
+
+## Endpoint examples
+
+Each example works against a server started as above.
+
+**`GET /idle-drivers`** — driving hours, idle gaps and free capacity per driver (default date: tomorrow)
+
+```bash
+curl "http://localhost:8000/idle-drivers?date=2026-10-06"
+```
+
+**`POST /optimize`** — test express routes with the CP-SAT model and get a launch recommendation. An empty body tests the 3 built-in candidates (E1–E3); or send your own:
+
+```bash
+curl -X POST http://localhost:8000/optimize \
+  -H "Content-Type: application/json" \
+  -d '{"date": "2026-10-06", "allowOvertime": true, "candidates": [{"startStation": "Central Station", "endStation": "Airport", "headwayMin": 60, "serviceStart": "09:30", "serviceEnd": "12:30", "tripDurationMin": 20}]}'
+```
+
+**`POST /emergency`** — bus breakdown recovery. This **changes the live bus pool**; reset it with `POST /emergency/reset`.
+
+```bash
+curl -X POST http://localhost:8000/emergency \
+  -H "Content-Type: application/json" \
+  -d '{"incidentType": "BREAKDOWN", "busId": "B021", "station": "Airport", "time": "09:15"}'
+
+curl -X POST http://localhost:8000/emergency/reset
+```
+
+**`POST /copilot`** — ask **Lotse**, the dispatcher assistant, in plain English; returns answer text, the matched intent and a structured `data` payload. The URL path `/copilot` is kept from the assistant's earlier name for compatibility.
+
+```bash
+curl -X POST http://localhost:8000/copilot \
+  -H "Content-Type: application/json" \
+  -d '{"question": "Can we launch a new express route tomorrow?"}'
+```
+
+Other questions it understands: "Which drivers are idle at the airport?", "What happens if bus B021 breaks down at 09:15?", "Which station needs more buses?", "Are we short of drivers this month?"
+
+**`GET /dashboard`** — KPIs, station status, top recommendation and alerts (default date: today)
+
+```bash
+curl http://localhost:8000/dashboard
+```
+
+**`GET /health`**
+
+```bash
+curl http://localhost:8000/health
+```
+
+---
+
 # Executive Summary
 
 Nuremberg has sufficient buses to launch additional express services, but a shortage of drivers limits the city's ability to expand public transportation capacity.
@@ -490,9 +573,9 @@ Schedule Preventive Maintenance
 
 ---
 
-# AI Dispatcher Copilot
+# Lotse: AI Dispatcher Assistant
 
-A conversational assistant for transportation managers.
+Lotse (German for "pilot", as in a harbour pilot) is a conversational assistant for transportation managers.
 
 ### Example Questions
 

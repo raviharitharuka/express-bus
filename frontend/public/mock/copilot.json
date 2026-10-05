@@ -1,10 +1,67 @@
 {
   "question": "Can we launch a new express route tomorrow?",
-  "answer": "Yes. 8 drivers have 22 idle hours tomorrow. E1 (Central Station - Airport), E2 (University - Central Station) and E3 (North Station - South Station) can launch with 0 new drivers. E4 would need 1 extra driver.",
-  "confidence": 92,
-  "followUps": [
-    "Which drivers have unused capacity today?",
-    "What happens if Bus B021 breaks down now?",
-    "Which station will run out of buses tonight?"
+  "intent": "launch_route",
+  "answer": "Yes, for 2026-10-06. Launch E1, E3 with existing drivers: 6 express trips, 5.5 idle h and 0.0 overtime h used, utilization 66.3% -> 69.4%. Not recommended: E2 (1 new driver(s) needed for 3 trip(s)).",
+  "confidence": 90,
+  "data": {
+    "date": "2026-10-06",
+    "recommended": [
+      "E1",
+      "E3"
+    ],
+    "currentUtilization": 66.3,
+    "optimizedUtilization": 69.4,
+    "routes": [
+      {
+        "route": "E1",
+        "name": "Central Station - Airport Express",
+        "startStation": "Central Station",
+        "endStation": "Airport",
+        "tripsRequested": 3,
+        "tripsCovered": 3,
+        "feasible": true,
+        "newDriversRequired": 0,
+        "idleHoursUsed": 2.5,
+        "overtimeHoursUsed": 0.0,
+        "utilizationBefore": 66.3,
+        "utilizationAfter": 67.7,
+        "reason": "All 3 trips covered by D002 from idle time"
+      },
+      {
+        "route": "E2",
+        "name": "University - Central Station Express",
+        "startStation": "University",
+        "endStation": "Central Station",
+        "tripsRequested": 8,
+        "tripsCovered": 8,
+        "feasible": false,
+        "newDriversRequired": 1,
+        "idleHoursUsed": 2.7,
+        "overtimeHoursUsed": 0.8,
+        "utilizationBefore": 66.3,
+        "utilizationAfter": 67.0,
+        "reason": "1 new driver(s) needed for 3 trip(s)"
+      },
+      {
+        "route": "E3",
+        "name": "North Station - South Station Express",
+        "startStation": "North Station",
+        "endStation": "South Station",
+        "tripsRequested": 3,
+        "tripsCovered": 3,
+        "feasible": true,
+        "newDriversRequired": 0,
+        "idleHoursUsed": 3.0,
+        "overtimeHoursUsed": 0.0,
+        "utilizationBefore": 66.3,
+        "utilizationAfter": 68.0,
+        "reason": "All 3 trips covered by D011 from idle time"
+      }
+    ]
+  },
+  "suggestedQuestions": [
+    "Which drivers are idle today?",
+    "What happens if bus B021 breaks down at 09:15?",
+    "Which station needs more buses?"
   ]
 }
