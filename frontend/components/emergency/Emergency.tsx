@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { BusFront, CircleCheck, Clock, Loader2, RotateCcw, Siren, TriangleAlert, UserRound, Wrench } from "lucide-react";
 import { api, ApiError } from "@/lib/api";
-import type { EmergencyRequest, EmergencyResult } from "@/lib/types";
+import { BREAKDOWN_SCENARIO } from "@/lib/scenarios";
+import type { EmergencyResult } from "@/lib/types";
 import { Card } from "@/components/Card";
+import { useBackendHealth } from "@/components/DataSource";
 import { EmptyState } from "@/components/EmptyState";
 import { BannerButton, ErrorBanner } from "@/components/ErrorBanner";
 import { KpiCard } from "@/components/KpiCard";
@@ -13,9 +15,10 @@ import { CardSkeleton, KpiSkeleton, Skeleton } from "@/components/Skeleton";
 import { StatusBadge } from "@/components/StatusBadge";
 import { RecoveryMap } from "./RecoveryMap";
 
-const SCENARIO: EmergencyRequest = { incidentType: "BREAKDOWN", busId: "B021", station: "Airport" };
-
 export function Emergency() {
+  // The scenario depends on the backend's dataset (synthetic B021 vs a real-data bus); wait for it.
+  const health = useBackendHealth();
+  const scenario = BREAKDOWN_SCENARIO[health?.dataSource ?? "synthetic"];
   const [result, setResult] = useState<EmergencyResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<ApiError | Error | null>(null);
@@ -32,12 +35,12 @@ export function Emergency() {
     }
   }
 
-  const simulate = () => run(() => api.reportEmergency(SCENARIO));
+  const simulate = () => run(() => api.reportEmergency(scenario));
   // The backend keeps broken buses in maintenance, so the same breakdown can't be reported twice.
   const resetAndSimulate = () =>
     run(async () => {
       await api.resetEmergency();
-      return api.reportEmergency(SCENARIO);
+      return api.reportEmergency(scenario);
     });
   const reset = () =>
     run(async () => {
@@ -65,11 +68,11 @@ export function Emergency() {
             )}
             <button
               onClick={simulate}
-              disabled={loading}
+              disabled={loading || health === undefined}
               className="inline-flex items-center gap-2 rounded-lg bg-rose-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-rose-500 focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-70"
             >
               {loading ? <Loader2 className="size-4 animate-spin" /> : <Siren className="size-4" />}
-              {loading ? "Dispatching…" : `Simulate breakdown of Bus ${SCENARIO.busId}`}
+              {loading ? "Dispatching…" : `Simulate breakdown of Bus ${scenario.busId}`}
             </button>
           </div>
         }
@@ -78,7 +81,7 @@ export function Emergency() {
       {error && (
         <div className="mb-6">
           <ErrorBanner
-            title={busAlreadyOut ? `Bus ${SCENARIO.busId} is already in maintenance` : "Recovery plan failed"}
+            title={busAlreadyOut ? `Bus ${scenario.busId} is already in maintenance` : "Recovery plan failed"}
             message={
               busAlreadyOut
                 ? "The backend keeps simulated breakdowns until it is reset. Reset the demo to run the scenario again."
@@ -110,7 +113,7 @@ export function Emergency() {
             tone="critical"
             icon={Siren}
             title="No active incident"
-            description={`Simulate a breakdown of Bus ${SCENARIO.busId} at ${SCENARIO.station} to see the automatic recovery plan.`}
+            description={`Simulate a breakdown of Bus ${scenario.busId} at ${scenario.station} to see the automatic recovery plan.`}
             actionLabel="Simulate breakdown"
             onAction={simulate}
           />

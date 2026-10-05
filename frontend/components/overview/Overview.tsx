@@ -23,10 +23,10 @@ import { PageHeader } from "@/components/PageHeader";
 import { KpiCard } from "@/components/KpiCard";
 import { CardSkeleton, KpiSkeleton, Skeleton } from "@/components/Skeleton";
 import { tone, type Tone } from "@/components/theme";
-import { FleetStatusChart, StationFleetChart } from "./charts";
+import { FleetStatusChart, MAX_CHART_STATIONS, StationFleetChart } from "./charts";
 
-const TOTAL_DRIVERS = 20;
-const TOTAL_BUSES = 50;
+/** Alerts shown before "Show all"; real GTFS data produces 100+. */
+const ALERTS_PREVIEW = 5;
 
 function formatDate(iso: string) {
   return new Date(`${iso}T00:00:00`).toLocaleDateString("en-GB", {
@@ -47,6 +47,7 @@ const ALERT_ORDER: Alert["level"][] = ["critical", "warning", "info"];
 export function Overview() {
   const [data, setData] = useState<Dashboard | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [showAllAlerts, setShowAllAlerts] = useState(false);
 
   const fetchDashboard = useCallback(() => {
     api.getDashboard().then(setData, (e: Error) => setError(e.message));
@@ -76,6 +77,7 @@ export function Overview() {
   if (!data) return <OverviewSkeleton />;
 
   const { kpis, stations, recommendation, alerts } = data;
+  const totalBuses = stations.reduce((n, s) => n + s.totalBuses, 0);
 
   return (
     <>
@@ -93,13 +95,13 @@ export function Overview() {
           label="Fleet utilization"
           value={`${kpis.fleetUtilization}%`}
           progress={kpis.fleetUtilization}
-          hint={`Buses in service of ${TOTAL_BUSES}`}
+          hint={`Buses running, of ${totalBuses}`}
           icon={ChartPie}
         />
         <KpiCard
           label="Available drivers"
           value={kpis.availableDrivers}
-          hint={`With idle capacity, of ${TOTAL_DRIVERS}`}
+          hint="Drivers with idle gaps today"
           icon={UserCheck}
           tone="positive"
         />
@@ -122,7 +124,11 @@ export function Overview() {
       <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
         <Card
           title="Fleet by station"
-          subtitle="Buses in service, spare and in maintenance"
+          subtitle={
+            stations.length > MAX_CHART_STATIONS
+              ? `Largest ${MAX_CHART_STATIONS} of ${stations.length} stations: in service, spare and in maintenance`
+              : "Buses in service, spare and in maintenance"
+          }
           className="lg:col-span-2"
         >
           <StationFleetChart stations={stations} />
@@ -163,6 +169,7 @@ export function Overview() {
             <ul className="space-y-2">
               {[...alerts]
                 .sort((a, b) => ALERT_ORDER.indexOf(a.level) - ALERT_ORDER.indexOf(b.level))
+                .slice(0, showAllAlerts ? undefined : ALERTS_PREVIEW)
                 .map((alert) => {
                   const { icon: Icon, tone: t } = ALERT_STYLES[alert.level];
                   return (
@@ -176,6 +183,14 @@ export function Overview() {
                   );
                 })}
             </ul>
+          )}
+          {alerts.length > ALERTS_PREVIEW && (
+            <button
+              onClick={() => setShowAllAlerts((v) => !v)}
+              className="mt-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
+            >
+              {showAllAlerts ? "Show fewer" : `Show all ${alerts.length} alerts`}
+            </button>
           )}
         </Card>
       </div>

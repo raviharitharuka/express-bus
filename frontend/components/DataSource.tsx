@@ -1,27 +1,42 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { DatabaseZap } from "lucide-react";
-import { API_BASE_URL, dataSourceStore } from "@/lib/api";
+import { api, API_BASE_URL, dataSourceStore } from "@/lib/api";
+import type { Health } from "@/lib/types";
 import { tone } from "@/components/theme";
 
 export function useDataSource() {
   return useSyncExternalStore(dataSourceStore.subscribe, dataSourceStore.get, () => null);
 }
 
+let healthRequest: Promise<Health | null> | null = null;
+
+/** Backend /health (which dataset is loaded), fetched once per page load. undefined while loading. */
+export function useBackendHealth() {
+  const [health, setHealth] = useState<Health | null | undefined>(undefined);
+  useEffect(() => {
+    healthRequest ??= api.getHealth();
+    healthRequest.then(setHealth);
+  }, []);
+  return health;
+}
+
 /** Sidebar status: live backend, mock fallback, or not contacted yet. */
 export function DataSourceBadge() {
   const source = useDataSource();
+  const health = useBackendHealth();
+  const dataset = health?.dataSource === "gtfs" ? "real GTFS trips" : "demo data";
   const [dot, label] =
     source === null
       ? [tone.neutral.dot, "Connecting…"]
       : source.kind === "live"
-        ? [tone.positive.dot, "Live backend"]
+        ? [tone.positive.dot, `Live · ${dataset}`]
         : [tone.warning.dot, "Mock data"];
 
   return (
     <div
-      title={source?.kind === "mock" ? source.reason : API_BASE_URL}
+      title={source?.kind === "mock" ? source.reason : health ? `${API_BASE_URL}\n${health.dataNote}` : API_BASE_URL}
       className="flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-600"
     >
       <span className={`size-2 shrink-0 rounded-full ${dot}`} />

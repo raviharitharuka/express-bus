@@ -1,5 +1,6 @@
 import type {
   ApiErrorBody,
+  Health,
   Dashboard,
   EmergencyRequest,
   EmergencyResult,
@@ -119,6 +120,16 @@ async function request<T>(path: string, mock: string, opts: RequestOptions = {})
 // --- Endpoints ------------------------------------------------------------------
 
 export const api = {
+  /** Which dataset the backend runs on. Never falls back to mocks: null means no backend. */
+  getHealth: async (): Promise<Health | null> => {
+    if (MOCKS_ONLY) return null;
+    try {
+      return await fetchJson<Health>(`${API_BASE_URL}/health`, { signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS) });
+    } catch {
+      return null;
+    }
+  },
+
   getDashboard: (date?: string) => request<Dashboard>("/dashboard", "dashboard", { query: { date } }),
 
   getIdleDrivers: (date?: string) => request<IdleDrivers>("/idle-drivers", "idle-drivers", { query: { date } }),

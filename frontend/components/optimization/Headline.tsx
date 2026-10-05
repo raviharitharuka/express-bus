@@ -27,7 +27,8 @@ export function Headline({ result }: { result: OptimizeResult }) {
         </h2>
         {closest && (
           <p className="mt-2 text-sm text-amber-800">
-            Closest option: {closest.route} ({closest.name}) needs {drivers(closest.newDriversRequired)}.
+            Closest option: {closest.route} ({closest.name}):{" "}
+            {closest.newDriversRequired > 0 ? `needs ${drivers(closest.newDriversRequired)}` : closest.reason}.
           </p>
         )}
       </section>
@@ -62,7 +63,10 @@ export function Headline({ result }: { result: OptimizeResult }) {
           {others.length > 0 && (
             <p className="mt-3 text-sm text-emerald-100">
               Not recommended:{" "}
-              {others.map((r) => `${r.route} needs ${drivers(r.newDriversRequired)}`).join("; ")}.
+              {others
+                .map((r) => `${r.route} (${r.newDriversRequired > 0 ? `needs ${drivers(r.newDriversRequired)}` : r.reason})`)
+                .join("; ")}
+              .
             </p>
           )}
         </div>

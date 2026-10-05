@@ -196,9 +196,13 @@ function Results({ result }: { result: OptimizeResult }) {
                             <StatusBadge tone="brand" icon={CircleCheck}>
                               Feasible alone
                             </StatusBadge>
-                          ) : (
+                          ) : r.newDriversRequired > 0 ? (
                             <StatusBadge tone="warning" icon={CircleX}>
                               Needs drivers
+                            </StatusBadge>
+                          ) : (
+                            <StatusBadge tone="critical" icon={CircleX}>
+                              Not feasible
                             </StatusBadge>
                           )}
                         </td>
@@ -218,7 +222,7 @@ function Results({ result }: { result: OptimizeResult }) {
               <span className="size-2 rounded-full" style={{ background: chartColor.positive }} /> Feasible
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="size-2 rounded-full" style={{ background: chartColor.warning }} /> Needs new drivers
+              <span className="size-2 rounded-full" style={{ background: chartColor.warning }} /> Not feasible
             </span>
           </div>
         </Card>

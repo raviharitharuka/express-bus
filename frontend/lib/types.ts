@@ -1,11 +1,20 @@
 // Response/request shapes from API_CONTRACT.md, mirroring backend/schemas/*.py.
 
-export type Station =
-  | "Central Station"
-  | "Airport"
-  | "North Station"
-  | "South Station"
-  | "University";
+/**
+ * Station (stop) name. The synthetic dataset has 5 ("Central Station", "Airport", …);
+ * DATA_SOURCE=gtfs uses ~116 real VAG stop names ("Nürnberg Flughafen", …).
+ */
+export type Station = string;
+
+export type DataSourceName = "synthetic" | "gtfs";
+
+// GET /health
+export interface Health {
+  status: "ok";
+  dataSource: DataSourceName;
+  /** What in the active dataset is real and what is synthetic. */
+  dataNote: string;
+}
 
 /** Error body for every non-2xx response. */
 export interface ApiErrorBody {

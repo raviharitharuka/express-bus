@@ -2,9 +2,9 @@ import { BusFront, MapPin } from "lucide-react";
 import type { Station } from "@/lib/types";
 import { chartColor } from "@/components/theme";
 
-// Schematic positions (% of the map box), roughly following Nuremberg's layout.
+// Schematic positions (% of the map box) for the synthetic dataset, roughly following Nuremberg's layout.
 // Placeholder until the Mapbox view lands.
-const STATIONS: Record<Station, { x: number; y: number }> = {
+const SCHEMATIC: Record<string, { x: number; y: number }> = {
   Airport: { x: 72, y: 18 },
   "North Station": { x: 38, y: 26 },
   University: { x: 18, y: 58 },
@@ -21,6 +21,11 @@ export function RecoveryMap({
   destination: Station;
   distanceKm: number;
 }) {
+  // Real-data (GTFS) stops aren't on the schematic: show just source and destination, side by side.
+  const onSchematic = source in SCHEMATIC && destination in SCHEMATIC;
+  const STATIONS = onSchematic
+    ? SCHEMATIC
+    : { [source]: { x: 22, y: 45 }, [destination]: { x: 78, y: 45 } };
   const from = STATIONS[source];
   const to = STATIONS[destination];
   const mid = { x: (from.x + to.x) / 2, y: (from.y + to.y) / 2 };
@@ -41,13 +46,14 @@ export function RecoveryMap({
         />
       </svg>
 
-      {(Object.keys(STATIONS) as Station[]).map((name) => {
+      {Object.keys(STATIONS).map((name) => {
         const { x, y } = STATIONS[name];
         const role = name === source ? "source" : name === destination ? "destination" : null;
         return (
+          // Anchored on the marker's centre (not marker + label) so a wrapped label doesn't shift it.
           <div
             key={name}
-            className="absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center"
+            className={`absolute flex -translate-x-1/2 flex-col items-center ${role ? "-translate-y-4" : "-translate-y-1.5"}`}
             style={{ left: `${x}%`, top: `${y}%` }}
           >
             {role ? (
@@ -62,7 +68,7 @@ export function RecoveryMap({
               <span className="size-3 rounded-full border-2 border-white bg-slate-400 shadow" />
             )}
             <span
-              className={`mt-1.5 rounded px-1.5 py-0.5 text-xs whitespace-nowrap ${
+              className={`mt-1.5 max-w-40 rounded px-1.5 py-0.5 text-center text-xs ${
                 role ? "bg-white font-medium text-slate-900 shadow-sm" : "text-slate-500"
               }`}
             >
