@@ -152,6 +152,13 @@ def test_lotse():  # endpoint path is still /copilot
     table = _response_part(sec).split("**Intents**")[1].split("|----------------------|")[-1]
     _check_tables(table, r.json())
 
+    # The greeting and fallback examples must be returned word for word.
+    examples = _json_blocks(_response_part(sec).split("**Intents**")[0])[1:]
+    assert {e["intent"] for e in examples} == {"greeting", "unknown"}
+    for example in examples:
+        r = client.post("/copilot", json={"question": example["question"]})
+        assert r.status_code == 200 and r.json() == example
+
 
 def test_dashboard():
     sec = _section("## 5. `GET /dashboard`")

@@ -183,6 +183,12 @@ INTENTS: list[tuple[str, list[str], Callable[[str], Reply]]] = [
 ]
 
 
+GREETING = re.compile(r"^\W*(hi|hello|hey|hallo|moin|servus|good (morning|afternoon|evening))\b")
+TOPICS = "idle drivers, new express routes, breakdowns or station bus levels"
+GREETING_ANSWER = f"Hi, I'm Lotse, your dispatch assistant. Ask me about {TOPICS}."
+FALLBACK_ANSWER = f"I didn't catch that. Ask Lotse about {TOPICS}."
+
+
 def match_intent(q: str) -> tuple[str, Callable[[str], Reply]] | None:
     scored = [(sum(bool(re.search(p, q)) for p in patterns), -i, name, fn)
               for i, (name, patterns, fn) in enumerate(INTENTS)]
@@ -193,11 +199,11 @@ def match_intent(q: str) -> tuple[str, Callable[[str], Reply]] | None:
 def ask(req: LotseRequest) -> LotseResponse:
     q = req.question.lower()
     matched = match_intent(q)
-    if not matched:
+    if not matched:  # a plain greeting, or nothing we understand: offer every example question
+        greeting = GREETING.match(q) is not None
         return LotseResponse(
-            question=req.question, intent="unknown", confidence=30, data=None,
-            answer="I'm Lotse, your dispatch assistant. I didn't catch that, but I can check new express routes, idle drivers, "
-                   "bus breakdowns, stations that need buses and driver shortages. Try one of these:",
+            question=req.question, intent="greeting" if greeting else "unknown", confidence=90 if greeting else 30,
+            data=None, answer=GREETING_ANSWER if greeting else FALLBACK_ANSWER,
             suggested_questions=list(SUGGESTED_QUESTIONS.values()),
         )
     intent, handler = matched

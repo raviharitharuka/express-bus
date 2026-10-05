@@ -74,7 +74,19 @@ def test_breakdown_question_is_hypothetical():
     assert next(b for b in data.buses() if b["busId"] == "B021")["status"] == "active"
 
 
+@pytest.mark.parametrize("question", ["Hello", "hi there!", "Good morning, Lotse"])
+def test_greeting(question):
+    r = ask(LotseRequest(question=question))
+    assert r.intent == "greeting" and r.answer.startswith("Hi, I'm Lotse")
+    assert len(r.suggested_questions) == 5
+
+
+def test_greeting_with_a_real_question_answers_the_question():
+    assert ask(LotseRequest(question="Hi, which drivers are idle?")).intent == "idle_drivers"
+
+
 def test_unknown_question_returns_suggestions():
     r = ask(LotseRequest(question="What's the weather like?"))
     assert r.intent == "unknown" and r.data is None
     assert len(r.suggested_questions) == 5
+    assert "Ask Lotse about idle drivers, new express routes, breakdowns or station bus levels." in r.answer

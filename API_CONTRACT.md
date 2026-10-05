@@ -320,6 +320,42 @@ The URL path `/copilot` and the mock file name `copilot.json` are kept from the 
 }
 ```
 
+**Greeting and fallback.** A question that is only a greeting ("hi", "hello", "good morning", …) gets `intent: "greeting"`; anything else that matches no intent gets `"unknown"`. Both return all 5 example questions:
+
+```json
+{
+  "question": "Hello",
+  "intent": "greeting",
+  "answer": "Hi, I'm Lotse, your dispatch assistant. Ask me about idle drivers, new express routes, breakdowns or station bus levels.",
+  "confidence": 90,
+  "data": null,
+  "suggestedQuestions": [
+    "Can we launch a new express route tomorrow?",
+    "Which drivers are idle today?",
+    "What happens if bus B021 breaks down at 09:15?",
+    "Which station needs more buses?",
+    "Are we short of drivers this month?"
+  ]
+}
+```
+
+```json
+{
+  "question": "What is the weather like?",
+  "intent": "unknown",
+  "answer": "I didn't catch that. Ask Lotse about idle drivers, new express routes, breakdowns or station bus levels.",
+  "confidence": 30,
+  "data": null,
+  "suggestedQuestions": [
+    "Can we launch a new express route tomorrow?",
+    "Which drivers are idle today?",
+    "What happens if bus B021 breaks down at 09:15?",
+    "Which station needs more buses?",
+    "Are we short of drivers this month?"
+  ]
+}
+```
+
 **Intents**
 
 | `intent`          | Example question                                   | Service              | `data` payload |
@@ -329,15 +365,16 @@ The URL path `/copilot` and the mock file name `copilot.json` are kept from the 
 | `breakdown`       | What happens if bus B021 breaks down at 09:15?     | `/emergency` as a **what-if** (bus pool unchanged). Without a bus ID, uses the first running bus at the named station | `hypothetical: true` + the `/emergency` response |
 | `station_buses`   | Which station needs more buses?                    | Fleet status: stations below 2 spare buses, filled from the nearest surplus | `minSparePerStation`, `stations[]` (`station`, `spare`, `active`, `maintenance`, `needsBuses`), `moves[]` (`from`, `to`, `buses`, `distanceKm`) |
 | `driver_shortage` | Are we short of drivers this month?                | 30-day calendar      | `date`, `driversMissing`, `driversOnVacation`, `uncoveredDuties` |
+| `greeting`        | Hello                                              | — (only when no other intent matches, so "Hi, which drivers are idle?" is `idle_drivers`) | `null` |
 | `unknown`         | anything else                                      | —                    | `null` |
 
 "tomorrow" in a question switches the date; `HH:MM` sets the breakdown time; station names (`airport`, `central`, `north`, `south`, `university`) are recognized.
 
 | Field                | Type           | Notes                                                        |
 |----------------------|----------------|--------------------------------------------------------------|
-| `confidence`         | integer        | 90 matched, 50–60 matched but missing info or an error, 30 unknown |
+| `confidence`         | integer        | 90 matched or greeting, 50–60 matched but missing info or an error, 30 unknown |
 | `data`               | object \| null | Shape depends on `intent` (table above)                      |
-| `suggestedQuestions` | string[]       | 3 related questions; for `unknown`, all 5 example questions  |
+| `suggestedQuestions` | string[]       | 3 related questions; for `greeting` and `unknown`, all 5 example questions |
 
 ---
 

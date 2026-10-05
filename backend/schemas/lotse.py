@@ -4,7 +4,7 @@ from pydantic import Field
 
 from schemas.common import CamelModel
 
-Intent = Literal["launch_route", "idle_drivers", "breakdown", "station_buses", "driver_shortage", "unknown"]
+Intent = Literal["launch_route", "idle_drivers", "breakdown", "station_buses", "driver_shortage", "greeting", "unknown"]
 
 
 class LotseRequest(CamelModel):
