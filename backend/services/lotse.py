@@ -1,8 +1,11 @@
-"""Lotse: the rule-based dispatcher assistant (served at POST /copilot, its old name).
+"""Lotse: the dispatcher assistant (POST /lotse; POST /copilot is the old alias).
 
-Keyword matching picks an intent, the intent calls an existing engine, and the
-result comes back as answer text plus a structured `data` payload the UI can
-render (tables, map highlights). No LLM involved.
+Flow with Claude (services/claude.py):
+  (a) Claude classifies the question into one of our intents or "unknown",
+  (b) the intent's existing service runs and returns a structured `data` payload,
+  (c) Claude writes a 2-4 sentence answer from that JSON only.
+Without ANTHROPIC_API_KEY, or on any API error, timeout or refusal, the keyword matcher below
+picks the intent and its template writes the answer. `explainedBy` says which path answered.
 """
 
 import re
@@ -13,7 +16,7 @@ from errors import ApiError
 from schemas.lotse import LotseRequest, LotseResponse
 from schemas.emergency import EmergencyRequest
 from schemas.optimize import OptimizeRequest
-from services import data
+from services import claude, data
 from services.dashboard import worst_shortage
 from services.emergency import handle_incident
 from services.fleet import MIN_SPARE_PER_STATION, rebalancing_moves, station_buses
@@ -197,22 +200,59 @@ def match_intent(q: str) -> tuple[str, Callable[[str], Reply]] | None:
     return (name, fn) if score else None
 
 
-def ask(req: LotseRequest) -> LotseResponse:
-    q = req.question.lower()
-    matched = match_intent(q)
-    if not matched:  # a plain greeting, or nothing we understand: offer every example question
-        greeting = GREETING.match(q) is not None
-        return LotseResponse(
-            question=req.question, intent="greeting" if greeting else "unknown", confidence=90 if greeting else 30,
-            data=None, answer=GREETING_ANSWER if greeting else FALLBACK_ANSWER,
-            suggested_questions=list(SUGGESTED_QUESTIONS.values()),
-        )
-    intent, handler = matched
+HANDLERS: dict[str, Callable[[str], Reply]] = {name: fn for name, _, fn in INTENTS}
+
+
+def _canned(req: LotseRequest, greeting: bool) -> LotseResponse:
+    """A plain greeting, or nothing we understand: offer every example question."""
+    return LotseResponse(
+        question=req.question, intent="greeting" if greeting else "unknown", confidence=90 if greeting else 30,
+        data=None, answer=GREETING_ANSWER if greeting else FALLBACK_ANSWER,
+        suggested_questions=list(SUGGESTED_QUESTIONS.values()), explained_by="rules",
+    )
+
+
+def _run(intent: str, q: str) -> Reply:
     try:
-        reply = handler(q)
+        return HANDLERS[intent](q)
     except ApiError as e:
-        reply = Reply(e.message, None, 60)
+        return Reply(e.message, None, 60)
+
+
+def _respond(req: LotseRequest, intent: str, reply: Reply, explained_by: str) -> LotseResponse:
     return LotseResponse(
         question=req.question, intent=intent, answer=reply.answer, confidence=reply.confidence, data=reply.data,
         suggested_questions=[s for name, s in SUGGESTED_QUESTIONS.items() if name != intent][:3],
+        explained_by=explained_by,
     )
+
+
+def answer_with_rules(req: LotseRequest) -> LotseResponse:
+    """Keyword matcher + template answer: no network, always available."""
+    q = req.question.lower()
+    matched = match_intent(q)
+    if not matched:
+        return _canned(req, greeting=GREETING.match(q) is not None)
+    intent, _ = matched
+    return _respond(req, intent, _run(intent, q), "rules")
+
+
+def ask(req: LotseRequest) -> LotseResponse:
+    q = req.question.lower()
+    try:
+        intent = claude.classify(req.question, [*HANDLERS, "greeting"])  # (a)
+    except claude.ClaudeUnavailable as e:
+        claude.log_fallback("classification", e)
+        return answer_with_rules(req)
+    if intent in ("greeting", "unknown"):
+        return _canned(req, greeting=intent == "greeting")
+
+    reply = _run(intent, q)  # (b)
+    if reply.data is None:  # nothing to explain (missing bus id, error): keep the service's own message
+        return _respond(req, intent, reply, "rules")
+    try:
+        text = claude.explain(req.question, intent, reply.data)  # (c)
+    except claude.ClaudeUnavailable as e:
+        claude.log_fallback("answer", e)
+        return answer_with_rules(req)
+    return _respond(req, intent, Reply(text, reply.data, reply.confidence), "claude")

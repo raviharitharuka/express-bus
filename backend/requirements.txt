@@ -4,5 +4,6 @@ pydantic>=2.9
 ortools>=9.10
 pandas>=2.2
 python-dotenv>=1.0
+anthropic>=1.11
 pytest
 httpx2

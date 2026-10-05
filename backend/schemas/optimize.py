@@ -74,3 +74,4 @@ class OptimizeResponse(CamelModel):
     recommended: list[str]
     summary: str
     recommendations: list[RouteResult]
+    cached: bool = False  # True: the solver timed out or failed; this is the last good result for the same request

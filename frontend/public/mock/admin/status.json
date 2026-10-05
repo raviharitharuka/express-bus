@@ -1,5 +1,6 @@
 {
   "dataSource": "synthetic",
+  "dataNote": "Hand-made demo dataset: all stations, trips, drivers and buses are invented.",
   "counts": {
     "stations": 5,
     "drivers": 20,

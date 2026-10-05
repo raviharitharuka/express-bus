@@ -98,7 +98,7 @@ export function StatusTab() {
         <KpiCard
           label="Data source"
           value={active ? SOURCE_LABEL[active] : "—"}
-          hint={health?.dataNote ?? (readOnly ? "From mock file" : undefined)}
+          hint={status.dataNote ?? health?.dataNote ?? (readOnly ? "From mock file" : undefined)}
           icon={Database}
         />
         <KpiCard

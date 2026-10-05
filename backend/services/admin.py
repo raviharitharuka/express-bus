@@ -17,6 +17,7 @@ def record_optimize_ms(ms: int | None) -> None:
 def status() -> AdminStatus:
     return AdminStatus(
         data_source=config.DATA_SOURCE,
+        data_note=config.DATA_NOTE,
         counts=Counts(
             stations=len(data.stations()),
             drivers=len(data.drivers()),

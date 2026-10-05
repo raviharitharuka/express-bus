@@ -143,10 +143,10 @@ def test_emergency():
     assert client.post("/emergency/reset").json() == {"status": "reset"}
 
 
-def test_lotse():  # endpoint path is still /copilot
-    sec = _section("## 4. `POST /copilot`")
+def test_lotse():
+    sec = _section("## 4. `POST /lotse`")
     request = _json_blocks(sec)[0]
-    r = client.post("/copilot", json=request)
+    r = client.post("/lotse", json=request)
     assert r.status_code == 200, r.text
     _compare(_json_blocks(_response_part(sec))[0], r.json())
     table = _response_part(sec).split("**Intents**")[1].split("|----------------------|")[-1]
@@ -156,8 +156,15 @@ def test_lotse():  # endpoint path is still /copilot
     examples = _json_blocks(_response_part(sec).split("**Intents**")[0])[1:]
     assert {e["intent"] for e in examples} == {"greeting", "unknown"}
     for example in examples:
-        r = client.post("/copilot", json={"question": example["question"]})
+        r = client.post("/lotse", json={"question": example["question"]})
         assert r.status_code == 200 and r.json() == example
+
+
+def test_copilot_is_an_alias_of_lotse():
+    for question in ["Hello", "Can we launch a new express route tomorrow?", "What's the weather like?"]:
+        main = client.post("/lotse", json={"question": question})
+        alias = client.post("/copilot", json={"question": question})
+        assert main.status_code == alias.status_code == 200 and main.json() == alias.json()
 
 
 def test_dashboard():
@@ -185,6 +192,7 @@ def test_dashboard():
     (lambda: client.post("/emergency", json={"incidentType": "ROAD_CLOSURE", "station": "Airport"}),
      501, "NOT_IMPLEMENTED"),
     (lambda: client.get("/dashboard", params={"date": "tomorrow"}), 400, "INVALID_DATE"),
+    (lambda: client.post("/lotse", json={}), 400, "INVALID_REQUEST"),
     (lambda: client.post("/copilot", json={}), 400, "INVALID_REQUEST"),
 ])
 def test_errors(call, status, error):

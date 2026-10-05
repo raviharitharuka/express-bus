@@ -5,8 +5,18 @@ feasible when every trip is covered by existing drivers (idle time or allowed
 overtime) with a spare bus, i.e. 0 new drivers. The recommended plan then adds
 feasible routes one by one and re-solves them together, so two routes never
 count on the same idle minutes.
+
+All CP-SAT solves of one request share a time budget (OPTIMIZE_TIME_LIMIT_S, default 8 s). If a solve
+doesn't finish with a proven-optimal answer in time, or fails, the last good result for the same data
+source, date and options is returned with `cached: true`; without one, the request fails with 503.
 """
 
+import logging
+import os
+import time
+
+import config
+from errors import ApiError
 from schemas.optimize import OptimizeRequest, OptimizeResponse, RouteResult, TripAssignment
 from services import data
 from services.express_model import Solution, build_driver_days, build_tasks, solve
@@ -69,20 +79,77 @@ def _route_result(cand: dict, sol: Solution, spare: dict[str, int]) -> RouteResu
     )
 
 
+log = logging.getLogger(__name__)
+
+TIME_LIMIT_ENV = "OPTIMIZE_TIME_LIMIT_S"
+DEFAULT_TIME_LIMIT_S = 8.0
+
+# (data source, date, request options) -> last result that solved to optimality
+_last_good: dict[tuple[str, str, str], OptimizeResponse] = {}
+
+
+class SolveIncomplete(Exception):
+    """A solve ran out of time or didn't prove optimality."""
+
+
+def time_limit_s() -> float:
+    raw = os.getenv(TIME_LIMIT_ENV, "").strip()
+    try:
+        value = float(raw) if raw else DEFAULT_TIME_LIMIT_S
+    except ValueError:
+        value = 0
+    if value <= 0:
+        log.warning("%s=%r is not a positive number of seconds; using %s", TIME_LIMIT_ENV, raw, DEFAULT_TIME_LIMIT_S)
+        return DEFAULT_TIME_LIMIT_S
+    return value
+
+
+def clear_cache() -> None:
+    _last_good.clear()
+
+
 def optimize(req: OptimizeRequest) -> OptimizeResponse:
+    # Validation (unknown station, bad date) raises 4xx here, before any solving.
     day = data.resolve_day(req.date, default=tomorrow())
     candidates = _candidates(req)
+    key = (config.DATA_SOURCE, day.date, req.model_dump_json(exclude={"date"}))
+    try:
+        result = _solve_all(day, req, candidates, deadline=time.perf_counter() + time_limit_s())
+    except ApiError:
+        raise
+    except Exception as e:  # timeout, or anything the solver threw
+        cached = _last_good.get(key)
+        log.warning("optimize %s on %s failed (%s); %s", config.DATA_SOURCE, day.date, e,
+                    "returning the cached result" if cached else "no cached result")
+        if cached:
+            return cached.model_copy(update={"cached": True})
+        raise ApiError(503, "OPTIMIZE_UNAVAILABLE",
+                       f"Optimization didn't finish ({e}) and there is no earlier result for {day.date} to fall back on")
+    _last_good[key] = result
+    return result
+
+
+def _solve_all(day: data.Day, req: OptimizeRequest, candidates: list[dict], deadline: float) -> OptimizeResponse:
     drivers = build_driver_days(day, req.allow_overtime)
     spare = {s: len(data.spare_buses(s)) for s in data.station_names()}
     tasks = {c["routeId"]: build_tasks(c) for c in candidates}
 
-    results = [_route_result(c, solve(tasks[c["routeId"]], drivers, spare), spare) for c in candidates]
+    def solve_in_budget(route_tasks):
+        remaining = deadline - time.perf_counter()
+        if remaining <= 0:
+            raise SolveIncomplete(f"time limit of {time_limit_s():g} s reached")
+        sol = solve(route_tasks, drivers, spare, time_limit_s=remaining)
+        if sol.status != "OPTIMAL":
+            raise SolveIncomplete(f"solver stopped with status {sol.status}")
+        return sol
+
+    results = [_route_result(c, solve_in_budget(tasks[c["routeId"]]), spare) for c in candidates]
 
     # Launch plan: cheapest feasible routes first; keep a route only if the combined model still needs nobody new.
     plan_routes: list[str] = []
-    plan = solve([], drivers, spare)
+    plan = solve_in_budget([])
     for r in sorted((r for r in results if r.feasible), key=lambda r: (r.overtime_hours_used, -r.trips_covered)):
-        trial = solve([t for rid in plan_routes + [r.route] for t in tasks[rid]], drivers, spare)
+        trial = solve_in_budget([t for rid in plan_routes + [r.route] for t in tasks[rid]])
         if trial.covered == len(trial.assignments) and trial.new_drivers == 0:
             plan_routes.append(r.route)
             plan = trial

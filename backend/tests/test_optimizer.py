@@ -86,7 +86,7 @@ def test_break_rule_blocks_assignment():
                        driving=[(360, 600), (840, 900)], slots=[Slot("X", 600, 840, "idle")])
     now = Task("T-now", "R", "X", 600, 650, [(600, 620), (630, 650)])
     later = Task("T-later", "R", "X", 640, 690, [(640, 660), (670, 690)])
-    sol = solve([now], [driver], {"X": 1})
+    sol = solve([now], [driver], {"X": 1}, time_limit_s=5)
     assert sol.assignments[0].driver_id != "D900"
-    sol = solve([later], [driver], {"X": 1})
+    sol = solve([later], [driver], {"X": 1}, time_limit_s=5)
     assert sol.assignments[0].driver_id == "D900"

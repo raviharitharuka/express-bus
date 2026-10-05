@@ -1,5 +1,6 @@
 """KPI dashboard: aggregates the other engines into one payload."""
 
+from errors import ApiError
 from schemas.dashboard import Alert, DashboardResponse, Kpis, Recommendation, StationStatus
 from schemas.optimize import OptimizeRequest
 from services import data
@@ -24,7 +25,10 @@ def get_dashboard(date: str | None) -> DashboardResponse:
     working = day.working_duties()
     buses = data.buses()
     drivers = data.drivers()
-    opt = optimize(OptimizeRequest(date=day.date))
+    try:
+        opt = optimize(OptimizeRequest(date=day.date))
+    except ApiError:  # solver timed out with nothing cached: show the rest of the dashboard anyway
+        opt = None
     shortage_day, missing = worst_shortage(day.date)
 
     fleet = station_buses()
@@ -39,7 +43,13 @@ def get_dashboard(date: str | None) -> DashboardResponse:
         for f in fleet
     ]
 
-    if opt.recommended:
+    if opt is None:
+        recommendation = Recommendation(
+            title="Optimization unavailable",
+            reason="The route optimizer didn't finish in time; try again from the Optimization page",
+            confidence=0,
+        )
+    elif opt.recommended:
         trips = sum(r.trips_covered for r in opt.recommendations if r.route in opt.recommended)
         recommendation = Recommendation(
             title=f"Launch Express Route{'s' if len(opt.recommended) > 1 else ''} {', '.join(opt.recommended)}",
@@ -72,7 +82,7 @@ def get_dashboard(date: str | None) -> DashboardResponse:
             available_drivers=len({w.driver_id for w in idle_windows(day)}),
             available_buses=sum(f.spare for f in fleet),
             predicted_shortages=missing,
-            additional_routes_identified=len(opt.recommended),
+            additional_routes_identified=len(opt.recommended) if opt else 0,
         ),
         stations=stations,
         recommendation=recommendation,

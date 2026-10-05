@@ -18,6 +18,7 @@ class Counts(CamelModel):
 
 class AdminStatus(CamelModel):
     data_source: Literal["synthetic", "gtfs"]
+    data_note: str  # what in the active dataset is real and what is synthetic (same as /health)
     counts: Counts
     last_optimize_ms: int | None
     overrides_active: int

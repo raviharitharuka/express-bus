@@ -49,7 +49,6 @@ DAY_END_MIN = 24 * 60
 W_COVERED = 1_000_000  # one covered trip beats any number of hires/overtime
 W_NEW_DRIVER = 10_000  # one hire beats any realistic amount of overtime minutes
 W_NEW_DRIVER_TRIP = 1  # tie-break: among equal plans, give trips to existing drivers
-SOLVER_TIME_LIMIT_S = 5.0
 
 
 @dataclass
@@ -178,7 +177,8 @@ def _utilization(driving: int, span: int) -> float:
 
 # --- Model ------------------------------------------------------------------
 
-def solve(tasks: list[Task], drivers: list[DriverDay], spare_buses: dict[str, int]) -> Solution:
+def solve(tasks: list[Task], drivers: list[DriverDay], spare_buses: dict[str, int], time_limit_s: float) -> Solution:
+    """Solution.status is the CP-SAT status name; anything but OPTIMAL means the solve was cut short."""
     m = cp_model.CpModel()
     x: dict[tuple[int, str], cp_model.IntVar] = {}  # (task index, worker) -> assigned?
     slot_kind: dict[tuple[int, str], str] = {}
@@ -261,7 +261,7 @@ def solve(tasks: list[Task], drivers: list[DriverDay], spare_buses: dict[str, in
                - W_NEW_DRIVER_TRIP * sum(new_driver_trips))
 
     solver = cp_model.CpSolver()
-    solver.parameters.max_time_in_seconds = SOLVER_TIME_LIMIT_S
+    solver.parameters.max_time_in_seconds = time_limit_s
     solver.parameters.num_workers = 1  # single thread: same input, same answer (models are tiny)
     status = solver.solve(m)
     ok = status in (cp_model.OPTIMAL, cp_model.FEASIBLE)

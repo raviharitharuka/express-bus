@@ -6,7 +6,12 @@ from services.lotse import ask
 router = APIRouter(tags=["lotse"])
 
 
-# The URL stays /copilot (the assistant's old name) so existing clients keep working.
-@router.post("/copilot", response_model=LotseResponse)
+@router.post("/lotse", response_model=LotseResponse)
 def lotse(req: LotseRequest):
     return ask(req)
+
+
+# Old name, kept so existing clients (and the frontend) keep working.
+@router.post("/copilot", response_model=LotseResponse, summary="Lotse (alias of POST /lotse)")
+def copilot(req: LotseRequest):
+    return lotse(req)

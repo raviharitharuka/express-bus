@@ -149,6 +149,8 @@ export interface OptimizeResult {
   recommended: string[];
   summary: string;
   recommendations: RouteRecommendation[];
+  /** true: the solver timed out or failed and this is the last good result for the same request. */
+  cached?: boolean;
 }
 
 // POST /emergency
@@ -229,6 +231,8 @@ interface LotseBase {
   /** 90 matched or greeting, 50–60 matched but missing info or an error, 30 unknown */
   confidence: number;
   suggestedQuestions: string[];
+  /** Who wrote `answer`: Claude from the `data` JSON, or the keyword rules (fallback). */
+  explainedBy?: "claude" | "rules";
 }
 
 /** `data` is null for greeting/unknown and when an intent couldn't be answered. */
@@ -258,6 +262,8 @@ export interface AdminCounts {
 // GET /admin/status, POST /admin/data-source, POST /admin/reset
 export interface AdminStatus {
   dataSource?: DataSourceName;
+  /** What in the active dataset is real and what is synthetic (same as /health). */
+  dataNote?: string;
   counts?: AdminCounts;
   /** Duration of the last POST /optimize; null if none since startup. */
   lastOptimizeMs?: number | null;

@@ -73,6 +73,10 @@ def pick_weekday(trips: pd.DataFrame, calendar: pd.DataFrame, dates: pd.DataFram
 
 
 def main():
+    if not (GTFS_DIR / "agency.txt").exists():
+        raise SystemExit(f"No GTFS feed in {GTFS_DIR}. Download https://www.vgn.de/opendata/GTFS.zip and unzip it "
+                         "there (see 'Rebuilding the GTFS data' in the README). The converted data is already committed, "
+                         "so DATA_SOURCE=gtfs works without this step.")
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     parser.add_argument("--date", help="service date YYYYMMDD (default: pick a representative Tue-Thu)")
     parser.add_argument("--prefixes", nargs="+", default=VAG_BUS_PREFIXES,

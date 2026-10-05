@@ -63,5 +63,6 @@
     "Which drivers are idle today?",
     "What happens if bus B021 breaks down at 09:15?",
     "Which station needs more buses?"
-  ]
+  ],
+  "explainedBy": "rules"
 }

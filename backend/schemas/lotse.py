@@ -18,3 +18,4 @@ class LotseResponse(CamelModel):
     confidence: int
     data: dict[str, Any] | None
     suggested_questions: list[str]
+    explained_by: Literal["rules", "claude"]  # who wrote `answer`
