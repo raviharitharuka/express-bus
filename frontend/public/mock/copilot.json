@@ -1,7 +1,7 @@
 {
   "question": "Can we launch a new express route tomorrow?",
-  "answer": "Yes. 8 drivers have 22 idle hours tomorrow. E1 (Central Station - Airport), E2 (University - Central Station) and E3 (North Station - South Station) can launch with 0 new drivers. E4 would need 1 extra driver.",
-  "confidence": 92,
+  "answer": "Yes. On 2026-10-06 4 express route(s) can launch with 0 new drivers: E1 (Central Station - Airport Express, 2.5 h), E2 (University - Central Station Express, 2.0 h), E3 (North Station - South Station Express, 3.0 h), E5 (South Station - Central Station Express, 2.7 h). Driver utilization rises from 66.3% to 71.7%. Not feasible: E4 (No spare bus at Airport; 1 of 4 departures unstaffed).",
+  "confidence": 90,
   "followUps": [
     "Which drivers have unused capacity today?",
     "What happens if Bus B021 breaks down now?",

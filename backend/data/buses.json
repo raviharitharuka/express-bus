@@ -1,0 +1,354 @@
+{
+  "buses": [
+    {
+      "busId": "B001",
+      "station": "Central Station",
+      "status": "active",
+      "type": "articulated",
+      "capacity": 120
+    },
+    {
+      "busId": "B002",
+      "station": "Central Station",
+      "status": "active",
+      "type": "articulated",
+      "capacity": 120
+    },
+    {
+      "busId": "B003",
+      "station": "Central Station",
+      "status": "maintenance",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B004",
+      "station": "Central Station",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B005",
+      "station": "Central Station",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B006",
+      "station": "Central Station",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B007",
+      "station": "Central Station",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B008",
+      "station": "Central Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B009",
+      "station": "Central Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B010",
+      "station": "Central Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B011",
+      "station": "Central Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B012",
+      "station": "Central Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B013",
+      "station": "Central Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B014",
+      "station": "Central Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B015",
+      "station": "Central Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B016",
+      "station": "Central Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B017",
+      "station": "Airport",
+      "status": "maintenance",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B018",
+      "station": "Airport",
+      "status": "active",
+      "type": "articulated",
+      "capacity": 120
+    },
+    {
+      "busId": "B019",
+      "station": "Airport",
+      "status": "active",
+      "type": "articulated",
+      "capacity": 120
+    },
+    {
+      "busId": "B020",
+      "station": "Airport",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B021",
+      "station": "Airport",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B022",
+      "station": "North Station",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B023",
+      "station": "North Station",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B024",
+      "station": "North Station",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B025",
+      "station": "North Station",
+      "status": "maintenance",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B026",
+      "station": "North Station",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B027",
+      "station": "North Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B028",
+      "station": "North Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B029",
+      "station": "North Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B030",
+      "station": "North Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B031",
+      "station": "North Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B032",
+      "station": "South Station",
+      "status": "active",
+      "type": "articulated",
+      "capacity": 120
+    },
+    {
+      "busId": "B033",
+      "station": "South Station",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B034",
+      "station": "South Station",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B035",
+      "station": "South Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B036",
+      "station": "South Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B037",
+      "station": "South Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B038",
+      "station": "South Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B039",
+      "station": "South Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B040",
+      "station": "South Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B041",
+      "station": "South Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B042",
+      "station": "University",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B043",
+      "station": "University",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B044",
+      "station": "University",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B045",
+      "station": "University",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B046",
+      "station": "University",
+      "status": "maintenance",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B047",
+      "station": "University",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80
+    },
+    {
+      "busId": "B048",
+      "station": "University",
+      "status": "spare",
+      "type": "midi",
+      "capacity": 50
+    },
+    {
+      "busId": "B049",
+      "station": "University",
+      "status": "spare",
+      "type": "midi",
+      "capacity": 50
+    },
+    {
+      "busId": "B050",
+      "station": "University",
+      "status": "spare",
+      "type": "midi",
+      "capacity": 50
+    }
+  ]
+}

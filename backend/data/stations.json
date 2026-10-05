@@ -1,0 +1,71 @@
+{
+  "stations": [
+    {
+      "id": "CEN",
+      "name": "Central Station",
+      "lat": 49.4459,
+      "lng": 11.0825
+    },
+    {
+      "id": "AIR",
+      "name": "Airport",
+      "lat": 49.4987,
+      "lng": 11.078
+    },
+    {
+      "id": "NOR",
+      "name": "North Station",
+      "lat": 49.476,
+      "lng": 11.105
+    },
+    {
+      "id": "SOU",
+      "name": "South Station",
+      "lat": 49.418,
+      "lng": 11.1
+    },
+    {
+      "id": "UNI",
+      "name": "University",
+      "lat": 49.433,
+      "lng": 11.035
+    }
+  ],
+  "distanceKm": {
+    "Central Station": {
+      "Central Station": 0,
+      "Airport": 8,
+      "North Station": 5,
+      "South Station": 5,
+      "University": 5
+    },
+    "Airport": {
+      "Central Station": 8,
+      "Airport": 0,
+      "North Station": 4,
+      "South Station": 12,
+      "University": 11
+    },
+    "North Station": {
+      "Central Station": 5,
+      "Airport": 4,
+      "North Station": 0,
+      "South Station": 9,
+      "University": 9
+    },
+    "South Station": {
+      "Central Station": 5,
+      "Airport": 12,
+      "North Station": 9,
+      "South Station": 0,
+      "University": 7
+    },
+    "University": {
+      "Central Station": 5,
+      "Airport": 11,
+      "North Station": 9,
+      "South Station": 7,
+      "University": 0
+    }
+  }
+}

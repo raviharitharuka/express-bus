@@ -1,0 +1,168 @@
+{
+  "routes": [
+    {
+      "routeId": "R1",
+      "name": "Central Station - Airport",
+      "from": "Central Station",
+      "to": "Airport",
+      "distanceKm": 8,
+      "durationMin": 45,
+      "frequencyMin": 30
+    },
+    {
+      "routeId": "R2",
+      "name": "Central Station - North Station",
+      "from": "Central Station",
+      "to": "North Station",
+      "distanceKm": 5,
+      "durationMin": 35,
+      "frequencyMin": 30
+    },
+    {
+      "routeId": "R3",
+      "name": "Central Station - South Station",
+      "from": "Central Station",
+      "to": "South Station",
+      "distanceKm": 5,
+      "durationMin": 35,
+      "frequencyMin": 30
+    },
+    {
+      "routeId": "R4",
+      "name": "Central Station - University",
+      "from": "Central Station",
+      "to": "University",
+      "distanceKm": 5,
+      "durationMin": 35,
+      "frequencyMin": 30
+    },
+    {
+      "routeId": "R5",
+      "name": "Airport - North Station",
+      "from": "Airport",
+      "to": "North Station",
+      "distanceKm": 4,
+      "durationMin": 30,
+      "frequencyMin": 60
+    },
+    {
+      "routeId": "R6",
+      "name": "Airport - South Station",
+      "from": "Airport",
+      "to": "South Station",
+      "distanceKm": 12,
+      "durationMin": 55,
+      "frequencyMin": 60
+    },
+    {
+      "routeId": "R7",
+      "name": "Airport - University",
+      "from": "Airport",
+      "to": "University",
+      "distanceKm": 11,
+      "durationMin": 55,
+      "frequencyMin": 60
+    },
+    {
+      "routeId": "R8",
+      "name": "North Station - South Station",
+      "from": "North Station",
+      "to": "South Station",
+      "distanceKm": 9,
+      "durationMin": 45,
+      "frequencyMin": 60
+    },
+    {
+      "routeId": "R9",
+      "name": "North Station - University",
+      "from": "North Station",
+      "to": "University",
+      "distanceKm": 9,
+      "durationMin": 45,
+      "frequencyMin": 60
+    },
+    {
+      "routeId": "R10",
+      "name": "South Station - University",
+      "from": "South Station",
+      "to": "University",
+      "distanceKm": 7,
+      "durationMin": 40,
+      "frequencyMin": 60
+    }
+  ],
+  "expressCandidates": [
+    {
+      "routeId": "E1",
+      "name": "Central Station - Airport Express",
+      "from": "Central Station",
+      "to": "Airport",
+      "distanceKm": 8,
+      "durationMin": 20,
+      "turnaroundMin": 10,
+      "departures": [
+        "09:45",
+        "10:45",
+        "11:45"
+      ]
+    },
+    {
+      "routeId": "E2",
+      "name": "University - Central Station Express",
+      "from": "University",
+      "to": "Central Station",
+      "distanceKm": 5,
+      "durationMin": 15,
+      "turnaroundMin": 10,
+      "departures": [
+        "09:30",
+        "10:30",
+        "11:30"
+      ]
+    },
+    {
+      "routeId": "E3",
+      "name": "North Station - South Station Express",
+      "from": "North Station",
+      "to": "South Station",
+      "distanceKm": 9,
+      "durationMin": 25,
+      "turnaroundMin": 10,
+      "departures": [
+        "09:00",
+        "10:00",
+        "11:00"
+      ]
+    },
+    {
+      "routeId": "E4",
+      "name": "Airport - University Express",
+      "from": "Airport",
+      "to": "University",
+      "distanceKm": 11,
+      "durationMin": 25,
+      "turnaroundMin": 10,
+      "departures": [
+        "09:30",
+        "10:30",
+        "11:30",
+        "12:00"
+      ]
+    },
+    {
+      "routeId": "E5",
+      "name": "South Station - Central Station Express",
+      "from": "South Station",
+      "to": "Central Station",
+      "distanceKm": 5,
+      "durationMin": 15,
+      "turnaroundMin": 10,
+      "departures": [
+        "10:00",
+        "10:45",
+        "11:30",
+        "12:20"
+      ]
+    }
+  ]
+}

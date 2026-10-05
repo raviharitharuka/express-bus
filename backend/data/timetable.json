@@ -1,0 +1,2167 @@
+{
+  "template": "weekday",
+  "duties": [
+    {
+      "dutyId": "DU001",
+      "driverId": "D001",
+      "busId": "B001",
+      "type": "straight",
+      "runsOn": [
+        "weekday",
+        "saturday",
+        "sunday"
+      ],
+      "start": "06:00",
+      "end": "13:10",
+      "spanMinutes": 430,
+      "drivingMinutes": 360
+    },
+    {
+      "dutyId": "DU002",
+      "driverId": "D002",
+      "busId": "B002",
+      "type": "split",
+      "runsOn": [
+        "weekday"
+      ],
+      "start": "06:30",
+      "end": "15:20",
+      "spanMinutes": 530,
+      "drivingMinutes": 280
+    },
+    {
+      "dutyId": "DU003",
+      "driverId": "D003",
+      "busId": "B004",
+      "type": "long-layover",
+      "runsOn": [
+        "weekday",
+        "saturday",
+        "sunday"
+      ],
+      "start": "07:00",
+      "end": "16:10",
+      "spanMinutes": 550,
+      "drivingMinutes": 280
+    },
+    {
+      "dutyId": "DU004",
+      "driverId": "D004",
+      "busId": "B005",
+      "type": "short",
+      "runsOn": [
+        "weekday"
+      ],
+      "start": "07:00",
+      "end": "11:20",
+      "spanMinutes": 260,
+      "drivingMinutes": 210
+    },
+    {
+      "dutyId": "DU005",
+      "driverId": "D005",
+      "busId": "B006",
+      "type": "split",
+      "runsOn": [
+        "weekday"
+      ],
+      "start": "06:15",
+      "end": "16:15",
+      "spanMinutes": 600,
+      "drivingMinutes": 360
+    },
+    {
+      "dutyId": "DU006",
+      "driverId": "D006",
+      "busId": "B007",
+      "type": "straight",
+      "runsOn": [
+        "weekday",
+        "saturday",
+        "sunday"
+      ],
+      "start": "11:30",
+      "end": "18:50",
+      "spanMinutes": 440,
+      "drivingMinutes": 350
+    },
+    {
+      "dutyId": "DU007",
+      "driverId": "D007",
+      "busId": "B018",
+      "type": "split",
+      "runsOn": [
+        "weekday"
+      ],
+      "start": "05:45",
+      "end": "15:45",
+      "spanMinutes": 600,
+      "drivingMinutes": 360
+    },
+    {
+      "dutyId": "DU008",
+      "driverId": "D008",
+      "busId": "B019",
+      "type": "long-layover",
+      "runsOn": [
+        "weekday",
+        "saturday",
+        "sunday"
+      ],
+      "start": "06:00",
+      "end": "14:25",
+      "spanMinutes": 505,
+      "drivingMinutes": 240
+    },
+    {
+      "dutyId": "DU009",
+      "driverId": "D009",
+      "busId": "B020",
+      "type": "straight",
+      "runsOn": [
+        "weekday",
+        "saturday",
+        "sunday"
+      ],
+      "start": "06:30",
+      "end": "12:50",
+      "spanMinutes": 380,
+      "drivingMinutes": 330
+    },
+    {
+      "dutyId": "DU010",
+      "driverId": "D010",
+      "busId": "B021",
+      "type": "short",
+      "runsOn": [
+        "weekday"
+      ],
+      "start": "09:30",
+      "end": "13:40",
+      "spanMinutes": 250,
+      "drivingMinutes": 220
+    },
+    {
+      "dutyId": "DU011",
+      "driverId": "D011",
+      "busId": "B022",
+      "type": "split",
+      "runsOn": [
+        "weekday"
+      ],
+      "start": "06:00",
+      "end": "16:00",
+      "spanMinutes": 600,
+      "drivingMinutes": 320
+    },
+    {
+      "dutyId": "DU012",
+      "driverId": "D012",
+      "busId": "B023",
+      "type": "straight",
+      "runsOn": [
+        "weekday",
+        "saturday",
+        "sunday"
+      ],
+      "start": "06:30",
+      "end": "13:40",
+      "spanMinutes": 430,
+      "drivingMinutes": 360
+    },
+    {
+      "dutyId": "DU013",
+      "driverId": "D013",
+      "busId": "B024",
+      "type": "long-layover",
+      "runsOn": [
+        "weekday",
+        "saturday",
+        "sunday"
+      ],
+      "start": "07:00",
+      "end": "14:50",
+      "spanMinutes": 470,
+      "drivingMinutes": 270
+    },
+    {
+      "dutyId": "DU014",
+      "driverId": "D014",
+      "busId": "B026",
+      "type": "short",
+      "runsOn": [
+        "weekday"
+      ],
+      "start": "14:00",
+      "end": "17:50",
+      "spanMinutes": 230,
+      "drivingMinutes": 180
+    },
+    {
+      "dutyId": "DU015",
+      "driverId": "D015",
+      "busId": "B032",
+      "type": "split",
+      "runsOn": [
+        "weekday"
+      ],
+      "start": "06:00",
+      "end": "16:00",
+      "spanMinutes": 600,
+      "drivingMinutes": 370
+    },
+    {
+      "dutyId": "DU016",
+      "driverId": "D016",
+      "busId": "B033",
+      "type": "straight",
+      "runsOn": [
+        "weekday",
+        "saturday",
+        "sunday"
+      ],
+      "start": "07:00",
+      "end": "13:20",
+      "spanMinutes": 380,
+      "drivingMinutes": 330
+    },
+    {
+      "dutyId": "DU017",
+      "driverId": "D017",
+      "busId": "B034",
+      "type": "long-layover",
+      "runsOn": [
+        "weekday",
+        "saturday",
+        "sunday"
+      ],
+      "start": "07:30",
+      "end": "15:05",
+      "spanMinutes": 455,
+      "drivingMinutes": 240
+    },
+    {
+      "dutyId": "DU018",
+      "driverId": "D018",
+      "busId": "B042",
+      "type": "split",
+      "runsOn": [
+        "weekday"
+      ],
+      "start": "06:30",
+      "end": "15:20",
+      "spanMinutes": 530,
+      "drivingMinutes": 280
+    },
+    {
+      "dutyId": "DU019",
+      "driverId": "D019",
+      "busId": "B043",
+      "type": "short",
+      "runsOn": [
+        "weekday"
+      ],
+      "start": "11:00",
+      "end": "15:50",
+      "spanMinutes": 290,
+      "drivingMinutes": 240
+    },
+    {
+      "dutyId": "DU020",
+      "driverId": "D020",
+      "busId": "B044",
+      "type": "straight",
+      "runsOn": [
+        "weekday",
+        "saturday",
+        "sunday"
+      ],
+      "start": "06:00",
+      "end": "12:20",
+      "spanMinutes": 380,
+      "drivingMinutes": 330
+    }
+  ],
+  "trips": [
+    {
+      "tripId": "T001",
+      "route": "R1",
+      "startStation": "Central Station",
+      "endStation": "Airport",
+      "departureTime": "06:00",
+      "arrivalTime": "06:45",
+      "dutyId": "DU001",
+      "driverId": "D001",
+      "busId": "B001"
+    },
+    {
+      "tripId": "T002",
+      "route": "R1",
+      "startStation": "Airport",
+      "endStation": "Central Station",
+      "departureTime": "06:55",
+      "arrivalTime": "07:40",
+      "dutyId": "DU001",
+      "driverId": "D001",
+      "busId": "B001"
+    },
+    {
+      "tripId": "T003",
+      "route": "R1",
+      "startStation": "Central Station",
+      "endStation": "Airport",
+      "departureTime": "07:50",
+      "arrivalTime": "08:35",
+      "dutyId": "DU001",
+      "driverId": "D001",
+      "busId": "B001"
+    },
+    {
+      "tripId": "T004",
+      "route": "R1",
+      "startStation": "Airport",
+      "endStation": "Central Station",
+      "departureTime": "08:45",
+      "arrivalTime": "09:30",
+      "dutyId": "DU001",
+      "driverId": "D001",
+      "busId": "B001"
+    },
+    {
+      "tripId": "T005",
+      "route": "R1",
+      "startStation": "Central Station",
+      "endStation": "Airport",
+      "departureTime": "09:40",
+      "arrivalTime": "10:25",
+      "dutyId": "DU001",
+      "driverId": "D001",
+      "busId": "B001"
+    },
+    {
+      "tripId": "T006",
+      "route": "R1",
+      "startStation": "Airport",
+      "endStation": "Central Station",
+      "departureTime": "10:35",
+      "arrivalTime": "11:20",
+      "dutyId": "DU001",
+      "driverId": "D001",
+      "busId": "B001"
+    },
+    {
+      "tripId": "T007",
+      "route": "R1",
+      "startStation": "Central Station",
+      "endStation": "Airport",
+      "departureTime": "11:30",
+      "arrivalTime": "12:15",
+      "dutyId": "DU001",
+      "driverId": "D001",
+      "busId": "B001"
+    },
+    {
+      "tripId": "T008",
+      "route": "R1",
+      "startStation": "Airport",
+      "endStation": "Central Station",
+      "departureTime": "12:25",
+      "arrivalTime": "13:10",
+      "dutyId": "DU001",
+      "driverId": "D001",
+      "busId": "B001"
+    },
+    {
+      "tripId": "T009",
+      "route": "R2",
+      "startStation": "Central Station",
+      "endStation": "North Station",
+      "departureTime": "06:30",
+      "arrivalTime": "07:05",
+      "dutyId": "DU002",
+      "driverId": "D002",
+      "busId": "B002"
+    },
+    {
+      "tripId": "T010",
+      "route": "R2",
+      "startStation": "North Station",
+      "endStation": "Central Station",
+      "departureTime": "07:15",
+      "arrivalTime": "07:50",
+      "dutyId": "DU002",
+      "driverId": "D002",
+      "busId": "B002"
+    },
+    {
+      "tripId": "T011",
+      "route": "R2",
+      "startStation": "Central Station",
+      "endStation": "North Station",
+      "departureTime": "08:00",
+      "arrivalTime": "08:35",
+      "dutyId": "DU002",
+      "driverId": "D002",
+      "busId": "B002"
+    },
+    {
+      "tripId": "T012",
+      "route": "R2",
+      "startStation": "North Station",
+      "endStation": "Central Station",
+      "departureTime": "08:45",
+      "arrivalTime": "09:20",
+      "dutyId": "DU002",
+      "driverId": "D002",
+      "busId": "B002"
+    },
+    {
+      "tripId": "T013",
+      "route": "R2",
+      "startStation": "Central Station",
+      "endStation": "North Station",
+      "departureTime": "12:30",
+      "arrivalTime": "13:05",
+      "dutyId": "DU002",
+      "driverId": "D002",
+      "busId": "B002"
+    },
+    {
+      "tripId": "T014",
+      "route": "R2",
+      "startStation": "North Station",
+      "endStation": "Central Station",
+      "departureTime": "13:15",
+      "arrivalTime": "13:50",
+      "dutyId": "DU002",
+      "driverId": "D002",
+      "busId": "B002"
+    },
+    {
+      "tripId": "T015",
+      "route": "R2",
+      "startStation": "Central Station",
+      "endStation": "North Station",
+      "departureTime": "14:00",
+      "arrivalTime": "14:35",
+      "dutyId": "DU002",
+      "driverId": "D002",
+      "busId": "B002"
+    },
+    {
+      "tripId": "T016",
+      "route": "R2",
+      "startStation": "North Station",
+      "endStation": "Central Station",
+      "departureTime": "14:45",
+      "arrivalTime": "15:20",
+      "dutyId": "DU002",
+      "driverId": "D002",
+      "busId": "B002"
+    },
+    {
+      "tripId": "T017",
+      "route": "R3",
+      "startStation": "Central Station",
+      "endStation": "South Station",
+      "departureTime": "07:00",
+      "arrivalTime": "07:35",
+      "dutyId": "DU003",
+      "driverId": "D003",
+      "busId": "B004"
+    },
+    {
+      "tripId": "T018",
+      "route": "R3",
+      "startStation": "South Station",
+      "endStation": "Central Station",
+      "departureTime": "08:35",
+      "arrivalTime": "09:10",
+      "dutyId": "DU003",
+      "driverId": "D003",
+      "busId": "B004"
+    },
+    {
+      "tripId": "T019",
+      "route": "R3",
+      "startStation": "Central Station",
+      "endStation": "South Station",
+      "departureTime": "09:20",
+      "arrivalTime": "09:55",
+      "dutyId": "DU003",
+      "driverId": "D003",
+      "busId": "B004"
+    },
+    {
+      "tripId": "T020",
+      "route": "R3",
+      "startStation": "South Station",
+      "endStation": "Central Station",
+      "departureTime": "10:55",
+      "arrivalTime": "11:30",
+      "dutyId": "DU003",
+      "driverId": "D003",
+      "busId": "B004"
+    },
+    {
+      "tripId": "T021",
+      "route": "R3",
+      "startStation": "Central Station",
+      "endStation": "South Station",
+      "departureTime": "11:40",
+      "arrivalTime": "12:15",
+      "dutyId": "DU003",
+      "driverId": "D003",
+      "busId": "B004"
+    },
+    {
+      "tripId": "T022",
+      "route": "R3",
+      "startStation": "South Station",
+      "endStation": "Central Station",
+      "departureTime": "13:15",
+      "arrivalTime": "13:50",
+      "dutyId": "DU003",
+      "driverId": "D003",
+      "busId": "B004"
+    },
+    {
+      "tripId": "T023",
+      "route": "R3",
+      "startStation": "Central Station",
+      "endStation": "South Station",
+      "departureTime": "14:00",
+      "arrivalTime": "14:35",
+      "dutyId": "DU003",
+      "driverId": "D003",
+      "busId": "B004"
+    },
+    {
+      "tripId": "T024",
+      "route": "R3",
+      "startStation": "South Station",
+      "endStation": "Central Station",
+      "departureTime": "15:35",
+      "arrivalTime": "16:10",
+      "dutyId": "DU003",
+      "driverId": "D003",
+      "busId": "B004"
+    },
+    {
+      "tripId": "T025",
+      "route": "R4",
+      "startStation": "Central Station",
+      "endStation": "University",
+      "departureTime": "07:00",
+      "arrivalTime": "07:35",
+      "dutyId": "DU004",
+      "driverId": "D004",
+      "busId": "B005"
+    },
+    {
+      "tripId": "T026",
+      "route": "R4",
+      "startStation": "University",
+      "endStation": "Central Station",
+      "departureTime": "07:45",
+      "arrivalTime": "08:20",
+      "dutyId": "DU004",
+      "driverId": "D004",
+      "busId": "B005"
+    },
+    {
+      "tripId": "T027",
+      "route": "R4",
+      "startStation": "Central Station",
+      "endStation": "University",
+      "departureTime": "08:30",
+      "arrivalTime": "09:05",
+      "dutyId": "DU004",
+      "driverId": "D004",
+      "busId": "B005"
+    },
+    {
+      "tripId": "T028",
+      "route": "R4",
+      "startStation": "University",
+      "endStation": "Central Station",
+      "departureTime": "09:15",
+      "arrivalTime": "09:50",
+      "dutyId": "DU004",
+      "driverId": "D004",
+      "busId": "B005"
+    },
+    {
+      "tripId": "T029",
+      "route": "R4",
+      "startStation": "Central Station",
+      "endStation": "University",
+      "departureTime": "10:00",
+      "arrivalTime": "10:35",
+      "dutyId": "DU004",
+      "driverId": "D004",
+      "busId": "B005"
+    },
+    {
+      "tripId": "T030",
+      "route": "R4",
+      "startStation": "University",
+      "endStation": "Central Station",
+      "departureTime": "10:45",
+      "arrivalTime": "11:20",
+      "dutyId": "DU004",
+      "driverId": "D004",
+      "busId": "B005"
+    },
+    {
+      "tripId": "T031",
+      "route": "R1",
+      "startStation": "Central Station",
+      "endStation": "Airport",
+      "departureTime": "06:15",
+      "arrivalTime": "07:00",
+      "dutyId": "DU005",
+      "driverId": "D005",
+      "busId": "B006"
+    },
+    {
+      "tripId": "T032",
+      "route": "R1",
+      "startStation": "Airport",
+      "endStation": "Central Station",
+      "departureTime": "07:10",
+      "arrivalTime": "07:55",
+      "dutyId": "DU005",
+      "driverId": "D005",
+      "busId": "B006"
+    },
+    {
+      "tripId": "T033",
+      "route": "R1",
+      "startStation": "Central Station",
+      "endStation": "Airport",
+      "departureTime": "08:05",
+      "arrivalTime": "08:50",
+      "dutyId": "DU005",
+      "driverId": "D005",
+      "busId": "B006"
+    },
+    {
+      "tripId": "T034",
+      "route": "R1",
+      "startStation": "Airport",
+      "endStation": "Central Station",
+      "departureTime": "09:00",
+      "arrivalTime": "09:45",
+      "dutyId": "DU005",
+      "driverId": "D005",
+      "busId": "B006"
+    },
+    {
+      "tripId": "T035",
+      "route": "R1",
+      "startStation": "Central Station",
+      "endStation": "Airport",
+      "departureTime": "12:45",
+      "arrivalTime": "13:30",
+      "dutyId": "DU005",
+      "driverId": "D005",
+      "busId": "B006"
+    },
+    {
+      "tripId": "T036",
+      "route": "R1",
+      "startStation": "Airport",
+      "endStation": "Central Station",
+      "departureTime": "13:40",
+      "arrivalTime": "14:25",
+      "dutyId": "DU005",
+      "driverId": "D005",
+      "busId": "B006"
+    },
+    {
+      "tripId": "T037",
+      "route": "R1",
+      "startStation": "Central Station",
+      "endStation": "Airport",
+      "departureTime": "14:35",
+      "arrivalTime": "15:20",
+      "dutyId": "DU005",
+      "driverId": "D005",
+      "busId": "B006"
+    },
+    {
+      "tripId": "T038",
+      "route": "R1",
+      "startStation": "Airport",
+      "endStation": "Central Station",
+      "departureTime": "15:30",
+      "arrivalTime": "16:15",
+      "dutyId": "DU005",
+      "driverId": "D005",
+      "busId": "B006"
+    },
+    {
+      "tripId": "T039",
+      "route": "R4",
+      "startStation": "Central Station",
+      "endStation": "University",
+      "departureTime": "11:30",
+      "arrivalTime": "12:05",
+      "dutyId": "DU006",
+      "driverId": "D006",
+      "busId": "B007"
+    },
+    {
+      "tripId": "T040",
+      "route": "R4",
+      "startStation": "University",
+      "endStation": "Central Station",
+      "departureTime": "12:15",
+      "arrivalTime": "12:50",
+      "dutyId": "DU006",
+      "driverId": "D006",
+      "busId": "B007"
+    },
+    {
+      "tripId": "T041",
+      "route": "R4",
+      "startStation": "Central Station",
+      "endStation": "University",
+      "departureTime": "13:00",
+      "arrivalTime": "13:35",
+      "dutyId": "DU006",
+      "driverId": "D006",
+      "busId": "B007"
+    },
+    {
+      "tripId": "T042",
+      "route": "R4",
+      "startStation": "University",
+      "endStation": "Central Station",
+      "departureTime": "13:45",
+      "arrivalTime": "14:20",
+      "dutyId": "DU006",
+      "driverId": "D006",
+      "busId": "B007"
+    },
+    {
+      "tripId": "T043",
+      "route": "R4",
+      "startStation": "Central Station",
+      "endStation": "University",
+      "departureTime": "14:30",
+      "arrivalTime": "15:05",
+      "dutyId": "DU006",
+      "driverId": "D006",
+      "busId": "B007"
+    },
+    {
+      "tripId": "T044",
+      "route": "R4",
+      "startStation": "University",
+      "endStation": "Central Station",
+      "departureTime": "15:15",
+      "arrivalTime": "15:50",
+      "dutyId": "DU006",
+      "driverId": "D006",
+      "busId": "B007"
+    },
+    {
+      "tripId": "T045",
+      "route": "R4",
+      "startStation": "Central Station",
+      "endStation": "University",
+      "departureTime": "16:00",
+      "arrivalTime": "16:35",
+      "dutyId": "DU006",
+      "driverId": "D006",
+      "busId": "B007"
+    },
+    {
+      "tripId": "T046",
+      "route": "R4",
+      "startStation": "University",
+      "endStation": "Central Station",
+      "departureTime": "16:45",
+      "arrivalTime": "17:20",
+      "dutyId": "DU006",
+      "driverId": "D006",
+      "busId": "B007"
+    },
+    {
+      "tripId": "T047",
+      "route": "R4",
+      "startStation": "Central Station",
+      "endStation": "University",
+      "departureTime": "17:30",
+      "arrivalTime": "18:05",
+      "dutyId": "DU006",
+      "driverId": "D006",
+      "busId": "B007"
+    },
+    {
+      "tripId": "T048",
+      "route": "R4",
+      "startStation": "University",
+      "endStation": "Central Station",
+      "departureTime": "18:15",
+      "arrivalTime": "18:50",
+      "dutyId": "DU006",
+      "driverId": "D006",
+      "busId": "B007"
+    },
+    {
+      "tripId": "T049",
+      "route": "R1",
+      "startStation": "Airport",
+      "endStation": "Central Station",
+      "departureTime": "05:45",
+      "arrivalTime": "06:30",
+      "dutyId": "DU007",
+      "driverId": "D007",
+      "busId": "B018"
+    },
+    {
+      "tripId": "T050",
+      "route": "R1",
+      "startStation": "Central Station",
+      "endStation": "Airport",
+      "departureTime": "06:40",
+      "arrivalTime": "07:25",
+      "dutyId": "DU007",
+      "driverId": "D007",
+      "busId": "B018"
+    },
+    {
+      "tripId": "T051",
+      "route": "R1",
+      "startStation": "Airport",
+      "endStation": "Central Station",
+      "departureTime": "07:35",
+      "arrivalTime": "08:20",
+      "dutyId": "DU007",
+      "driverId": "D007",
+      "busId": "B018"
+    },
+    {
+      "tripId": "T052",
+      "route": "R1",
+      "startStation": "Central Station",
+      "endStation": "Airport",
+      "departureTime": "08:30",
+      "arrivalTime": "09:15",
+      "dutyId": "DU007",
+      "driverId": "D007",
+      "busId": "B018"
+    },
+    {
+      "tripId": "T053",
+      "route": "R1",
+      "startStation": "Airport",
+      "endStation": "Central Station",
+      "departureTime": "12:15",
+      "arrivalTime": "13:00",
+      "dutyId": "DU007",
+      "driverId": "D007",
+      "busId": "B018"
+    },
+    {
+      "tripId": "T054",
+      "route": "R1",
+      "startStation": "Central Station",
+      "endStation": "Airport",
+      "departureTime": "13:10",
+      "arrivalTime": "13:55",
+      "dutyId": "DU007",
+      "driverId": "D007",
+      "busId": "B018"
+    },
+    {
+      "tripId": "T055",
+      "route": "R1",
+      "startStation": "Airport",
+      "endStation": "Central Station",
+      "departureTime": "14:05",
+      "arrivalTime": "14:50",
+      "dutyId": "DU007",
+      "driverId": "D007",
+      "busId": "B018"
+    },
+    {
+      "tripId": "T056",
+      "route": "R1",
+      "startStation": "Central Station",
+      "endStation": "Airport",
+      "departureTime": "15:00",
+      "arrivalTime": "15:45",
+      "dutyId": "DU007",
+      "driverId": "D007",
+      "busId": "B018"
+    },
+    {
+      "tripId": "T057",
+      "route": "R5",
+      "startStation": "Airport",
+      "endStation": "North Station",
+      "departureTime": "06:00",
+      "arrivalTime": "06:30",
+      "dutyId": "DU008",
+      "driverId": "D008",
+      "busId": "B019"
+    },
+    {
+      "tripId": "T058",
+      "route": "R5",
+      "startStation": "North Station",
+      "endStation": "Airport",
+      "departureTime": "06:40",
+      "arrivalTime": "07:10",
+      "dutyId": "DU008",
+      "driverId": "D008",
+      "busId": "B019"
+    },
+    {
+      "tripId": "T059",
+      "route": "R5",
+      "startStation": "Airport",
+      "endStation": "North Station",
+      "departureTime": "08:25",
+      "arrivalTime": "08:55",
+      "dutyId": "DU008",
+      "driverId": "D008",
+      "busId": "B019"
+    },
+    {
+      "tripId": "T060",
+      "route": "R5",
+      "startStation": "North Station",
+      "endStation": "Airport",
+      "departureTime": "09:05",
+      "arrivalTime": "09:35",
+      "dutyId": "DU008",
+      "driverId": "D008",
+      "busId": "B019"
+    },
+    {
+      "tripId": "T061",
+      "route": "R5",
+      "startStation": "Airport",
+      "endStation": "North Station",
+      "departureTime": "10:50",
+      "arrivalTime": "11:20",
+      "dutyId": "DU008",
+      "driverId": "D008",
+      "busId": "B019"
+    },
+    {
+      "tripId": "T062",
+      "route": "R5",
+      "startStation": "North Station",
+      "endStation": "Airport",
+      "departureTime": "11:30",
+      "arrivalTime": "12:00",
+      "dutyId": "DU008",
+      "driverId": "D008",
+      "busId": "B019"
+    },
+    {
+      "tripId": "T063",
+      "route": "R5",
+      "startStation": "Airport",
+      "endStation": "North Station",
+      "departureTime": "13:15",
+      "arrivalTime": "13:45",
+      "dutyId": "DU008",
+      "driverId": "D008",
+      "busId": "B019"
+    },
+    {
+      "tripId": "T064",
+      "route": "R5",
+      "startStation": "North Station",
+      "endStation": "Airport",
+      "departureTime": "13:55",
+      "arrivalTime": "14:25",
+      "dutyId": "DU008",
+      "driverId": "D008",
+      "busId": "B019"
+    },
+    {
+      "tripId": "T065",
+      "route": "R6",
+      "startStation": "Airport",
+      "endStation": "South Station",
+      "departureTime": "06:30",
+      "arrivalTime": "07:25",
+      "dutyId": "DU009",
+      "driverId": "D009",
+      "busId": "B020"
+    },
+    {
+      "tripId": "T066",
+      "route": "R6",
+      "startStation": "South Station",
+      "endStation": "Airport",
+      "departureTime": "07:35",
+      "arrivalTime": "08:30",
+      "dutyId": "DU009",
+      "driverId": "D009",
+      "busId": "B020"
+    },
+    {
+      "tripId": "T067",
+      "route": "R6",
+      "startStation": "Airport",
+      "endStation": "South Station",
+      "departureTime": "08:40",
+      "arrivalTime": "09:35",
+      "dutyId": "DU009",
+      "driverId": "D009",
+      "busId": "B020"
+    },
+    {
+      "tripId": "T068",
+      "route": "R6",
+      "startStation": "South Station",
+      "endStation": "Airport",
+      "departureTime": "09:45",
+      "arrivalTime": "10:40",
+      "dutyId": "DU009",
+      "driverId": "D009",
+      "busId": "B020"
+    },
+    {
+      "tripId": "T069",
+      "route": "R6",
+      "startStation": "Airport",
+      "endStation": "South Station",
+      "departureTime": "10:50",
+      "arrivalTime": "11:45",
+      "dutyId": "DU009",
+      "driverId": "D009",
+      "busId": "B020"
+    },
+    {
+      "tripId": "T070",
+      "route": "R6",
+      "startStation": "South Station",
+      "endStation": "Airport",
+      "departureTime": "11:55",
+      "arrivalTime": "12:50",
+      "dutyId": "DU009",
+      "driverId": "D009",
+      "busId": "B020"
+    },
+    {
+      "tripId": "T071",
+      "route": "R7",
+      "startStation": "Airport",
+      "endStation": "University",
+      "departureTime": "09:30",
+      "arrivalTime": "10:25",
+      "dutyId": "DU010",
+      "driverId": "D010",
+      "busId": "B021"
+    },
+    {
+      "tripId": "T072",
+      "route": "R7",
+      "startStation": "University",
+      "endStation": "Airport",
+      "departureTime": "10:35",
+      "arrivalTime": "11:30",
+      "dutyId": "DU010",
+      "driverId": "D010",
+      "busId": "B021"
+    },
+    {
+      "tripId": "T073",
+      "route": "R7",
+      "startStation": "Airport",
+      "endStation": "University",
+      "departureTime": "11:40",
+      "arrivalTime": "12:35",
+      "dutyId": "DU010",
+      "driverId": "D010",
+      "busId": "B021"
+    },
+    {
+      "tripId": "T074",
+      "route": "R7",
+      "startStation": "University",
+      "endStation": "Airport",
+      "departureTime": "12:45",
+      "arrivalTime": "13:40",
+      "dutyId": "DU010",
+      "driverId": "D010",
+      "busId": "B021"
+    },
+    {
+      "tripId": "T075",
+      "route": "R2",
+      "startStation": "North Station",
+      "endStation": "Central Station",
+      "departureTime": "06:00",
+      "arrivalTime": "06:35",
+      "dutyId": "DU011",
+      "driverId": "D011",
+      "busId": "B022"
+    },
+    {
+      "tripId": "T076",
+      "route": "R2",
+      "startStation": "Central Station",
+      "endStation": "North Station",
+      "departureTime": "06:45",
+      "arrivalTime": "07:20",
+      "dutyId": "DU011",
+      "driverId": "D011",
+      "busId": "B022"
+    },
+    {
+      "tripId": "T077",
+      "route": "R2",
+      "startStation": "North Station",
+      "endStation": "Central Station",
+      "departureTime": "07:30",
+      "arrivalTime": "08:05",
+      "dutyId": "DU011",
+      "driverId": "D011",
+      "busId": "B022"
+    },
+    {
+      "tripId": "T078",
+      "route": "R2",
+      "startStation": "Central Station",
+      "endStation": "North Station",
+      "departureTime": "08:15",
+      "arrivalTime": "08:50",
+      "dutyId": "DU011",
+      "driverId": "D011",
+      "busId": "B022"
+    },
+    {
+      "tripId": "T079",
+      "route": "R8",
+      "startStation": "North Station",
+      "endStation": "South Station",
+      "departureTime": "12:30",
+      "arrivalTime": "13:15",
+      "dutyId": "DU011",
+      "driverId": "D011",
+      "busId": "B022"
+    },
+    {
+      "tripId": "T080",
+      "route": "R8",
+      "startStation": "South Station",
+      "endStation": "North Station",
+      "departureTime": "13:25",
+      "arrivalTime": "14:10",
+      "dutyId": "DU011",
+      "driverId": "D011",
+      "busId": "B022"
+    },
+    {
+      "tripId": "T081",
+      "route": "R8",
+      "startStation": "North Station",
+      "endStation": "South Station",
+      "departureTime": "14:20",
+      "arrivalTime": "15:05",
+      "dutyId": "DU011",
+      "driverId": "D011",
+      "busId": "B022"
+    },
+    {
+      "tripId": "T082",
+      "route": "R8",
+      "startStation": "South Station",
+      "endStation": "North Station",
+      "departureTime": "15:15",
+      "arrivalTime": "16:00",
+      "dutyId": "DU011",
+      "driverId": "D011",
+      "busId": "B022"
+    },
+    {
+      "tripId": "T083",
+      "route": "R8",
+      "startStation": "North Station",
+      "endStation": "South Station",
+      "departureTime": "06:30",
+      "arrivalTime": "07:15",
+      "dutyId": "DU012",
+      "driverId": "D012",
+      "busId": "B023"
+    },
+    {
+      "tripId": "T084",
+      "route": "R8",
+      "startStation": "South Station",
+      "endStation": "North Station",
+      "departureTime": "07:25",
+      "arrivalTime": "08:10",
+      "dutyId": "DU012",
+      "driverId": "D012",
+      "busId": "B023"
+    },
+    {
+      "tripId": "T085",
+      "route": "R8",
+      "startStation": "North Station",
+      "endStation": "South Station",
+      "departureTime": "08:20",
+      "arrivalTime": "09:05",
+      "dutyId": "DU012",
+      "driverId": "D012",
+      "busId": "B023"
+    },
+    {
+      "tripId": "T086",
+      "route": "R8",
+      "startStation": "South Station",
+      "endStation": "North Station",
+      "departureTime": "09:15",
+      "arrivalTime": "10:00",
+      "dutyId": "DU012",
+      "driverId": "D012",
+      "busId": "B023"
+    },
+    {
+      "tripId": "T087",
+      "route": "R8",
+      "startStation": "North Station",
+      "endStation": "South Station",
+      "departureTime": "10:10",
+      "arrivalTime": "10:55",
+      "dutyId": "DU012",
+      "driverId": "D012",
+      "busId": "B023"
+    },
+    {
+      "tripId": "T088",
+      "route": "R8",
+      "startStation": "South Station",
+      "endStation": "North Station",
+      "departureTime": "11:05",
+      "arrivalTime": "11:50",
+      "dutyId": "DU012",
+      "driverId": "D012",
+      "busId": "B023"
+    },
+    {
+      "tripId": "T089",
+      "route": "R8",
+      "startStation": "North Station",
+      "endStation": "South Station",
+      "departureTime": "12:00",
+      "arrivalTime": "12:45",
+      "dutyId": "DU012",
+      "driverId": "D012",
+      "busId": "B023"
+    },
+    {
+      "tripId": "T090",
+      "route": "R8",
+      "startStation": "South Station",
+      "endStation": "North Station",
+      "departureTime": "12:55",
+      "arrivalTime": "13:40",
+      "dutyId": "DU012",
+      "driverId": "D012",
+      "busId": "B023"
+    },
+    {
+      "tripId": "T091",
+      "route": "R9",
+      "startStation": "North Station",
+      "endStation": "University",
+      "departureTime": "07:00",
+      "arrivalTime": "07:45",
+      "dutyId": "DU013",
+      "driverId": "D013",
+      "busId": "B024"
+    },
+    {
+      "tripId": "T092",
+      "route": "R9",
+      "startStation": "University",
+      "endStation": "North Station",
+      "departureTime": "08:45",
+      "arrivalTime": "09:30",
+      "dutyId": "DU013",
+      "driverId": "D013",
+      "busId": "B024"
+    },
+    {
+      "tripId": "T093",
+      "route": "R9",
+      "startStation": "North Station",
+      "endStation": "University",
+      "departureTime": "09:40",
+      "arrivalTime": "10:25",
+      "dutyId": "DU013",
+      "driverId": "D013",
+      "busId": "B024"
+    },
+    {
+      "tripId": "T094",
+      "route": "R9",
+      "startStation": "University",
+      "endStation": "North Station",
+      "departureTime": "11:25",
+      "arrivalTime": "12:10",
+      "dutyId": "DU013",
+      "driverId": "D013",
+      "busId": "B024"
+    },
+    {
+      "tripId": "T095",
+      "route": "R9",
+      "startStation": "North Station",
+      "endStation": "University",
+      "departureTime": "12:20",
+      "arrivalTime": "13:05",
+      "dutyId": "DU013",
+      "driverId": "D013",
+      "busId": "B024"
+    },
+    {
+      "tripId": "T096",
+      "route": "R9",
+      "startStation": "University",
+      "endStation": "North Station",
+      "departureTime": "14:05",
+      "arrivalTime": "14:50",
+      "dutyId": "DU013",
+      "driverId": "D013",
+      "busId": "B024"
+    },
+    {
+      "tripId": "T097",
+      "route": "R5",
+      "startStation": "North Station",
+      "endStation": "Airport",
+      "departureTime": "14:00",
+      "arrivalTime": "14:30",
+      "dutyId": "DU014",
+      "driverId": "D014",
+      "busId": "B026"
+    },
+    {
+      "tripId": "T098",
+      "route": "R5",
+      "startStation": "Airport",
+      "endStation": "North Station",
+      "departureTime": "14:40",
+      "arrivalTime": "15:10",
+      "dutyId": "DU014",
+      "driverId": "D014",
+      "busId": "B026"
+    },
+    {
+      "tripId": "T099",
+      "route": "R5",
+      "startStation": "North Station",
+      "endStation": "Airport",
+      "departureTime": "15:20",
+      "arrivalTime": "15:50",
+      "dutyId": "DU014",
+      "driverId": "D014",
+      "busId": "B026"
+    },
+    {
+      "tripId": "T100",
+      "route": "R5",
+      "startStation": "Airport",
+      "endStation": "North Station",
+      "departureTime": "16:00",
+      "arrivalTime": "16:30",
+      "dutyId": "DU014",
+      "driverId": "D014",
+      "busId": "B026"
+    },
+    {
+      "tripId": "T101",
+      "route": "R5",
+      "startStation": "North Station",
+      "endStation": "Airport",
+      "departureTime": "16:40",
+      "arrivalTime": "17:10",
+      "dutyId": "DU014",
+      "driverId": "D014",
+      "busId": "B026"
+    },
+    {
+      "tripId": "T102",
+      "route": "R5",
+      "startStation": "Airport",
+      "endStation": "North Station",
+      "departureTime": "17:20",
+      "arrivalTime": "17:50",
+      "dutyId": "DU014",
+      "driverId": "D014",
+      "busId": "B026"
+    },
+    {
+      "tripId": "T103",
+      "route": "R3",
+      "startStation": "South Station",
+      "endStation": "Central Station",
+      "departureTime": "06:00",
+      "arrivalTime": "06:35",
+      "dutyId": "DU015",
+      "driverId": "D015",
+      "busId": "B032"
+    },
+    {
+      "tripId": "T104",
+      "route": "R3",
+      "startStation": "Central Station",
+      "endStation": "South Station",
+      "departureTime": "06:45",
+      "arrivalTime": "07:20",
+      "dutyId": "DU015",
+      "driverId": "D015",
+      "busId": "B032"
+    },
+    {
+      "tripId": "T105",
+      "route": "R3",
+      "startStation": "South Station",
+      "endStation": "Central Station",
+      "departureTime": "07:30",
+      "arrivalTime": "08:05",
+      "dutyId": "DU015",
+      "driverId": "D015",
+      "busId": "B032"
+    },
+    {
+      "tripId": "T106",
+      "route": "R3",
+      "startStation": "Central Station",
+      "endStation": "South Station",
+      "departureTime": "08:15",
+      "arrivalTime": "08:50",
+      "dutyId": "DU015",
+      "driverId": "D015",
+      "busId": "B032"
+    },
+    {
+      "tripId": "T107",
+      "route": "R3",
+      "startStation": "South Station",
+      "endStation": "Central Station",
+      "departureTime": "09:00",
+      "arrivalTime": "09:35",
+      "dutyId": "DU015",
+      "driverId": "D015",
+      "busId": "B032"
+    },
+    {
+      "tripId": "T108",
+      "route": "R3",
+      "startStation": "Central Station",
+      "endStation": "South Station",
+      "departureTime": "09:45",
+      "arrivalTime": "10:20",
+      "dutyId": "DU015",
+      "driverId": "D015",
+      "busId": "B032"
+    },
+    {
+      "tripId": "T109",
+      "route": "R10",
+      "startStation": "South Station",
+      "endStation": "University",
+      "departureTime": "12:50",
+      "arrivalTime": "13:30",
+      "dutyId": "DU015",
+      "driverId": "D015",
+      "busId": "B032"
+    },
+    {
+      "tripId": "T110",
+      "route": "R10",
+      "startStation": "University",
+      "endStation": "South Station",
+      "departureTime": "13:40",
+      "arrivalTime": "14:20",
+      "dutyId": "DU015",
+      "driverId": "D015",
+      "busId": "B032"
+    },
+    {
+      "tripId": "T111",
+      "route": "R10",
+      "startStation": "South Station",
+      "endStation": "University",
+      "departureTime": "14:30",
+      "arrivalTime": "15:10",
+      "dutyId": "DU015",
+      "driverId": "D015",
+      "busId": "B032"
+    },
+    {
+      "tripId": "T112",
+      "route": "R10",
+      "startStation": "University",
+      "endStation": "South Station",
+      "departureTime": "15:20",
+      "arrivalTime": "16:00",
+      "dutyId": "DU015",
+      "driverId": "D015",
+      "busId": "B032"
+    },
+    {
+      "tripId": "T113",
+      "route": "R6",
+      "startStation": "South Station",
+      "endStation": "Airport",
+      "departureTime": "07:00",
+      "arrivalTime": "07:55",
+      "dutyId": "DU016",
+      "driverId": "D016",
+      "busId": "B033"
+    },
+    {
+      "tripId": "T114",
+      "route": "R6",
+      "startStation": "Airport",
+      "endStation": "South Station",
+      "departureTime": "08:05",
+      "arrivalTime": "09:00",
+      "dutyId": "DU016",
+      "driverId": "D016",
+      "busId": "B033"
+    },
+    {
+      "tripId": "T115",
+      "route": "R6",
+      "startStation": "South Station",
+      "endStation": "Airport",
+      "departureTime": "09:10",
+      "arrivalTime": "10:05",
+      "dutyId": "DU016",
+      "driverId": "D016",
+      "busId": "B033"
+    },
+    {
+      "tripId": "T116",
+      "route": "R6",
+      "startStation": "Airport",
+      "endStation": "South Station",
+      "departureTime": "10:15",
+      "arrivalTime": "11:10",
+      "dutyId": "DU016",
+      "driverId": "D016",
+      "busId": "B033"
+    },
+    {
+      "tripId": "T117",
+      "route": "R6",
+      "startStation": "South Station",
+      "endStation": "Airport",
+      "departureTime": "11:20",
+      "arrivalTime": "12:15",
+      "dutyId": "DU016",
+      "driverId": "D016",
+      "busId": "B033"
+    },
+    {
+      "tripId": "T118",
+      "route": "R6",
+      "startStation": "Airport",
+      "endStation": "South Station",
+      "departureTime": "12:25",
+      "arrivalTime": "13:20",
+      "dutyId": "DU016",
+      "driverId": "D016",
+      "busId": "B033"
+    },
+    {
+      "tripId": "T119",
+      "route": "R10",
+      "startStation": "South Station",
+      "endStation": "University",
+      "departureTime": "07:30",
+      "arrivalTime": "08:10",
+      "dutyId": "DU017",
+      "driverId": "D017",
+      "busId": "B034"
+    },
+    {
+      "tripId": "T120",
+      "route": "R10",
+      "startStation": "University",
+      "endStation": "South Station",
+      "departureTime": "09:15",
+      "arrivalTime": "09:55",
+      "dutyId": "DU017",
+      "driverId": "D017",
+      "busId": "B034"
+    },
+    {
+      "tripId": "T121",
+      "route": "R10",
+      "startStation": "South Station",
+      "endStation": "University",
+      "departureTime": "10:05",
+      "arrivalTime": "10:45",
+      "dutyId": "DU017",
+      "driverId": "D017",
+      "busId": "B034"
+    },
+    {
+      "tripId": "T122",
+      "route": "R10",
+      "startStation": "University",
+      "endStation": "South Station",
+      "departureTime": "11:50",
+      "arrivalTime": "12:30",
+      "dutyId": "DU017",
+      "driverId": "D017",
+      "busId": "B034"
+    },
+    {
+      "tripId": "T123",
+      "route": "R10",
+      "startStation": "South Station",
+      "endStation": "University",
+      "departureTime": "12:40",
+      "arrivalTime": "13:20",
+      "dutyId": "DU017",
+      "driverId": "D017",
+      "busId": "B034"
+    },
+    {
+      "tripId": "T124",
+      "route": "R10",
+      "startStation": "University",
+      "endStation": "South Station",
+      "departureTime": "14:25",
+      "arrivalTime": "15:05",
+      "dutyId": "DU017",
+      "driverId": "D017",
+      "busId": "B034"
+    },
+    {
+      "tripId": "T125",
+      "route": "R4",
+      "startStation": "University",
+      "endStation": "Central Station",
+      "departureTime": "06:30",
+      "arrivalTime": "07:05",
+      "dutyId": "DU018",
+      "driverId": "D018",
+      "busId": "B042"
+    },
+    {
+      "tripId": "T126",
+      "route": "R4",
+      "startStation": "Central Station",
+      "endStation": "University",
+      "departureTime": "07:15",
+      "arrivalTime": "07:50",
+      "dutyId": "DU018",
+      "driverId": "D018",
+      "busId": "B042"
+    },
+    {
+      "tripId": "T127",
+      "route": "R4",
+      "startStation": "University",
+      "endStation": "Central Station",
+      "departureTime": "08:00",
+      "arrivalTime": "08:35",
+      "dutyId": "DU018",
+      "driverId": "D018",
+      "busId": "B042"
+    },
+    {
+      "tripId": "T128",
+      "route": "R4",
+      "startStation": "Central Station",
+      "endStation": "University",
+      "departureTime": "08:45",
+      "arrivalTime": "09:20",
+      "dutyId": "DU018",
+      "driverId": "D018",
+      "busId": "B042"
+    },
+    {
+      "tripId": "T129",
+      "route": "R4",
+      "startStation": "University",
+      "endStation": "Central Station",
+      "departureTime": "12:30",
+      "arrivalTime": "13:05",
+      "dutyId": "DU018",
+      "driverId": "D018",
+      "busId": "B042"
+    },
+    {
+      "tripId": "T130",
+      "route": "R4",
+      "startStation": "Central Station",
+      "endStation": "University",
+      "departureTime": "13:15",
+      "arrivalTime": "13:50",
+      "dutyId": "DU018",
+      "driverId": "D018",
+      "busId": "B042"
+    },
+    {
+      "tripId": "T131",
+      "route": "R4",
+      "startStation": "University",
+      "endStation": "Central Station",
+      "departureTime": "14:00",
+      "arrivalTime": "14:35",
+      "dutyId": "DU018",
+      "driverId": "D018",
+      "busId": "B042"
+    },
+    {
+      "tripId": "T132",
+      "route": "R4",
+      "startStation": "Central Station",
+      "endStation": "University",
+      "departureTime": "14:45",
+      "arrivalTime": "15:20",
+      "dutyId": "DU018",
+      "driverId": "D018",
+      "busId": "B042"
+    },
+    {
+      "tripId": "T133",
+      "route": "R10",
+      "startStation": "University",
+      "endStation": "South Station",
+      "departureTime": "11:00",
+      "arrivalTime": "11:40",
+      "dutyId": "DU019",
+      "driverId": "D019",
+      "busId": "B043"
+    },
+    {
+      "tripId": "T134",
+      "route": "R10",
+      "startStation": "South Station",
+      "endStation": "University",
+      "departureTime": "11:50",
+      "arrivalTime": "12:30",
+      "dutyId": "DU019",
+      "driverId": "D019",
+      "busId": "B043"
+    },
+    {
+      "tripId": "T135",
+      "route": "R10",
+      "startStation": "University",
+      "endStation": "South Station",
+      "departureTime": "12:40",
+      "arrivalTime": "13:20",
+      "dutyId": "DU019",
+      "driverId": "D019",
+      "busId": "B043"
+    },
+    {
+      "tripId": "T136",
+      "route": "R10",
+      "startStation": "South Station",
+      "endStation": "University",
+      "departureTime": "13:30",
+      "arrivalTime": "14:10",
+      "dutyId": "DU019",
+      "driverId": "D019",
+      "busId": "B043"
+    },
+    {
+      "tripId": "T137",
+      "route": "R10",
+      "startStation": "University",
+      "endStation": "South Station",
+      "departureTime": "14:20",
+      "arrivalTime": "15:00",
+      "dutyId": "DU019",
+      "driverId": "D019",
+      "busId": "B043"
+    },
+    {
+      "tripId": "T138",
+      "route": "R10",
+      "startStation": "South Station",
+      "endStation": "University",
+      "departureTime": "15:10",
+      "arrivalTime": "15:50",
+      "dutyId": "DU019",
+      "driverId": "D019",
+      "busId": "B043"
+    },
+    {
+      "tripId": "T139",
+      "route": "R7",
+      "startStation": "University",
+      "endStation": "Airport",
+      "departureTime": "06:00",
+      "arrivalTime": "06:55",
+      "dutyId": "DU020",
+      "driverId": "D020",
+      "busId": "B044"
+    },
+    {
+      "tripId": "T140",
+      "route": "R7",
+      "startStation": "Airport",
+      "endStation": "University",
+      "departureTime": "07:05",
+      "arrivalTime": "08:00",
+      "dutyId": "DU020",
+      "driverId": "D020",
+      "busId": "B044"
+    },
+    {
+      "tripId": "T141",
+      "route": "R7",
+      "startStation": "University",
+      "endStation": "Airport",
+      "departureTime": "08:10",
+      "arrivalTime": "09:05",
+      "dutyId": "DU020",
+      "driverId": "D020",
+      "busId": "B044"
+    },
+    {
+      "tripId": "T142",
+      "route": "R7",
+      "startStation": "Airport",
+      "endStation": "University",
+      "departureTime": "09:15",
+      "arrivalTime": "10:10",
+      "dutyId": "DU020",
+      "driverId": "D020",
+      "busId": "B044"
+    },
+    {
+      "tripId": "T143",
+      "route": "R7",
+      "startStation": "University",
+      "endStation": "Airport",
+      "departureTime": "10:20",
+      "arrivalTime": "11:15",
+      "dutyId": "DU020",
+      "driverId": "D020",
+      "busId": "B044"
+    },
+    {
+      "tripId": "T144",
+      "route": "R7",
+      "startStation": "Airport",
+      "endStation": "University",
+      "departureTime": "11:25",
+      "arrivalTime": "12:20",
+      "dutyId": "DU020",
+      "driverId": "D020",
+      "busId": "B044"
+    }
+  ],
+  "calendar": [
+    {
+      "date": "2026-10-01",
+      "dayType": "weekday",
+      "holiday": null,
+      "activeDuties": 20,
+      "driversOnVacation": [],
+      "uncoveredDuties": []
+    },
+    {
+      "date": "2026-10-02",
+      "dayType": "weekday",
+      "holiday": null,
+      "activeDuties": 20,
+      "driversOnVacation": [],
+      "uncoveredDuties": []
+    },
+    {
+      "date": "2026-10-03",
+      "dayType": "sunday",
+      "holiday": "Tag der Deutschen Einheit",
+      "activeDuties": 10,
+      "driversOnVacation": [],
+      "uncoveredDuties": []
+    },
+    {
+      "date": "2026-10-04",
+      "dayType": "sunday",
+      "holiday": null,
+      "activeDuties": 10,
+      "driversOnVacation": [],
+      "uncoveredDuties": []
+    },
+    {
+      "date": "2026-10-05",
+      "dayType": "weekday",
+      "holiday": null,
+      "activeDuties": 20,
+      "driversOnVacation": [],
+      "uncoveredDuties": []
+    },
+    {
+      "date": "2026-10-06",
+      "dayType": "weekday",
+      "holiday": null,
+      "activeDuties": 20,
+      "driversOnVacation": [],
+      "uncoveredDuties": []
+    },
+    {
+      "date": "2026-10-07",
+      "dayType": "weekday",
+      "holiday": null,
+      "activeDuties": 20,
+      "driversOnVacation": [],
+      "uncoveredDuties": []
+    },
+    {
+      "date": "2026-10-08",
+      "dayType": "weekday",
+      "holiday": null,
+      "activeDuties": 20,
+      "driversOnVacation": [],
+      "uncoveredDuties": []
+    },
+    {
+      "date": "2026-10-09",
+      "dayType": "weekday",
+      "holiday": null,
+      "activeDuties": 20,
+      "driversOnVacation": [],
+      "uncoveredDuties": []
+    },
+    {
+      "date": "2026-10-10",
+      "dayType": "saturday",
+      "holiday": null,
+      "activeDuties": 10,
+      "driversOnVacation": [],
+      "uncoveredDuties": []
+    },
+    {
+      "date": "2026-10-11",
+      "dayType": "sunday",
+      "holiday": null,
+      "activeDuties": 10,
+      "driversOnVacation": [],
+      "uncoveredDuties": []
+    },
+    {
+      "date": "2026-10-12",
+      "dayType": "weekday",
+      "holiday": null,
+      "activeDuties": 20,
+      "driversOnVacation": [
+        "D004"
+      ],
+      "uncoveredDuties": [
+        "DU004"
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "dayType": "weekday",
+      "holiday": null,
+      "activeDuties": 20,
+      "driversOnVacation": [
+        "D004"
+      ],
+      "uncoveredDuties": [
+        "DU004"
+      ]
+    },
+    {
+      "date": "2026-10-14",
+      "dayType": "weekday",
+      "holiday": null,
+      "activeDuties": 20,
+      "driversOnVacation": [
+        "D004"
+      ],
+      "uncoveredDuties": [
+        "DU004"
+      ]
+    },
+    {
+      "date": "2026-10-15",
+      "dayType": "weekday",
+      "holiday": null,
+      "activeDuties": 20,
+      "driversOnVacation": [],
+      "uncoveredDuties": []
+    },
+    {
+      "date": "2026-10-16",
+      "dayType": "weekday",
+      "holiday": null,
+      "activeDuties": 20,
+      "driversOnVacation": [],
+      "uncoveredDuties": []
+    },
+    {
+      "date": "2026-10-17",
+      "dayType": "saturday",
+      "holiday": null,
+      "activeDuties": 10,
+      "driversOnVacation": [],
+      "uncoveredDuties": []
+    },
+    {
+      "date": "2026-10-18",
+      "dayType": "sunday",
+      "holiday": null,
+      "activeDuties": 10,
+      "driversOnVacation": [],
+      "uncoveredDuties": []
+    },
+    {
+      "date": "2026-10-19",
+      "dayType": "weekday",
+      "holiday": null,
+      "activeDuties": 20,
+      "driversOnVacation": [
+        "D009"
+      ],
+      "uncoveredDuties": [
+        "DU009"
+      ]
+    },
+    {
+      "date": "2026-10-20",
+      "dayType": "weekday",
+      "holiday": null,
+      "activeDuties": 20,
+      "driversOnVacation": [
+        "D009"
+      ],
+      "uncoveredDuties": [
+        "DU009"
+      ]
+    },
+    {
+      "date": "2026-10-21",
+      "dayType": "weekday",
+      "holiday": null,
+      "activeDuties": 20,
+      "driversOnVacation": [
+        "D009",
+        "D014"
+      ],
+      "uncoveredDuties": [
+        "DU009",
+        "DU014"
+      ]
+    },
+    {
+      "date": "2026-10-22",
+      "dayType": "weekday",
+      "holiday": null,
+      "activeDuties": 20,
+      "driversOnVacation": [
+        "D009",
+        "D014",
+        "D019"
+      ],
+      "uncoveredDuties": [
+        "DU009",
+        "DU014",
+        "DU019"
+      ]
+    },
+    {
+      "date": "2026-10-23",
+      "dayType": "weekday",
+      "holiday": null,
+      "activeDuties": 20,
+      "driversOnVacation": [
+        "D009",
+        "D014",
+        "D019"
+      ],
+      "uncoveredDuties": [
+        "DU009",
+        "DU014",
+        "DU019"
+      ]
+    },
+    {
+      "date": "2026-10-24",
+      "dayType": "saturday",
+      "holiday": null,
+      "activeDuties": 10,
+      "driversOnVacation": [],
+      "uncoveredDuties": []
+    },
+    {
+      "date": "2026-10-25",
+      "dayType": "sunday",
+      "holiday": null,
+      "activeDuties": 10,
+      "driversOnVacation": [],
+      "uncoveredDuties": []
+    },
+    {
+      "date": "2026-10-26",
+      "dayType": "weekday",
+      "holiday": null,
+      "activeDuties": 20,
+      "driversOnVacation": [],
+      "uncoveredDuties": []
+    },
+    {
+      "date": "2026-10-27",
+      "dayType": "weekday",
+      "holiday": null,
+      "activeDuties": 20,
+      "driversOnVacation": [],
+      "uncoveredDuties": []
+    },
+    {
+      "date": "2026-10-28",
+      "dayType": "weekday",
+      "holiday": null,
+      "activeDuties": 20,
+      "driversOnVacation": [
+        "D013"
+      ],
+      "uncoveredDuties": [
+        "DU013"
+      ]
+    },
+    {
+      "date": "2026-10-29",
+      "dayType": "weekday",
+      "holiday": null,
+      "activeDuties": 20,
+      "driversOnVacation": [
+        "D013"
+      ],
+      "uncoveredDuties": [
+        "DU013"
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "dayType": "weekday",
+      "holiday": null,
+      "activeDuties": 20,
+      "driversOnVacation": [
+        "D013"
+      ],
+      "uncoveredDuties": [
+        "DU013"
+      ]
+    }
+  ]
+}

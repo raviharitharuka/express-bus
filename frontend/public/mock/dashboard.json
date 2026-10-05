@@ -1,28 +1,67 @@
 {
-  "date": "2026-10-06",
+  "date": "2026-10-05",
   "kpis": {
-    "driverUtilization": 74,
-    "fleetUtilization": 68,
-    "availableDrivers": 8,
-    "availableBuses": 12,
+    "driverUtilization": 66.3,
+    "fleetUtilization": 40.0,
+    "availableDrivers": 10,
+    "availableBuses": 26,
     "predictedShortages": 3,
-    "additionalRoutesIdentified": 3
+    "additionalRoutesIdentified": 4
   },
   "stations": [
-    { "name": "Central Station", "totalBuses": 14, "availableBuses": 5, "maintenanceBuses": 2, "driversOnDuty": 6 },
-    { "name": "Airport",         "totalBuses": 9,  "availableBuses": 0, "maintenanceBuses": 1, "driversOnDuty": 4 },
-    { "name": "North Station",   "totalBuses": 10, "availableBuses": 3, "maintenanceBuses": 1, "driversOnDuty": 4 },
-    { "name": "South Station",   "totalBuses": 9,  "availableBuses": 2, "maintenanceBuses": 0, "driversOnDuty": 3 },
-    { "name": "University",      "totalBuses": 8,  "availableBuses": 2, "maintenanceBuses": 0, "driversOnDuty": 3 }
+    {
+      "name": "Central Station",
+      "totalBuses": 16,
+      "availableBuses": 9,
+      "maintenanceBuses": 1,
+      "driversOnDuty": 6
+    },
+    {
+      "name": "Airport",
+      "totalBuses": 5,
+      "availableBuses": 0,
+      "maintenanceBuses": 1,
+      "driversOnDuty": 4
+    },
+    {
+      "name": "North Station",
+      "totalBuses": 10,
+      "availableBuses": 5,
+      "maintenanceBuses": 1,
+      "driversOnDuty": 4
+    },
+    {
+      "name": "South Station",
+      "totalBuses": 10,
+      "availableBuses": 7,
+      "maintenanceBuses": 0,
+      "driversOnDuty": 3
+    },
+    {
+      "name": "University",
+      "totalBuses": 9,
+      "availableBuses": 5,
+      "maintenanceBuses": 1,
+      "driversOnDuty": 3
+    }
   ],
   "recommendation": {
-    "title": "Launch Express Route E1",
-    "reason": "9 idle driver hours identified on Central Station - Airport",
+    "title": "Launch Express Route E3",
+    "reason": "3.0 idle driver hours on North Station - South Station Express (D011)",
     "confidence": 92
   },
   "alerts": [
-    { "level": "warning", "message": "Airport has 0 spare buses" },
-    { "level": "warning", "message": "3 drivers short predicted on 2026-12-24" },
-    { "level": "info",    "message": "Bus B003 failure probability 81% - schedule maintenance" }
+    {
+      "level": "warning",
+      "message": "Airport has 0 spare buses"
+    },
+    {
+      "level": "critical",
+      "message": "3 driver(s) short predicted on 2026-10-22"
+    },
+    {
+      "level": "info",
+      "message": "4 buses in maintenance: B003, B017, B025, B046"
+    }
   ]
 }

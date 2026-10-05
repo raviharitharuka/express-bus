@@ -1,16 +1,335 @@
 {
   "date": "2026-10-06",
   "totalDrivers": 20,
-  "idleDriverCount": 8,
-  "totalIdleHours": 22,
+  "workingDrivers": 20,
+  "idleDriverCount": 10,
+  "totalIdleHours": 32.5,
+  "totalFreeCapacityHours": 73.0,
   "drivers": [
-    { "driverId": "D003", "homeStation": "Central Station", "idleHours": 3,   "idleWindows": [{ "start": "07:00", "end": "10:00" }], "recommendedRoute": "E1" },
-    { "driverId": "D005", "homeStation": "Airport",         "idleHours": 2,   "idleWindows": [{ "start": "11:00", "end": "13:00" }], "recommendedRoute": "E1" },
-    { "driverId": "D007", "homeStation": "Central Station", "idleHours": 4,   "idleWindows": [{ "start": "08:30", "end": "10:30" }, { "start": "13:00", "end": "15:00" }], "recommendedRoute": "E1" },
-    { "driverId": "D009", "homeStation": "North Station",   "idleHours": 2.5, "idleWindows": [{ "start": "09:30", "end": "12:00" }], "recommendedRoute": "E3" },
-    { "driverId": "D012", "homeStation": "University",      "idleHours": 3,   "idleWindows": [{ "start": "10:00", "end": "13:00" }], "recommendedRoute": "E2" },
-    { "driverId": "D014", "homeStation": "South Station",   "idleHours": 2,   "idleWindows": [{ "start": "14:00", "end": "16:00" }], "recommendedRoute": "E3" },
-    { "driverId": "D016", "homeStation": "University",      "idleHours": 3.5, "idleWindows": [{ "start": "06:30", "end": "10:00" }], "recommendedRoute": "E2" },
-    { "driverId": "D019", "homeStation": "North Station",   "idleHours": 2,   "idleWindows": [{ "start": "12:00", "end": "14:00" }], "recommendedRoute": "E4" }
+    {
+      "driverId": "D001",
+      "homeStation": "Central Station",
+      "dutyStart": "06:00",
+      "dutyEnd": "13:10",
+      "drivingHours": 6.0,
+      "idleHours": 0.0,
+      "freeCapacityHours": 2.8,
+      "idleWindows": [],
+      "recommendedRoute": null
+    },
+    {
+      "driverId": "D002",
+      "homeStation": "Central Station",
+      "dutyStart": "06:30",
+      "dutyEnd": "15:20",
+      "drivingHours": 4.7,
+      "idleHours": 3.2,
+      "freeCapacityHours": 4.3,
+      "idleWindows": [
+        {
+          "start": "09:20",
+          "end": "12:30",
+          "station": "Central Station"
+        }
+      ],
+      "recommendedRoute": "E1"
+    },
+    {
+      "driverId": "D003",
+      "homeStation": "Central Station",
+      "dutyStart": "07:00",
+      "dutyEnd": "16:10",
+      "drivingHours": 4.7,
+      "idleHours": 4.0,
+      "freeCapacityHours": 4.8,
+      "idleWindows": [
+        {
+          "start": "07:35",
+          "end": "08:35",
+          "station": "South Station"
+        },
+        {
+          "start": "09:55",
+          "end": "10:55",
+          "station": "South Station"
+        },
+        {
+          "start": "12:15",
+          "end": "13:15",
+          "station": "South Station"
+        },
+        {
+          "start": "14:35",
+          "end": "15:35",
+          "station": "South Station"
+        }
+      ],
+      "recommendedRoute": "E5"
+    },
+    {
+      "driverId": "D004",
+      "homeStation": "Central Station",
+      "dutyStart": "07:00",
+      "dutyEnd": "11:20",
+      "drivingHours": 3.5,
+      "idleHours": 0.0,
+      "freeCapacityHours": 3.7,
+      "idleWindows": [],
+      "recommendedRoute": null
+    },
+    {
+      "driverId": "D005",
+      "homeStation": "Central Station",
+      "dutyStart": "06:15",
+      "dutyEnd": "16:15",
+      "drivingHours": 6.0,
+      "idleHours": 3.0,
+      "freeCapacityHours": 3.0,
+      "idleWindows": [
+        {
+          "start": "09:45",
+          "end": "12:45",
+          "station": "Central Station"
+        }
+      ],
+      "recommendedRoute": "E1"
+    },
+    {
+      "driverId": "D006",
+      "homeStation": "Central Station",
+      "dutyStart": "11:30",
+      "dutyEnd": "18:50",
+      "drivingHours": 5.8,
+      "idleHours": 0.0,
+      "freeCapacityHours": 1.7,
+      "idleWindows": [],
+      "recommendedRoute": null
+    },
+    {
+      "driverId": "D007",
+      "homeStation": "Airport",
+      "dutyStart": "05:45",
+      "dutyEnd": "15:45",
+      "drivingHours": 6.0,
+      "idleHours": 3.0,
+      "freeCapacityHours": 3.0,
+      "idleWindows": [
+        {
+          "start": "09:15",
+          "end": "12:15",
+          "station": "Airport"
+        }
+      ],
+      "recommendedRoute": "E4"
+    },
+    {
+      "driverId": "D008",
+      "homeStation": "Airport",
+      "dutyStart": "06:00",
+      "dutyEnd": "14:25",
+      "drivingHours": 4.0,
+      "idleHours": 3.8,
+      "freeCapacityHours": 5.3,
+      "idleWindows": [
+        {
+          "start": "07:10",
+          "end": "08:25",
+          "station": "Airport"
+        },
+        {
+          "start": "09:35",
+          "end": "10:50",
+          "station": "Airport"
+        },
+        {
+          "start": "12:00",
+          "end": "13:15",
+          "station": "Airport"
+        }
+      ],
+      "recommendedRoute": "E4"
+    },
+    {
+      "driverId": "D009",
+      "homeStation": "Airport",
+      "dutyStart": "06:30",
+      "dutyEnd": "12:50",
+      "drivingHours": 5.5,
+      "idleHours": 0.0,
+      "freeCapacityHours": 3.7,
+      "idleWindows": [],
+      "recommendedRoute": null
+    },
+    {
+      "driverId": "D010",
+      "homeStation": "Airport",
+      "dutyStart": "09:30",
+      "dutyEnd": "13:40",
+      "drivingHours": 3.7,
+      "idleHours": 0.0,
+      "freeCapacityHours": 3.8,
+      "idleWindows": [],
+      "recommendedRoute": null
+    },
+    {
+      "driverId": "D011",
+      "homeStation": "North Station",
+      "dutyStart": "06:00",
+      "dutyEnd": "16:00",
+      "drivingHours": 5.3,
+      "idleHours": 3.7,
+      "freeCapacityHours": 3.7,
+      "idleWindows": [
+        {
+          "start": "08:50",
+          "end": "12:30",
+          "station": "North Station"
+        }
+      ],
+      "recommendedRoute": "E3"
+    },
+    {
+      "driverId": "D012",
+      "homeStation": "North Station",
+      "dutyStart": "06:30",
+      "dutyEnd": "13:40",
+      "drivingHours": 6.0,
+      "idleHours": 0.0,
+      "freeCapacityHours": 1.8,
+      "idleWindows": [],
+      "recommendedRoute": null
+    },
+    {
+      "driverId": "D013",
+      "homeStation": "North Station",
+      "dutyStart": "07:00",
+      "dutyEnd": "14:50",
+      "drivingHours": 4.5,
+      "idleHours": 3.0,
+      "freeCapacityHours": 5.2,
+      "idleWindows": [
+        {
+          "start": "07:45",
+          "end": "08:45",
+          "station": "University"
+        },
+        {
+          "start": "10:25",
+          "end": "11:25",
+          "station": "University"
+        },
+        {
+          "start": "13:05",
+          "end": "14:05",
+          "station": "University"
+        }
+      ],
+      "recommendedRoute": "E2"
+    },
+    {
+      "driverId": "D014",
+      "homeStation": "North Station",
+      "dutyStart": "14:00",
+      "dutyEnd": "17:50",
+      "drivingHours": 3.0,
+      "idleHours": 0.0,
+      "freeCapacityHours": 4.2,
+      "idleWindows": [],
+      "recommendedRoute": null
+    },
+    {
+      "driverId": "D015",
+      "homeStation": "South Station",
+      "dutyStart": "06:00",
+      "dutyEnd": "16:00",
+      "drivingHours": 6.2,
+      "idleHours": 2.5,
+      "freeCapacityHours": 2.5,
+      "idleWindows": [
+        {
+          "start": "10:20",
+          "end": "12:50",
+          "station": "South Station"
+        }
+      ],
+      "recommendedRoute": "E5"
+    },
+    {
+      "driverId": "D016",
+      "homeStation": "South Station",
+      "dutyStart": "07:00",
+      "dutyEnd": "13:20",
+      "drivingHours": 5.5,
+      "idleHours": 0.0,
+      "freeCapacityHours": 3.7,
+      "idleWindows": [],
+      "recommendedRoute": null
+    },
+    {
+      "driverId": "D017",
+      "homeStation": "South Station",
+      "dutyStart": "07:30",
+      "dutyEnd": "15:05",
+      "drivingHours": 4.0,
+      "idleHours": 3.2,
+      "freeCapacityHours": 5.7,
+      "idleWindows": [
+        {
+          "start": "08:10",
+          "end": "09:15",
+          "station": "University"
+        },
+        {
+          "start": "10:45",
+          "end": "11:50",
+          "station": "University"
+        },
+        {
+          "start": "13:20",
+          "end": "14:25",
+          "station": "University"
+        }
+      ],
+      "recommendedRoute": null
+    },
+    {
+      "driverId": "D018",
+      "homeStation": "University",
+      "dutyStart": "06:30",
+      "dutyEnd": "15:20",
+      "drivingHours": 4.7,
+      "idleHours": 3.2,
+      "freeCapacityHours": 4.3,
+      "idleWindows": [
+        {
+          "start": "09:20",
+          "end": "12:30",
+          "station": "University"
+        }
+      ],
+      "recommendedRoute": "E2"
+    },
+    {
+      "driverId": "D019",
+      "homeStation": "University",
+      "dutyStart": "11:00",
+      "dutyEnd": "15:50",
+      "drivingHours": 4.0,
+      "idleHours": 0.0,
+      "freeCapacityHours": 3.2,
+      "idleWindows": [],
+      "recommendedRoute": null
+    },
+    {
+      "driverId": "D020",
+      "homeStation": "University",
+      "dutyStart": "06:00",
+      "dutyEnd": "12:20",
+      "drivingHours": 5.5,
+      "idleHours": 0.0,
+      "freeCapacityHours": 2.7,
+      "idleWindows": [],
+      "recommendedRoute": null
+    }
   ]
 }

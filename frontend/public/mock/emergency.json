@@ -1,19 +1,34 @@
 {
-  "incidentId": "INC-0042",
+  "incidentId": "INC-0001",
   "incidentType": "BREAKDOWN",
   "status": "DISPATCHED",
   "brokenBus": "B021",
-  "replacementBus": "B041",
-  "driver": "D007",
-  "sourceStation": "Central Station",
+  "replacementBus": "B027",
+  "driver": "D011",
+  "sourceStation": "North Station",
   "destinationStation": "Airport",
-  "distanceKm": 8,
-  "etaMinutes": 15,
+  "distanceKm": 4.0,
+  "etaMinutes": 10,
   "timeline": [
-    { "time": "09:15", "step": "Breakdown reported: B021 at Airport" },
-    { "time": "09:15", "step": "Airport has 0 spare buses; nearest pool is Central Station (5 available, 8 km)" },
-    { "time": "09:16", "step": "Idle driver D007 selected at Central Station (free until 10:30)" },
-    { "time": "09:17", "step": "D007 assigned to collect B041 and drive to Airport" },
-    { "time": "09:32", "step": "B041 arrives at Airport; timetable and station inventory updated" }
+    {
+      "time": "09:15",
+      "step": "Breakdown reported: B021 at Airport"
+    },
+    {
+      "time": "09:15",
+      "step": "Airport has 0 spare buses; nearest is North Station (5 spare, 4 km)"
+    },
+    {
+      "time": "09:16",
+      "step": "Idle driver D011 selected at North Station (free until 12:30)"
+    },
+    {
+      "time": "09:17",
+      "step": "D011 departs North Station with B027"
+    },
+    {
+      "time": "09:25",
+      "step": "B027 arrives at Airport; B021 sent to maintenance, inventory updated"
+    }
   ]
 }
