@@ -306,4 +306,183 @@ Design the complete dashboard.
 Pages:
 
 1. Overview Dashboard
-2. Timetable 
+2. Timetable Optimization
+3. Fleet Monitoring
+4. Driver Availability
+5. Emergency Recovery
+6. AI Predictions
+7. Dispatcher Copilot
+
+For each page provide:
+
+- Layout
+- Charts
+- KPIs
+- Components
+- User interactions
+
+Use modern SaaS styling.
+
+=========================================================
+PROMPT 10 - API DESIGN
+=========================================================
+
+Read project_context.md.
+
+Design the complete FastAPI backend.
+
+Generate:
+
+1. API endpoint list
+2. Request models
+3. Response models
+4. Service layer structure
+5. Controller layer structure
+6. Validation rules
+7. Error handling
+8. Example requests and responses
+
+Group APIs by:
+
+- Drivers
+- Buses
+- Routes
+- Timetables
+- Emergencies
+- Optimization
+- Predictions
+- Copilot
+
+=========================================================
+PROMPT 11 - 6 HOUR HACKATHON PLAN
+=========================================================
+
+You are the Technical Lead for this hackathon.
+
+Read project_context.md.
+
+IMPORTANT:
+
+We only have 6 hours to build the MVP.
+
+The goal is NOT production readiness.
+
+The goal is to win the hackathon demo.
+
+Prioritize features that directly answer the challenge:
+
+"How can AI help optimize timetables, routes, rotas and available resources so additional express bus services can launch with as little extra staff as possible?"
+
+For every feature classify as:
+
+- Build Now
+- Build If Time Permits
+- Demo Only (Mocked Data)
+- Ignore
+
+Then create a detailed 6-hour execution plan.
+
+Hour 1:
+- Setup
+- Project structure
+- Hardcoded data
+- Database models
+
+Hour 2:
+- Driver Idle-Time Detection Engine
+- Bus Station data
+- Driver availability logic
+
+Hour 3:
+- OR-Tools Optimization Engine
+- Optimize timetable
+- Optimize driver allocation
+- Optimize bus allocation
+
+Hour 4:
+- Emergency Recovery Engine
+- Bus breakdown simulation
+- Nearest bus search
+- Nearest driver search
+
+Hour 5:
+- Dashboard
+- KPI cards
+- Optimization results
+- AI recommendations
+- Recovery simulation screen
+
+Hour 6:
+- AI Dispatcher Copilot
+- Demo preparation
+- Judges presentation flow
+- Final polish
+
+For each hour provide:
+
+1. Deliverables
+2. Development tasks
+3. Expected output
+4. Demo value
+
+Then provide:
+
+A list of features that can be mocked using hardcoded data to save development time.
+
+Finally answer:
+
+"If we only finish three features, which three give us the highest chance of winning?"
+
+Think like a hackathon mentor focused on maximizing demo impact within 6 hours.
+
+=========================================================
+PROMPT 12 - GENERATE COMPLETE MVP
+=========================================================
+
+Read project_context.md.
+
+Act as a team of:
+
+- Solution Architect
+- Senior Backend Engineer
+- Senior Frontend Engineer
+- AI Engineer
+- Database Architect
+
+Generate a complete implementation plan.
+
+Build order:
+
+1. Database
+2. Demo Data
+3. Backend
+4. Optimization Engine
+5. Emergency Recovery Engine
+6. Prediction Engine
+7. Dashboard
+8. AI Dispatcher Copilot
+
+Provide:
+
+- File-by-file breakdown
+- Technologies used
+- Dependencies
+- Folder structure
+- Development sequence
+
+Do not skip implementation details.
+
+=========================================================
+FINAL JUDGE-WINNING FOCUS
+=========================================================
+
+Build these first:
+
+1. OR-Tools Schedule Optimization
+2. Emergency Bus Recovery Simulator
+3. AI Dispatcher Copilot
+4. Dashboard with KPIs and Operations Map
+
+Everything else can be hardcoded or simplified for the demo.
+
+These four features directly address the Fraunhofer IIS challenge and create the strongest demo impact.
