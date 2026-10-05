@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Bot, BusFront, LayoutDashboard, Route, Siren, type LucideIcon } from "lucide-react";
+import { Bot, BusFront, LayoutDashboard, Route, Siren, SlidersHorizontal, type LucideIcon } from "lucide-react";
 import { DataSourceBadge } from "@/components/DataSource";
 
 const NAV: { href: string; label: string; icon: LucideIcon; subtitle?: string; tooltip?: string }[] = [
@@ -16,6 +16,7 @@ const NAV: { href: string; label: string; icon: LucideIcon; subtitle?: string; t
     subtitle: "AI dispatch assistant",
     tooltip: "Ask Lotse – AI dispatch assistant",
   },
+  { href: "/admin", label: "Admin", icon: SlidersHorizontal, subtitle: "Data and manual changes" },
 ];
 
 export function Sidebar() {

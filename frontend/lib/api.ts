@@ -1,5 +1,15 @@
 import type {
+  AdminBus,
+  AdminDriver,
+  AdminListQuery,
+  AdminPage,
+  AdminRoute,
+  AdminStation,
+  AdminStatus,
   ApiErrorBody,
+  BusPatch,
+  DataSourceName,
+  DriverPatch,
   Health,
   Dashboard,
   EmergencyRequest,
@@ -53,11 +63,13 @@ export const dataSourceStore = {
 
 // --- Request helper -------------------------------------------------------------
 
-interface RequestOptions {
+interface RequestOptions<T> {
   method?: "GET" | "POST";
   body?: unknown;
   query?: Record<string, string | undefined>;
   timeoutMs?: number;
+  /** Adjusts mock data to the request, e.g. search/paginate a mock list. */
+  fromMock?: (data: T) => T;
 }
 
 /** Network failures, timeouts and server errors fall back to mocks; 4xx (bad input, conflicts) don't. */
@@ -85,8 +97,9 @@ async function fetchMock<T>(mock: string): Promise<T> {
   return fetchJson<T>(`/mock/${mock}.json`, {});
 }
 
-async function request<T>(path: string, mock: string, opts: RequestOptions = {}): Promise<T> {
-  if (MOCKS_ONLY) return fetchMock<T>(mock);
+async function request<T>(path: string, mock: string, opts: RequestOptions<T> = {}): Promise<T> {
+  const mockData = async () => (opts.fromMock ?? ((d: T) => d))(await fetchMock<T>(mock));
+  if (MOCKS_ONLY) return mockData();
 
   const params = new URLSearchParams();
   for (const [key, value] of Object.entries(opts.query ?? {})) {
@@ -108,13 +121,80 @@ async function request<T>(path: string, mock: string, opts: RequestOptions = {})
     const reason = describe(err);
     console.warn(`[api] ${opts.method ?? "GET"} ${path} failed (${reason}); using /mock/${mock}.json`);
     try {
-      const data = await fetchMock<T>(mock);
+      const data = await mockData();
       setDataSource({ kind: "mock", reason });
       return data;
     } catch {
       throw new ApiError(err instanceof ApiError ? err.status : 0, "UNAVAILABLE", `${reason}, and no mock data is available.`);
     }
   }
+}
+
+/** Writes (PATCH, switch, reset) never fall back to mocks: a change that didn't happen must not look saved. */
+async function mutate<T>(path: string, method: "POST" | "PATCH", body?: unknown): Promise<T> {
+  if (MOCKS_ONLY) throw new ApiError(0, "MOCK_MODE", "Mock mode is on: changes need the live backend.");
+  try {
+    const data = await fetchJson<T>(`${API_BASE_URL}${path}`, {
+      method,
+      headers: { "Content-Type": "application/json" },
+      body: body === undefined ? undefined : JSON.stringify(body),
+      signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
+    });
+    setDataSource({ kind: "live" });
+    return data;
+  } catch (err) {
+    if (err instanceof ApiError) throw err;
+    throw new ApiError(0, "UNAVAILABLE", `${describe(err)}: the change was not saved.`);
+  }
+}
+
+// --- Admin status store: drives the "manual changes active" banner on every page ---
+
+let adminStatus: AdminStatus | null = null;
+const adminListeners = new Set<() => void>();
+
+function setAdminStatus(next: AdminStatus | null) {
+  adminStatus = next;
+  adminListeners.forEach((l) => l());
+}
+
+export const adminStatusStore = {
+  subscribe(listener: () => void) {
+    adminListeners.add(listener);
+    return () => adminListeners.delete(listener);
+  },
+  get: () => adminStatus,
+};
+
+/** Re-read /admin/status in the background (after any change); failures just hide the banner. */
+export function refreshAdminStatus() {
+  api.getAdminStatus().catch(() => setAdminStatus(null));
+}
+
+/** Mock lists hold (at most) one page of the default data: apply search and paging locally. */
+function pageLocally<T>({ q, page = 1, pageSize = 20 }: AdminListQuery) {
+  return (data: AdminPage<T>): AdminPage<T> => {
+    const needle = q?.trim().toLowerCase();
+    const all = data.items ?? [];
+    const matches = needle
+      ? all.filter((item) =>
+          Object.values(item as object).some(
+            (v) => (typeof v === "string" || typeof v === "number") && String(v).toLowerCase().includes(needle),
+          ),
+        )
+      : all;
+    const start = (page - 1) * pageSize;
+    // total counts what the mock file holds, so paging never runs past the rows we have
+    return { page, pageSize, total: matches.length, items: matches.slice(start, start + pageSize) };
+  };
+}
+
+function listQuery({ page, pageSize, q }: AdminListQuery) {
+  return { page: page?.toString(), pageSize: pageSize?.toString(), q: q?.trim() || undefined };
+}
+
+function list<T>(path: string, mock: string, query: AdminListQuery) {
+  return request<AdminPage<T>>(path, mock, { query: listQuery(query), fromMock: pageLocally<T>(query) });
 }
 
 // --- Endpoints ------------------------------------------------------------------
@@ -138,8 +218,11 @@ export const api = {
   optimize: (body: OptimizeRequest = {}) =>
     request<OptimizeResult>("/optimize", "optimize", { method: "POST", body, timeoutMs: 30_000 }),
 
-  reportEmergency: (body: EmergencyRequest) =>
-    request<EmergencyResult>("/emergency", "emergency", { method: "POST", body }),
+  reportEmergency: async (body: EmergencyRequest) => {
+    const result = await request<EmergencyResult>("/emergency", "emergency", { method: "POST", body });
+    refreshAdminStatus(); // a breakdown changes the bus pool: the overrides banner should show it
+    return result;
+  },
 
   /** Demo helper: undo all breakdowns and dispatches on the backend. No-op without a backend. */
   resetEmergency: async (): Promise<void> => {
@@ -150,6 +233,7 @@ export const api = {
         signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
       });
       setDataSource({ kind: "live" });
+      refreshAdminStatus();
     } catch (err) {
       if (!shouldFallBack(err)) throw err;
       setDataSource({ kind: "mock", reason: describe(err) });
@@ -159,4 +243,41 @@ export const api = {
   // Lotse is the UI name; the backend endpoint and mock file are still "copilot".
   askLotse: (question: string) =>
     request<LotseResult>("/copilot", "copilot", { method: "POST", body: { question } }),
+
+  // --- Admin (API_CONTRACT.md section 6); mocks in public/mock/admin/ ---
+
+  getAdminStatus: async () => {
+    const status = await request<AdminStatus>("/admin/status", "admin/status");
+    setAdminStatus(status);
+    return status;
+  },
+
+  setDataSource: async (dataSource: DataSourceName) => {
+    const status = await mutate<AdminStatus>("/admin/data-source", "POST", { dataSource });
+    setAdminStatus(status);
+    return status;
+  },
+
+  resetAdmin: async () => {
+    const status = await mutate<AdminStatus>("/admin/reset", "POST");
+    setAdminStatus(status);
+    return status;
+  },
+
+  getAdminDrivers: (query: AdminListQuery = {}) => list<AdminDriver>("/admin/drivers", "admin/drivers", query),
+  getAdminBuses: (query: AdminListQuery = {}) => list<AdminBus>("/admin/buses", "admin/buses", query),
+  getAdminStations: (query: AdminListQuery = {}) => list<AdminStation>("/admin/stations", "admin/stations", query),
+  getAdminRoutes: (query: AdminListQuery = {}) => list<AdminRoute>("/admin/routes", "admin/routes", query),
+
+  patchDriver: async (id: string, patch: DriverPatch) => {
+    const driver = await mutate<AdminDriver>(`/admin/drivers/${encodeURIComponent(id)}`, "PATCH", patch);
+    refreshAdminStatus();
+    return driver;
+  },
+
+  patchBus: async (id: string, patch: BusPatch) => {
+    const bus = await mutate<AdminBus>(`/admin/buses/${encodeURIComponent(id)}`, "PATCH", patch);
+    refreshAdminStatus();
+    return bus;
+  },
 };

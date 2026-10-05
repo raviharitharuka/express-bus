@@ -243,3 +243,98 @@ export type LotseResult = LotseBase &
   );
 
 export type LotseIntent = LotseResult["intent"];
+
+// /admin (API_CONTRACT.md section 6). Every response field is optional: the admin API is new and the
+// UI must render whatever subset an older backend or a mock file returns.
+
+export interface AdminCounts {
+  stations?: number;
+  drivers?: number;
+  buses?: number;
+  routes?: number;
+  trips?: number;
+}
+
+// GET /admin/status, POST /admin/data-source, POST /admin/reset
+export interface AdminStatus {
+  dataSource?: DataSourceName;
+  counts?: AdminCounts;
+  /** Duration of the last POST /optimize; null if none since startup. */
+  lastOptimizeMs?: number | null;
+  /** Drivers and buses changed by PATCH or emergencies since the last reset. */
+  overridesActive?: number;
+}
+
+/** Paginated list from GET /admin/{drivers,buses,stations,routes}. */
+export interface AdminPage<T> {
+  page?: number;
+  pageSize?: number;
+  total?: number;
+  items?: T[];
+}
+
+export interface AdminListQuery {
+  page?: number;
+  pageSize?: number;
+  /** Case-insensitive search in any text or number field. */
+  q?: string;
+}
+
+export interface AdminDriver {
+  driverId?: string;
+  homeStation?: Station;
+  /** Today's duty; null when off (weekend, vacation, sick). */
+  dutyId?: string | null;
+  overtimeAvailable?: boolean;
+  maxShiftHours?: number;
+  vacationDates?: string[];
+  /** false = sick leave today. */
+  available?: boolean;
+  overridden?: boolean;
+}
+
+export type BusStatus = "active" | "spare" | "maintenance" | "broken";
+
+export interface AdminBus {
+  busId?: string;
+  station?: Station;
+  status?: BusStatus;
+  type?: string;
+  capacity?: number;
+  overridden?: boolean;
+}
+
+export interface AdminStation {
+  id?: string;
+  name?: Station;
+  lat?: number;
+  lng?: number;
+  totalBuses?: number;
+  spareBuses?: number;
+  driversBased?: number;
+}
+
+export interface AdminRoute {
+  routeId?: string;
+  name?: string;
+  from?: Station;
+  to?: Station;
+  distanceKm?: number;
+  durationMin?: number;
+  frequencyMin?: number;
+}
+
+// PATCH bodies: only the fields sent change.
+export interface DriverPatch {
+  vacationDates?: string[];
+  overtimeAvailable?: boolean;
+  maxShiftHours?: number;
+  available?: boolean;
+}
+
+export type BusStatusChange = "available" | "maintenance" | "broken";
+
+export interface BusPatch {
+  status?: BusStatusChange;
+  station?: Station;
+}
