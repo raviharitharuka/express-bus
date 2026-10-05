@@ -1,6 +1,11 @@
-"""Loads the hardcoded MVP dataset from backend/data/ (read-only, cached)."""
+"""Loads the hardcoded MVP dataset from backend/data/ (cached), plus live fleet changes made by emergencies.
 
+Live changes are kept in memory only: restarting the server or POST /emergency/reset clears them.
+"""
+
+import copy
 import json
+from contextlib import contextmanager
 from dataclasses import dataclass
 from datetime import date
 from functools import cache
@@ -34,7 +39,8 @@ def drivers() -> dict[str, dict]:
 
 
 def buses() -> list[dict]:
-    return _load("buses.json")["buses"]
+    """Buses with any live changes (breakdowns, relocations) applied."""
+    return [{**b, **_bus_changes.get(b["busId"], {})} for b in _load("buses.json")["buses"]]
 
 
 def routes() -> dict[str, dict]:
@@ -99,3 +105,38 @@ def resolve_day(value: str | None = None, default: date | None = None) -> Day:
     day_type = "sunday" if d.weekday() == 6 else "saturday" if d.weekday() == 5 else "weekday"
     on_vacation = {did for did, drv in drivers().items() if iso in drv["vacationDates"]}
     return Day(iso, day_type, on_vacation)
+
+
+# --- Live state (in memory) -------------------------------------------------
+
+_bus_changes: dict[str, dict] = {}  # busId -> overridden fields, e.g. {"status": "maintenance"}
+_driver_busy_until: dict[str, int] = {}  # driverId -> minute they're free again
+
+
+def update_bus(bus_id: str, **fields) -> None:
+    _bus_changes.setdefault(bus_id, {}).update(fields)
+
+
+def mark_driver_busy(driver_id: str, until: int) -> None:
+    _driver_busy_until[driver_id] = until
+
+
+def driver_busy_until(driver_id: str) -> int:
+    return _driver_busy_until.get(driver_id, -1)
+
+
+@contextmanager
+def what_if():
+    """Run hypothetical changes (e.g. a copilot "what happens if...") and roll them back afterwards."""
+    saved = copy.deepcopy(_bus_changes), dict(_driver_busy_until)
+    try:
+        yield
+    finally:
+        reset_live_state()
+        _bus_changes.update(saved[0])
+        _driver_busy_until.update(saved[1])
+
+
+def reset_live_state() -> None:
+    _bus_changes.clear()
+    _driver_busy_until.clear()

@@ -43,11 +43,17 @@ def _breakdown(q: str, bus_id: str) -> str:
     bus = next((b for b in data.buses() if b["busId"] == bus_id), None)
     if not bus:
         return f"Bus {bus_id} does not exist. Buses run from B001 to B050."
-    res = handle_incident(EmergencyRequest(incident_type="BREAKDOWN", bus_id=bus_id, station=bus["station"]))
+    at = re.search(r"\b(\d{1,2}):(\d{2})\b", q)
+    time = f"{int(at[1]):02d}:{at[2]}" if at else None
+    when = f"at {time}" if time else "now"
+    with data.what_if():  # hypothetical: don't touch the real bus pool
+        res = handle_incident(EmergencyRequest(incident_type="BREAKDOWN", bus_id=bus_id, station=bus["station"], time=time))
     if res.status != "DISPATCHED":
-        return f"If {bus_id} breaks down at {bus['station']} now, no replacement is available: {res.timeline[-1].step}."
-    return (f"If {bus_id} breaks down at {res.destination_station}, driver {res.driver} brings {res.replacement_bus} "
-            f"from {res.source_station} in about {res.eta_minutes} minutes.")
+        return f"If {bus_id} breaks down at {bus['station']} {when}, no replacement is available: {res.timeline[-1].step}."
+    where = (f"takes spare {res.replacement_bus} at {res.source_station}" if res.source_station == res.destination_station
+             else f"brings {res.replacement_bus} from {res.source_station}")
+    return (f"If {bus_id} breaks down at {res.destination_station} {when}, driver {res.driver} {where}; "
+            f"service resumes in about {res.eta_minutes} minute{'s' if res.eta_minutes != 1 else ''}.")
 
 
 def _buses(_: str) -> str:

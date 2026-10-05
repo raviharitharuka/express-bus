@@ -8,7 +8,7 @@
   "sourceStation": "North Station",
   "destinationStation": "Airport",
   "distanceKm": 4.0,
-  "etaMinutes": 10,
+  "etaMinutes": 9,
   "timeline": [
     {
       "time": "09:15",
@@ -16,19 +16,27 @@
     },
     {
       "time": "09:15",
-      "step": "Airport has 0 spare buses; nearest is North Station (5 spare, 4 km)"
+      "step": "B021 removed from the bus pool (maintenance)"
+    },
+    {
+      "time": "09:15",
+      "step": "North Station is the nearest station with a spare bus (5 spare, 4 km)"
     },
     {
       "time": "09:16",
-      "step": "Idle driver D011 selected at North Station (free until 12:30)"
+      "step": "Driver D011 assigned (on shift, idle at North Station, free until 12:30)"
     },
     {
-      "time": "09:17",
+      "time": "09:16",
       "step": "D011 departs North Station with B027"
     },
     {
-      "time": "09:25",
-      "step": "B027 arrives at Airport; B021 sent to maintenance, inventory updated"
+      "time": "09:24",
+      "step": "B027 arrives at Airport; service resumes"
+    },
+    {
+      "time": "09:24",
+      "step": "Bus pool, driver roster and station inventory updated"
     }
   ]
 }
