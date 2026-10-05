@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ExpressBus · Project overview</title>
+<meta name="description" content="ExpressBus: finding hidden driver capacity to launch express buses despite a driver shortage. What it does, who it is for, and how it works.">
+<style>
+  :root {
+    color-scheme: light;
+    --surface-0: #f4f4f2;
+    --surface-1: #fcfcfb;
+    --surface-2: #f0efec;
+    --border: #e2e1dd;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #6d6c68;
+    --accent: #2a78d6;         /* validated: categorical slot 1, light */
+    --accent-soft: #e8f1fc;
+    --accent-ink: #1d5aa6;     /* accent-tinted text for small labels, >= 4.5:1 */
+    --radius: 14px;
+    --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --surface-0: #121211;
+      --surface-1: #1a1a19;
+      --surface-2: #232321;
+      --border: #33332f;
+      --text-primary: #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted: #a3a29a;
+      --accent: #3987e5;       /* validated: categorical slot 1, dark */
+      --accent-soft: #16263a;
+      --accent-ink: #8fbcf3;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--surface-0); color: var(--text-primary);
+    font: 16px/1.6 var(--font); -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent-ink); }
+  code { font-family: var(--mono); font-size: .88em; background: var(--surface-2); padding: .1em .35em; border-radius: 6px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* Top bar */
+  header.top { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--surface-0) 88%, transparent);
+    backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 56px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 650; }
+  .brand-mark { width: 30px; height: 30px; border-radius: 8px; background: var(--accent); display: grid; place-items: center; }
+  .brand-mark svg { width: 18px; height: 18px; }
+  nav a { color: var(--text-secondary); text-decoration: none; font-size: 14px; margin-left: 18px; }
+  nav a:hover { color: var(--text-primary); }
+  @media (max-width: 720px) { nav { display: none; } }
+
+  /* Sections */
+  section { padding: 56px 0; }
+  section + section { border-top: 1px solid var(--border); }
+  .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 8px; }
+  h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 16px; }
+  h2 { font-size: 28px; line-height: 1.2; letter-spacing: -.01em; margin: 0 0 12px; }
+  h3 { font-size: 17px; margin: 0 0 6px; }
+  .lead { font-size: 19px; color: var(--text-secondary); max-width: 760px; margin: 0; }
+  .sub { color: var(--text-secondary); max-width: 760px; margin: 0 0 28px; }
+  .muted { color: var(--text-muted); font-size: 14px; }
+
+  .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; }
+  .grid { display: grid; gap: 16px; }
+  .g2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .g3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+
+  /* Hero */
+  .hero { padding: 72px 0 56px; }
+  .hero-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: end; }
+  @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } }
+  .hero-figure { background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+  .hero-figure .label { color: var(--text-secondary); font-size: 14px; margin: 0; }
+  .hero-figure .value { font-size: 64px; font-weight: 650; line-height: 1.05; letter-spacing: -.02em; margin: 6px 0 4px; }
+  .hero-figure .value span { font-size: 28px; font-weight: 600; color: var(--text-secondary); margin-left: 4px; }
+  .hero-figure .bar { height: 6px; border-radius: 3px; background: var(--accent-soft); margin: 14px 0 8px; overflow: hidden; }
+  .hero-figure .bar i { display: block; height: 100%; width: 50%; background: var(--accent); border-radius: 3px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .chip { font-size: 13px; color: var(--text-secondary); border: 1px solid var(--border); background: var(--surface-1); padding: 4px 10px; border-radius: 999px; }
+
+  /* Stat tiles */
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+  .tile { background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
+  .tile .label { font-size: 14px; color: var(--text-secondary); margin: 0; }
+  .tile .value { font-size: clamp(26px, 2.6vw, 32px); font-weight: 650; letter-spacing: -.01em; margin: 6px 0 2px; }
+  .tile .value.pair { font-size: clamp(20px, 1.9vw, 24px); white-space: nowrap; line-height: 1.6; }
+  .tile .note { font-size: 13px; color: var(--text-muted); margin: 0; }
+  .tile .value .arrow { color: var(--text-muted); font-weight: 500; margin: 0 4px; }
+
+  /* Who it's for */
+  .persona { display: flex; gap: 14px; align-items: flex-start; }
+  .icon { flex: none; width: 40px; height: 40px; border-radius: 10px; background: var(--accent-soft); display: grid; place-items: center; }
+  .icon svg { width: 20px; height: 20px; stroke: var(--accent); }
+  .persona p, .feature p { margin: 0; color: var(--text-secondary); font-size: 15px; }
+
+  /* Features */
+  .feature { display: flex; flex-direction: column; gap: 8px; }
+  .feature .tag { align-self: flex-start; font-family: var(--mono); font-size: 12px; color: var(--accent-ink);
+    background: var(--accent-soft); padding: 2px 8px; border-radius: 6px; }
+
+  /* Pipeline */
+  .pipeline { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: stretch; gap: 10px; }
+  .stage { background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+  .stage .num { width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 13px; font-weight: 650;
+    display: grid; place-items: center; margin-bottom: 10px; }
+  .stage p { margin: 0; color: var(--text-secondary); font-size: 14px; }
+  .stage code { font-size: 12px; }
+  .arrow-cell { display: grid; place-items: center; color: var(--text-muted); }
+  @media (max-width: 900px) {
+    .pipeline { grid-template-columns: 1fr; }
+    .arrow-cell { transform: rotate(90deg); height: 18px; }
+  }
+  .side { margin-top: 16px; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
+  /* Steps */
+  ol.steps { list-style: none; counter-reset: s; margin: 0; padding: 0; display: grid; gap: 12px; }
+  ol.steps li { counter-increment: s; position: relative; padding: 14px 16px 14px 56px; background: var(--surface-1);
+    border: 1px solid var(--border); border-radius: 12px; color: var(--text-secondary); font-size: 15px; }
+  ol.steps li::before { content: counter(s); position: absolute; left: 16px; top: 14px; width: 26px; height: 26px; border-radius: 50%;
+    border: 2px solid var(--accent); color: var(--text-primary); font-weight: 650; font-size: 13px; display: grid; place-items: center; }
+  ol.steps li strong { color: var(--text-primary); }
+
+  /* Table */
+  table { width: 100%; border-collapse: collapse; background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; font-size: 15px; }
+  th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { font-size: 13px; color: var(--text-secondary); font-weight: 600; background: var(--surface-2); }
+  tr:last-child td { border-bottom: 0; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+  .pill::before { content: ""; width: 8px; height: 8px; border-radius: 50%; }
+  .pill.real::before { background: var(--accent); }
+  .pill.syn::before { background: transparent; border: 2px solid var(--text-muted); width: 6px; height: 6px; }
+  .pill.none::before { background: transparent; border: 2px dashed var(--text-muted); width: 6px; height: 6px; }
+
+  .table-wrap { overflow-x: auto; border-radius: var(--radius); }
+  @media (max-width: 560px) {
+    th, td { padding: 9px 10px; font-size: 14px; }
+    .pill { white-space: normal; }
+  }
+  ul.clean { margin: 0; padding-left: 18px; color: var(--text-secondary); }
+  ul.clean li { margin: 6px 0; }
+  pre { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 16px; overflow-x: auto; font: 14px/1.6 var(--mono); margin: 0; }
+  footer { padding: 36px 0 56px; color: var(--text-muted); font-size: 14px; border-top: 1px solid var(--border); }
+  footer p { margin: 6px 0; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="14" rx="3"/><path d="M4 11h16M8 21v-4M16 21v-4M8 14h.01M16 14h.01"/></svg>
+      </div>
+      ExpressBus
+    </div>
+    <nav aria-label="Sections">
+      <a href="#what">What it does</a>
+      <a href="#who">Who it's for</a>
+      <a href="#how">How it works</a>
+      <a href="#data">Data</a>
+      <a href="#limits">Limits</a>
+      <a href="#run">Run it</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Hackathon Track 1 · Fraunhofer IIS challenge</p>
+        <h1>Express buses despite a driver shortage</h1>
+        <p class="lead">Nuremberg has spare buses but not enough drivers. ExpressBus finds the idle time hidden inside existing driver duties and checks, with an optimization model, whether new express routes can run on that time instead of on new hires.</p>
+        <div class="chips">
+          <span class="chip">FastAPI backend</span>
+          <span class="chip">OR-Tools CP-SAT</span>
+          <span class="chip">Next.js dashboard</span>
+          <span class="chip">Real VGN timetable data</span>
+          <span class="chip">Optional Claude assistant</span>
+        </div>
+      </div>
+      <figure class="hero-figure" style="margin:0">
+        <p class="label">Idle driver time found in one day's duties</p>
+        <p class="value">32.5<span>hours</span></p>
+        <div class="bar" role="img" aria-label="10 of 20 drivers have idle gaps"><i></i></div>
+        <p class="muted" style="margin:0">10 of 20 drivers have gaps of an hour or more between trips · synthetic demo data, 6 Oct 2026</p>
+      </figure>
+    </div>
+  </section>
+
+  <!-- What it does -->
+  <section id="what">
+    <div class="wrap">
+      <p class="eyebrow">What it does</p>
+      <h2>From idle minutes to a launch decision</h2>
+      <p class="sub">Each capability is a backend endpoint with a page in the dashboard. Results below are real outputs on the synthetic demo dataset.</p>
+
+      <div class="tiles" style="margin-bottom:28px">
+        <div class="tile">
+          <p class="label">Express routes with 0 new drivers</p>
+          <p class="value">2 of 3</p>
+          <p class="note">E1 and E3 fit into idle time; E2 would need 1 hire</p>
+        </div>
+        <div class="tile">
+          <p class="label">Driver utilization with the plan</p>
+          <p class="value pair" aria-label="from 66.3% to 69.4%">66.3%<span class="arrow" aria-hidden="true">→</span>69.4%</p>
+          <p class="note">Driving time ÷ duty span, before and after</p>
+        </div>
+        <div class="tile">
+          <p class="label">Breakdown covered in</p>
+          <p class="value">9 min</p>
+          <p class="note">Bus B021 at the Airport: spare from North Station, idle driver D011</p>
+        </div>
+        <div class="tile">
+          <p class="label">Optimizer solve time</p>
+          <p class="value">≈ 26 ms</p>
+          <p class="note">Synthetic data; ≈ 160 ms on 626 GTFS-based duties</p>
+        </div>
+      </div>
+
+      <div class="grid g3">
+        <div class="card feature">
+          <span class="tag">GET /idle-drivers</span>
+          <h3>Idle-time detection</h3>
+          <p>For every driver: driving hours, each idle gap of 60 minutes or more with where they wait, and free capacity up to their maximum shift.</p>
+        </div>
+        <div class="card feature">
+          <span class="tag">POST /optimize</span>
+          <h3>Express route optimization</h3>
+          <p>A CP-SAT model assigns express round trips to idle time (or allowed overtime), counts the new drivers otherwise needed, and recommends routes that fit together.</p>
+        </div>
+        <div class="card feature">
+          <span class="tag">POST /emergency</span>
+          <h3>Breakdown recovery</h3>
+          <p>Takes the broken bus out of the pool, finds the nearest station with a spare bus and the nearest free driver, and returns an ETA with a timeline.</p>
+        </div>
+        <div class="card feature">
+          <span class="tag">GET /dashboard</span>
+          <h3>Operations dashboard</h3>
+          <p>Utilization, idle drivers, spare buses per station, driver shortages from the vacation calendar, a launch recommendation and rebalancing hints.</p>
+        </div>
+        <div class="card feature">
+          <span class="tag">POST /lotse</span>
+          <h3>Lotse, the dispatch assistant</h3>
+          <p>Ask in plain language. Keyword rules route the question to a service; with an API key, Claude classifies it and phrases the answer from the service's data only.</p>
+        </div>
+        <div class="card feature">
+          <span class="tag">/admin</span>
+          <h3>What-if editing</h3>
+          <p>Mark a driver sick, add vacation days or break a bus; every engine reflects it. Re-run the optimization for a before/after view, then reset.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who it's for -->
+  <section id="who">
+    <div class="wrap">
+      <p class="eyebrow">Who it's for</p>
+      <h2>People who keep buses running</h2>
+      <p class="sub">A prototype built for a hackathon. It shows what these roles could get from planning data they already have.</p>
+      <div class="grid g3">
+        <div class="card persona">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
+          <div><h3>Service planners</h3><p>Decide whether a new express line can launch with the drivers on the roster, and what it would cost in overtime or hires.</p></div>
+        </div>
+        <div class="card persona">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <div><h3>Dispatchers</h3><p>React to a breakdown or a sick driver in minutes: which spare bus, which free driver, how long until service resumes.</p></div>
+        </div>
+        <div class="card persona">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div><h3>Operations managers</h3><p>See utilization, spare capacity and upcoming shortages at a glance, and ask Lotse instead of digging through spreadsheets.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how">
+    <div class="wrap">
+      <p class="eyebrow">How it works</p>
+      <h2>Four stages, one data layer</h2>
+      <p class="sub">Every engine reads the same data layer: JSON files plus an in-memory layer for manual changes and emergencies, so a what-if edit reaches every result at once.</p>
+
+      <div class="pipeline" role="list" aria-label="Processing pipeline">
+        <div class="stage" role="listitem"><div class="num">1</div><h3>Load data</h3><p>Synthetic demo set, or real VGN trips with a generated roster. Chosen with <code>DATA_SOURCE</code>.</p></div>
+        <div class="arrow-cell" aria-hidden="true">→</div>
+        <div class="stage" role="listitem"><div class="num">2</div><h3>Find idle time</h3><p>Gaps between consecutive trips of a duty, at the station where the driver waits.</p></div>
+        <div class="arrow-cell" aria-hidden="true">→</div>
+        <div class="stage" role="listitem"><div class="num">3</div><h3>Solve</h3><p>CP-SAT places express round trips into those gaps under the scheduling rules.</p></div>
+        <div class="arrow-cell" aria-hidden="true">→</div>
+        <div class="stage" role="listitem"><div class="num">4</div><h3>Explain</h3><p>Dashboard, Optimization page and Lotse turn the result into a recommendation.</p></div>
+      </div>
+
+      <div class="side">
+        <div class="card">
+          <h3>Inside the optimizer</h3>
+          <ol class="steps" style="margin-top:12px">
+            <li><strong>Trips become tasks.</strong> Each express departure is a round trip: out, turnaround, back to the start station.</li>
+            <li><strong>Tasks meet drivers.</strong> A driver can take a task only while waiting at its start station, in a gap long enough to finish before their next trip.</li>
+            <li><strong>Rules hold.</strong> No overlaps, duty within the maximum shift, at most 4.5 h driving per 5 h, no vacation days, overtime only if allowed, enough spare buses.</li>
+            <li><strong>Priorities decide.</strong> Cover as many trips as possible, then use the fewest new drivers, then the least overtime.</li>
+          </ol>
+        </div>
+        <div class="card">
+          <h3>Built to demo reliably</h3>
+          <ul class="clean">
+            <li>One shared 8-second solve budget; a timeout returns the last good result marked <code>cached</code>.</li>
+            <li><code>scripts/validate_solution.py</code> re-checks every assignment against the rules, independently of the solver.</li>
+            <li>116 automated tests, including checks that the API matches its written contract.</li>
+            <li>The frontend falls back to mock data when the backend is unreachable.</li>
+            <li>Lotse falls back to keyword rules when Claude is unavailable or slow (5 s timeout).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Data -->
+  <section id="data">
+    <div class="wrap">
+      <p class="eyebrow">Data</p>
+      <h2>What is real and what is synthetic</h2>
+      <p class="sub">GTFS timetables say when buses run, not who drives them. In GTFS mode the real trips are chained into invented duties so the engines have rosters to work with. Every response says which parts are real.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th scope="col">Data</th><th scope="col">GTFS mode</th><th scope="col">Detail</th></tr></thead>
+        <tbody>
+          <tr><td>Timetable trips</td><td><span class="pill real">Real</span></td><td>4,750 VAG Nürnberg city bus trips on 53 lines, Wednesday 1 July 2026</td></tr>
+          <tr><td>Stops and routes</td><td><span class="pill real">Real</span></td><td>116 terminal stops with coordinates; real line numbers and names</td></tr>
+          <tr><td>Drivers and duties</td><td><span class="pill syn">Synthetic</span></td><td>Generated by chaining real trips; GTFS has no rosters</td></tr>
+          <tr><td>Buses</td><td><span class="pill syn">Synthetic</span></td><td>One per chained block plus a 10% spare reserve</td></tr>
+          <tr><td>Express candidates, distances</td><td><span class="pill syn">Synthetic</span></td><td>Candidates picked by a script; straight-line distance × 1.35</td></tr>
+          <tr><td>Passenger demand</td><td><span class="pill none">Not modelled</span></td><td>No ridership data is used anywhere</td></tr>
+        </tbody>
+      </table></div>
+      <p class="muted" style="margin-top:10px">Synthetic mode uses a hand-made network: 5 stations, 20 drivers, 50 buses and a 30-day calendar.</p>
+    </div>
+  </section>
+
+  <!-- Limits -->
+  <section id="limits">
+    <div class="wrap">
+      <p class="eyebrow">Limitations</p>
+      <h2>An honest prototype</h2>
+      <div class="grid g2">
+        <div class="card">
+          <h3>Simplified, not compliant</h3>
+          <ul class="clean">
+            <li>The break and shift rules are simplified for the demo; they do not claim compliance with EU 561/2006, German working-time law or collective agreements.</li>
+            <li>No empty repositioning trips and no handover buffer between trips.</li>
+            <li>No daily or weekly driving caps, rest periods between days, or qualifications.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Not built yet</h3>
+          <ul class="clean">
+            <li>Machine-learning forecasts; today's shortage alerts come from the vacation calendar.</li>
+            <li>GTFS-Realtime, real rosters, passenger or ticketing data.</li>
+            <li>A database, authentication and real maps (the map is a schematic).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Run -->
+  <section id="run">
+    <div class="wrap">
+      <p class="eyebrow">Run it</p>
+      <h2>One command</h2>
+      <p class="sub">Needs Python 3.10+ and Node.js 20.9+. Starts the backend on port 8000 and the dashboard on port 3000, with a demo clock that has drivers on shift.</p>
+      <pre><code>git clone https://github.com/raviharitharuka/express-bus.git
+cd express-bus
+./run_demo.sh                    # or run_demo.bat on Windows
+DATA_SOURCE=gtfs ./run_demo.sh   # real VAG trips, synthetic roster</code></pre>
+      <p class="muted" style="margin-top:10px">Open <code>http://localhost:3000</code> for the dashboard and <code>http://localhost:8000/docs</code> for the API. Full details in the repository README.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong style="color:var(--text-secondary)">ExpressBus</strong> · Hackathon Track 1 · Challenge provided by Fraunhofer IIS · Team: Tharindu Samarakoon, Ravihari Gunawadha</p>
+    <p>Timetable data: VGN open data (<a href="https://www.vgn.de/web-entwickler/open-data/nutzungsbedingungen/">terms of use</a>), »VGN – Verkehrsverbund Großraum Nürnberg GmbH«. Code under the MIT License; VGN-derived data under CC BY-SA 3.0 DE.</p>
+  </div>
+</footer>
+
+</body>
+</html>
