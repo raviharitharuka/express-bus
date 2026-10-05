@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-06",
+  "currentUtilization": 74,
+  "optimizedUtilization": 86,
+  "totalIdleHoursAvailable": 22,
+  "totalIdleHoursUsed": 20,
+  "newDriversRequired": 1,
+  "recommendations": [
+    { "route": "E1", "name": "Central Station - Airport Express", "idleHoursUsed": 9,   "newDriversRequired": 0, "feasible": true },
+    { "route": "E2", "name": "University - Central Station Express", "idleHoursUsed": 6.5, "newDriversRequired": 0, "feasible": true },
+    { "route": "E3", "name": "North Station - South Station Express", "idleHoursUsed": 4.5, "newDriversRequired": 0, "feasible": true },
+    { "route": "E4", "name": "North Station - Airport Express",      "idleHoursUsed": 2,   "newDriversRequired": 1, "feasible": false }
+  ]
+}

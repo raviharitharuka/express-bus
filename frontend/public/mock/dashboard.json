@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-06",
+  "kpis": {
+    "driverUtilization": 74,
+    "fleetUtilization": 68,
+    "availableDrivers": 8,
+    "availableBuses": 12,
+    "predictedShortages": 3,
+    "additionalRoutesIdentified": 3
+  },
+  "stations": [
+    { "name": "Central Station", "totalBuses": 14, "availableBuses": 5, "maintenanceBuses": 2, "driversOnDuty": 6 },
+    { "name": "Airport",         "totalBuses": 9,  "availableBuses": 0, "maintenanceBuses": 1, "driversOnDuty": 4 },
+    { "name": "North Station",   "totalBuses": 10, "availableBuses": 3, "maintenanceBuses": 1, "driversOnDuty": 4 },
+    { "name": "South Station",   "totalBuses": 9,  "availableBuses": 2, "maintenanceBuses": 0, "driversOnDuty": 3 },
+    { "name": "University",      "totalBuses": 8,  "availableBuses": 2, "maintenanceBuses": 0, "driversOnDuty": 3 }
+  ],
+  "recommendation": {
+    "title": "Launch Express Route E1",
+    "reason": "9 idle driver hours identified on Central Station - Airport",
+    "confidence": 92
+  },
+  "alerts": [
+    { "level": "warning", "message": "Airport has 0 spare buses" },
+    { "level": "warning", "message": "3 drivers short predicted on 2026-12-24" },
+    { "level": "info",    "message": "Bus B003 failure probability 81% - schedule maintenance" }
+  ]
+}
