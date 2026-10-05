@@ -10,7 +10,7 @@ from services import data
 from services.dashboard import worst_shortage
 from services.emergency import handle_incident
 from services.idle import get_idle_drivers
-from services.optimizer import optimize, spare_buses
+from services.optimizer import optimize
 from services.time_utils import today, tomorrow
 
 EXAMPLES = [
@@ -27,18 +27,9 @@ def _date_for(q: str) -> str:
 
 
 def _express(q: str) -> str:
-    res = optimize(OptimizeRequest(date=_date_for(q), allow_overtime="overtime" in q))
-    ok = [r for r in res.recommendations if r.feasible]
-    bad = [r for r in res.recommendations if not r.feasible]
-    if not ok:
-        return f"No express route can be staffed from idle time on {res.date}. " + "; ".join(
-            f"{r.route}: {r.reason}" for r in bad)
-    text = (f"Yes. On {res.date} {len(ok)} express route(s) can launch with 0 new drivers: "
-            + ", ".join(f"{r.route} ({r.name}, {r.idle_hours_used} h)" for r in ok)
-            + f". Driver utilization rises from {res.current_utilization}% to {res.optimized_utilization}%.")
-    if bad:
-        text += " Not feasible: " + "; ".join(f"{r.route} ({r.reason})" for r in bad) + "."
-    return text
+    no_overtime = re.search(r"(no|without) overtime", q) is not None
+    res = optimize(OptimizeRequest(date=_date_for(q), allow_overtime=not no_overtime))
+    return f"{'Yes' if res.recommended else 'No'}, for {res.date}. {res.summary}"
 
 
 def _idle(q: str) -> str:
@@ -60,7 +51,7 @@ def _breakdown(q: str, bus_id: str) -> str:
 
 
 def _buses(_: str) -> str:
-    counts = {s: len(spare_buses(s)) for s in data.station_names()}
+    counts = {s: len(data.spare_buses(s)) for s in data.station_names()}
     empty = [s for s, n in counts.items() if n == 0]
     ranked = ", ".join(f"{s} {n}" for s, n in sorted(counts.items(), key=lambda x: x[1]))
     lead = f"{' and '.join(empty)} has no spare buses. " if empty else "Every station has at least one spare bus. "

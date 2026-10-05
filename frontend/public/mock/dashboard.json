@@ -6,7 +6,7 @@
     "availableDrivers": 10,
     "availableBuses": 26,
     "predictedShortages": 3,
-    "additionalRoutesIdentified": 4
+    "additionalRoutesIdentified": 2
   },
   "stations": [
     {
@@ -46,8 +46,8 @@
     }
   ],
   "recommendation": {
-    "title": "Launch Express Route E3",
-    "reason": "3.0 idle driver hours on North Station - South Station Express (D011)",
+    "title": "Launch Express Routes E1, E3",
+    "reason": "5.5 idle driver hours cover 6 express trips with 0 new drivers; utilization 66.3% -> 69.4%",
     "confidence": 92
   },
   "alerts": [

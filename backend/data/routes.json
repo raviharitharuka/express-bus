@@ -95,74 +95,38 @@
     {
       "routeId": "E1",
       "name": "Central Station - Airport Express",
-      "from": "Central Station",
-      "to": "Airport",
+      "startStation": "Central Station",
+      "endStation": "Airport",
       "distanceKm": 8,
-      "durationMin": 20,
+      "tripDurationMin": 20,
       "turnaroundMin": 10,
-      "departures": [
-        "09:45",
-        "10:45",
-        "11:45"
-      ]
+      "headwayMin": 60,
+      "serviceStart": "09:30",
+      "serviceEnd": "12:30"
     },
     {
       "routeId": "E2",
       "name": "University - Central Station Express",
-      "from": "University",
-      "to": "Central Station",
+      "startStation": "University",
+      "endStation": "Central Station",
       "distanceKm": 5,
-      "durationMin": 15,
+      "tripDurationMin": 15,
       "turnaroundMin": 10,
-      "departures": [
-        "09:30",
-        "10:30",
-        "11:30"
-      ]
+      "headwayMin": 30,
+      "serviceStart": "09:30",
+      "serviceEnd": "13:30"
     },
     {
       "routeId": "E3",
       "name": "North Station - South Station Express",
-      "from": "North Station",
-      "to": "South Station",
+      "startStation": "North Station",
+      "endStation": "South Station",
       "distanceKm": 9,
-      "durationMin": 25,
+      "tripDurationMin": 25,
       "turnaroundMin": 10,
-      "departures": [
-        "09:00",
-        "10:00",
-        "11:00"
-      ]
-    },
-    {
-      "routeId": "E4",
-      "name": "Airport - University Express",
-      "from": "Airport",
-      "to": "University",
-      "distanceKm": 11,
-      "durationMin": 25,
-      "turnaroundMin": 10,
-      "departures": [
-        "09:30",
-        "10:30",
-        "11:30",
-        "12:00"
-      ]
-    },
-    {
-      "routeId": "E5",
-      "name": "South Station - Central Station Express",
-      "from": "South Station",
-      "to": "Central Station",
-      "distanceKm": 5,
-      "durationMin": 15,
-      "turnaroundMin": 10,
-      "departures": [
-        "10:00",
-        "10:45",
-        "11:30",
-        "12:20"
-      ]
+      "headwayMin": 60,
+      "serviceStart": "09:00",
+      "serviceEnd": "12:00"
     }
   ]
 }

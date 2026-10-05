@@ -1,68 +1,166 @@
 {
   "date": "2026-10-06",
+  "allowOvertime": true,
   "currentUtilization": 66.3,
-  "optimizedUtilization": 71.7,
+  "optimizedUtilization": 69.4,
   "totalIdleHoursAvailable": 32.5,
-  "totalIdleHoursUsed": 10.2,
+  "totalIdleHoursUsed": 5.5,
+  "overtimeHoursUsed": 0.0,
   "newDriversRequired": 1,
+  "recommended": [
+    "E1",
+    "E3"
+  ],
+  "summary": "Launch E1, E3 with existing drivers: 6 express trips, 5.5 idle h and 0.0 overtime h used, utilization 66.3% -> 69.4%. Not recommended: E2 (1 new driver(s) needed for 3 trip(s)).",
   "recommendations": [
     {
       "route": "E1",
       "name": "Central Station - Airport Express",
-      "idleHoursUsed": 2.5,
-      "newDriversRequired": 0,
+      "startStation": "Central Station",
+      "endStation": "Airport",
+      "tripsRequested": 3,
+      "tripsCovered": 3,
       "feasible": true,
-      "assignedDrivers": [
-        "D005"
-      ],
-      "reason": "Covered by idle time of D005"
+      "newDriversRequired": 0,
+      "idleHoursUsed": 2.5,
+      "overtimeHoursUsed": 0.0,
+      "utilizationBefore": 66.3,
+      "utilizationAfter": 67.7,
+      "reason": "All 3 trips covered by D002 from idle time",
+      "assignments": [
+        {
+          "tripId": "E1-1",
+          "departure": "09:30",
+          "returnsAt": "10:20",
+          "driver": "D002",
+          "kind": "idle"
+        },
+        {
+          "tripId": "E1-2",
+          "departure": "10:30",
+          "returnsAt": "11:20",
+          "driver": "D002",
+          "kind": "idle"
+        },
+        {
+          "tripId": "E1-3",
+          "departure": "11:30",
+          "returnsAt": "12:20",
+          "driver": "D002",
+          "kind": "idle"
+        }
+      ]
     },
     {
       "route": "E2",
       "name": "University - Central Station Express",
-      "idleHoursUsed": 2.0,
-      "newDriversRequired": 0,
-      "feasible": true,
-      "assignedDrivers": [
-        "D013",
-        "D018"
-      ],
-      "reason": "Covered by idle time of D013, D018"
+      "startStation": "University",
+      "endStation": "Central Station",
+      "tripsRequested": 8,
+      "tripsCovered": 8,
+      "feasible": false,
+      "newDriversRequired": 1,
+      "idleHoursUsed": 2.7,
+      "overtimeHoursUsed": 0.8,
+      "utilizationBefore": 66.3,
+      "utilizationAfter": 67.0,
+      "reason": "1 new driver(s) needed for 3 trip(s)",
+      "assignments": [
+        {
+          "tripId": "E2-1",
+          "departure": "09:30",
+          "returnsAt": "10:10",
+          "driver": "D018",
+          "kind": "idle"
+        },
+        {
+          "tripId": "E2-2",
+          "departure": "10:00",
+          "returnsAt": "10:40",
+          "driver": "NEW-E2-1",
+          "kind": "new-driver"
+        },
+        {
+          "tripId": "E2-3",
+          "departure": "10:30",
+          "returnsAt": "11:10",
+          "driver": "D013",
+          "kind": "idle"
+        },
+        {
+          "tripId": "E2-4",
+          "departure": "11:00",
+          "returnsAt": "11:40",
+          "driver": "D017",
+          "kind": "idle"
+        },
+        {
+          "tripId": "E2-5",
+          "departure": "11:30",
+          "returnsAt": "12:10",
+          "driver": "D018",
+          "kind": "idle"
+        },
+        {
+          "tripId": "E2-6",
+          "departure": "12:00",
+          "returnsAt": "12:40",
+          "driver": "NEW-E2-1",
+          "kind": "new-driver"
+        },
+        {
+          "tripId": "E2-7",
+          "departure": "12:30",
+          "returnsAt": "13:10",
+          "driver": "D020",
+          "kind": "overtime"
+        },
+        {
+          "tripId": "E2-8",
+          "departure": "13:00",
+          "returnsAt": "13:40",
+          "driver": "NEW-E2-1",
+          "kind": "new-driver"
+        }
+      ]
     },
     {
       "route": "E3",
       "name": "North Station - South Station Express",
-      "idleHoursUsed": 3.0,
-      "newDriversRequired": 0,
+      "startStation": "North Station",
+      "endStation": "South Station",
+      "tripsRequested": 3,
+      "tripsCovered": 3,
       "feasible": true,
-      "assignedDrivers": [
-        "D011"
-      ],
-      "reason": "Covered by idle time of D011"
-    },
-    {
-      "route": "E4",
-      "name": "Airport - University Express",
-      "idleHoursUsed": 3.0,
-      "newDriversRequired": 1,
-      "feasible": false,
-      "assignedDrivers": [
-        "D007",
-        "D008"
-      ],
-      "reason": "No spare bus at Airport; 1 of 4 departures unstaffed"
-    },
-    {
-      "route": "E5",
-      "name": "South Station - Central Station Express",
-      "idleHoursUsed": 2.7,
       "newDriversRequired": 0,
-      "feasible": true,
-      "assignedDrivers": [
-        "D003",
-        "D015"
-      ],
-      "reason": "Covered by idle time of D003, D015"
+      "idleHoursUsed": 3.0,
+      "overtimeHoursUsed": 0.0,
+      "utilizationBefore": 66.3,
+      "utilizationAfter": 68.0,
+      "reason": "All 3 trips covered by D011 from idle time",
+      "assignments": [
+        {
+          "tripId": "E3-1",
+          "departure": "09:00",
+          "returnsAt": "10:00",
+          "driver": "D011",
+          "kind": "idle"
+        },
+        {
+          "tripId": "E3-2",
+          "departure": "10:00",
+          "returnsAt": "11:00",
+          "driver": "D011",
+          "kind": "idle"
+        },
+        {
+          "tripId": "E3-3",
+          "departure": "11:00",
+          "returnsAt": "12:00",
+          "driver": "D011",
+          "kind": "idle"
+        }
+      ]
     }
   ]
 }

@@ -23,7 +23,6 @@ def get_dashboard(date: str | None) -> DashboardResponse:
     drivers = data.drivers()
     in_service = {d["busId"] for d in working}
     opt = optimize(OptimizeRequest(date=day.date))
-    feasible = [r for r in opt.recommendations if r.feasible]
     shortage_day, missing = worst_shortage(day.date)
 
     stations = []
@@ -37,11 +36,12 @@ def get_dashboard(date: str | None) -> DashboardResponse:
             drivers_on_duty=sum(drivers[d["driverId"]]["homeStation"] == name for d in working),
         ))
 
-    if feasible:
-        best = max(feasible, key=lambda r: r.idle_hours_used)
+    if opt.recommended:
+        trips = sum(r.trips_covered for r in opt.recommendations if r.route in opt.recommended)
         recommendation = Recommendation(
-            title=f"Launch Express Route {best.route}",
-            reason=f"{best.idle_hours_used} idle driver hours on {best.name} ({', '.join(best.assigned_drivers)})",
+            title=f"Launch Express Route{'s' if len(opt.recommended) > 1 else ''} {', '.join(opt.recommended)}",
+            reason=(f"{opt.total_idle_hours_used} idle driver hours cover {trips} express trips with 0 new drivers; "
+                    f"utilization {opt.current_utilization}% -> {opt.optimized_utilization}%"),
             confidence=92,
         )
     else:
@@ -67,7 +67,7 @@ def get_dashboard(date: str | None) -> DashboardResponse:
             available_drivers=len({w.driver_id for w in idle_windows(day)}),
             available_buses=sum(b["status"] == "spare" for b in buses),
             predicted_shortages=missing,
-            additional_routes_identified=len(feasible),
+            additional_routes_identified=len(opt.recommended),
         ),
         stations=stations,
         recommendation=recommendation,

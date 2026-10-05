@@ -58,16 +58,11 @@ def driver_utilization(day: data.Day) -> float:
     return round(100 * sum(d["drivingMinutes"] for d in working) / span, 1) if span else 0.0
 
 
-def express_round_trip(cand: dict) -> int:
-    return 2 * cand["durationMin"] + cand["turnaroundMin"]
-
-
 def _recommended_route(windows: list[Window]) -> str | None:
     for cand in data.express_candidates():
-        rt = express_round_trip(cand)
-        for dep in cand["departures"]:
-            s = to_min(dep)
-            if any(w.station == cand["from"] and w.fits(s, s + rt) for w in windows):
+        rt = 2 * cand["tripDurationMin"] + cand["turnaroundMin"]
+        for s in data.express_departures(cand):
+            if any(w.station == cand["startStation"] and w.fits(s, s + rt) for w in windows):
                 return cand["routeId"]
     return None
 

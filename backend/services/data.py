@@ -7,7 +7,7 @@ from functools import cache
 from pathlib import Path
 
 from errors import ApiError
-from services.time_utils import today
+from services.time_utils import to_min, today
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
@@ -43,6 +43,15 @@ def routes() -> dict[str, dict]:
 
 def express_candidates() -> list[dict]:
     return _load("routes.json")["expressCandidates"]
+
+
+def express_departures(cand: dict) -> list[int]:
+    """Departure minutes from the start station: every headway, from serviceStart until before serviceEnd."""
+    return list(range(to_min(cand["serviceStart"]), to_min(cand["serviceEnd"]), cand["headwayMin"]))
+
+
+def spare_buses(station: str) -> list[str]:
+    return [b["busId"] for b in buses() if b["station"] == station and b["status"] == "spare"]
 
 
 def duties() -> list[dict]:

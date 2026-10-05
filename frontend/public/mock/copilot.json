@@ -1,6 +1,6 @@
 {
   "question": "Can we launch a new express route tomorrow?",
-  "answer": "Yes. On 2026-10-06 4 express route(s) can launch with 0 new drivers: E1 (Central Station - Airport Express, 2.5 h), E2 (University - Central Station Express, 2.0 h), E3 (North Station - South Station Express, 3.0 h), E5 (South Station - Central Station Express, 2.7 h). Driver utilization rises from 66.3% to 71.7%. Not feasible: E4 (No spare bus at Airport; 1 of 4 departures unstaffed).",
+  "answer": "Yes, for 2026-10-06. Launch E1, E3 with existing drivers: 6 express trips, 5.5 idle h and 0.0 overtime h used, utilization 66.3% -> 69.4%. Not recommended: E2 (1 new driver(s) needed for 3 trip(s)).",
   "confidence": 90,
   "followUps": [
     "Which drivers have unused capacity today?",

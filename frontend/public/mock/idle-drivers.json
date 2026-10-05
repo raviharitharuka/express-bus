@@ -64,7 +64,7 @@
           "station": "South Station"
         }
       ],
-      "recommendedRoute": "E5"
+      "recommendedRoute": null
     },
     {
       "driverId": "D004",
@@ -120,7 +120,7 @@
           "station": "Airport"
         }
       ],
-      "recommendedRoute": "E4"
+      "recommendedRoute": null
     },
     {
       "driverId": "D008",
@@ -147,7 +147,7 @@
           "station": "Airport"
         }
       ],
-      "recommendedRoute": "E4"
+      "recommendedRoute": null
     },
     {
       "driverId": "D009",
@@ -252,7 +252,7 @@
           "station": "South Station"
         }
       ],
-      "recommendedRoute": "E5"
+      "recommendedRoute": null
     },
     {
       "driverId": "D016",
@@ -290,7 +290,7 @@
           "station": "University"
         }
       ],
-      "recommendedRoute": null
+      "recommendedRoute": "E2"
     },
     {
       "driverId": "D018",

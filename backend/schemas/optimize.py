@@ -1,29 +1,70 @@
-from pydantic import Field
+from typing import Literal
+
+from pydantic import Field, model_validator
 
 from schemas.common import CamelModel
 
 
+class ExpressCandidate(CamelModel):
+    route_id: str | None = None
+    name: str | None = None
+    start_station: str
+    end_station: str
+    headway_min: int = Field(ge=10, le=240)
+    service_start: str = Field(pattern=r"^\d{2}:\d{2}$")
+    service_end: str = Field(pattern=r"^\d{2}:\d{2}$")
+    trip_duration_min: int = Field(ge=5, le=120)
+    turnaround_min: int = Field(default=10, ge=0, le=60)
+
+    @model_validator(mode="after")
+    def check(self):
+        if self.start_station == self.end_station:
+            raise ValueError("startStation and endStation must differ")
+        if self.service_start >= self.service_end:
+            raise ValueError("serviceStart must be before serviceEnd")
+        return self
+
+
 class OptimizeRequest(CamelModel):
     date: str | None = None
-    allow_overtime: bool = False
-    max_new_routes: int = Field(default=5, ge=1, le=10)
+    allow_overtime: bool = True
+    candidates: list[ExpressCandidate] | None = Field(default=None, min_length=1, max_length=5)
 
 
-class RouteRecommendation(CamelModel):
+class TripAssignment(CamelModel):
+    trip_id: str
+    departure: str
+    returns_at: str
+    driver: str | None
+    kind: Literal["idle", "overtime", "new-driver", "uncovered"]
+
+
+class RouteResult(CamelModel):
     route: str
     name: str
-    idle_hours_used: float
-    new_drivers_required: int
+    start_station: str
+    end_station: str
+    trips_requested: int
+    trips_covered: int
     feasible: bool
-    assigned_drivers: list[str]
+    new_drivers_required: int
+    idle_hours_used: float
+    overtime_hours_used: float
+    utilization_before: float
+    utilization_after: float
     reason: str
+    assignments: list[TripAssignment]
 
 
 class OptimizeResponse(CamelModel):
     date: str
+    allow_overtime: bool
     current_utilization: float
     optimized_utilization: float
     total_idle_hours_available: float
     total_idle_hours_used: float
+    overtime_hours_used: float
     new_drivers_required: int
-    recommendations: list[RouteRecommendation]
+    recommended: list[str]
+    summary: str
+    recommendations: list[RouteResult]

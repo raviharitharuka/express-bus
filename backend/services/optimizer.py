@@ -1,94 +1,112 @@
-"""Express route feasibility: staff candidate express trips from idle (and optional overtime) windows."""
+"""POST /optimize: test candidate express routes with the CP-SAT model and recommend a launch plan.
 
-import math
+Each candidate is solved on its own against today's roster. A candidate is
+feasible when every trip is covered by existing drivers (idle time or allowed
+overtime) with a spare bus, i.e. 0 new drivers. The recommended plan then adds
+feasible routes one by one and re-solves them together, so two routes never
+count on the same idle minutes.
+"""
 
-from schemas.optimize import OptimizeRequest, OptimizeResponse, RouteRecommendation
+from schemas.optimize import OptimizeRequest, OptimizeResponse, RouteResult, TripAssignment
 from services import data
-from services.idle import Window, driver_utilization, express_round_trip, idle_windows, overtime_windows
-from services.time_utils import hours, to_min, tomorrow
-
-NEW_DRIVER_SHIFT_MIN = 8 * 60
-
-
-def spare_buses(station: str) -> list[str]:
-    return [b["busId"] for b in data.buses() if b["station"] == station and b["status"] == "spare"]
+from services.express_model import Solution, build_driver_days, build_tasks, solve
+from services.idle import idle_windows
+from services.time_utils import hours, to_hhmm, tomorrow
 
 
-def _take(windows: list[Window], station: str, start: int, end: int) -> Window | None:
-    """Best-fit: the smallest window at `station` covering [start, end]; split what's left."""
-    fits = [w for w in windows if w.station == station and w.fits(start, end)]
-    if not fits:
-        return None
-    w = min(fits, key=lambda x: (x.kind != "idle", x.minutes))
-    windows.remove(w)
-    windows += [Window(w.driver_id, w.station, a, b, w.kind) for a, b in ((w.start, start), (end, w.end)) if b > a]
-    return w
+def _candidates(req: OptimizeRequest) -> list[dict]:
+    if not req.candidates:
+        return data.express_candidates()
+    out = []
+    for i, c in enumerate(req.candidates, 1):
+        cand = c.model_dump(by_alias=True)
+        data.require_station(cand["startStation"])
+        data.require_station(cand["endStation"])
+        cand["routeId"] = cand["routeId"] or f"X{i}"
+        cand["name"] = cand["name"] or f"{cand['startStation']} - {cand['endStation']} Express"
+        out.append(cand)
+    return out
+
+
+def _reason(cand: dict, sol: Solution, spare: dict[str, int]) -> str:
+    n = len(sol.assignments)
+    if n == 0:
+        return "No departures in the service window"
+    if sol.covered == n and sol.new_drivers == 0:
+        drivers = sorted({a.driver_id for a in sol.assignments})
+        text = f"All {n} trips covered by {', '.join(drivers)}"
+        return text + (f" with {hours(sol.overtime_minutes)} h overtime" if sol.overtime_minutes else " from idle time")
+    parts = []
+    if sol.new_drivers:
+        parts.append(f"{sol.new_drivers} new driver(s) needed for {sum(a.kind == 'new-driver' for a in sol.assignments)} trip(s)")
+    if sol.covered < n:
+        bus_note = f"only {spare[cand['startStation']]} spare bus(es) at {cand['startStation']}"
+        parts.append(f"{n - sol.covered} trip(s) uncovered ({bus_note})")
+    return "; ".join(parts)
+
+
+def _route_result(cand: dict, sol: Solution, spare: dict[str, int]) -> RouteResult:
+    n = len(sol.assignments)
+    return RouteResult(
+        route=cand["routeId"],
+        name=cand["name"],
+        start_station=cand["startStation"],
+        end_station=cand["endStation"],
+        trips_requested=n,
+        trips_covered=sol.covered,
+        feasible=n > 0 and sol.covered == n and sol.new_drivers == 0,
+        new_drivers_required=sol.new_drivers,
+        idle_hours_used=hours(sol.idle_minutes_used),
+        overtime_hours_used=hours(sol.overtime_minutes),
+        utilization_before=sol.utilization_before,
+        utilization_after=sol.utilization_after,
+        reason=_reason(cand, sol, spare),
+        assignments=[
+            TripAssignment(trip_id=a.task.task_id, departure=to_hhmm(a.task.start), returns_at=to_hhmm(a.task.end),
+                           driver=a.driver_id, kind=a.kind)
+            for a in sol.assignments
+        ],
+    )
 
 
 def optimize(req: OptimizeRequest) -> OptimizeResponse:
     day = data.resolve_day(req.date, default=tomorrow())
-    idle = idle_windows(day)
-    windows = idle + (overtime_windows(day) if req.allow_overtime else [])
+    candidates = _candidates(req)
+    drivers = build_driver_days(day, req.allow_overtime)
+    spare = {s: len(data.spare_buses(s)) for s in data.station_names()}
+    tasks = {c["routeId"]: build_tasks(c) for c in candidates}
 
-    working = day.working_duties()
-    span = {d["driverId"]: [to_min(d["start"]), to_min(d["end"])] for d in working}
-    driving = sum(d["drivingMinutes"] for d in working)
+    results = [_route_result(c, solve(tasks[c["routeId"]], drivers, spare), spare) for c in candidates]
 
-    recs = []
-    used_total = 0
-    for cand in data.express_candidates()[: req.max_new_routes]:
-        rt = express_round_trip(cand)
-        trial = list(windows)
-        assigned: list[tuple[Window, int, int]] = []
-        unstaffed = 0
-        for dep in cand["departures"]:
-            s = to_min(dep)
-            w = _take(trial, cand["from"], s, s + rt)
-            if w:
-                assigned.append((w, s, s + rt))
-            else:
-                unstaffed += 1
+    # Launch plan: cheapest feasible routes first; keep a route only if the combined model still needs nobody new.
+    plan_routes: list[str] = []
+    plan = solve([], drivers, spare)
+    for r in sorted((r for r in results if r.feasible), key=lambda r: (r.overtime_hours_used, -r.trips_covered)):
+        trial = solve([t for rid in plan_routes + [r.route] for t in tasks[rid]], drivers, spare)
+        if trial.covered == len(trial.assignments) and trial.new_drivers == 0:
+            plan_routes.append(r.route)
+            plan = trial
 
-        new_drivers = math.ceil(unstaffed * rt / NEW_DRIVER_SHIFT_MIN)
-        has_bus = bool(spare_buses(cand["from"]))
-        feasible = unstaffed == 0 and has_bus
-        names = sorted({w.driver_id for w, _, _ in assigned})
-        used = sum(e - s for _, s, e in assigned)
+    if plan_routes:
+        summary = (f"Launch {', '.join(plan_routes)} with existing drivers: {plan.covered} express trips, "
+                   f"{hours(plan.idle_minutes_used)} idle h and {hours(plan.overtime_minutes)} overtime h used, "
+                   f"utilization {plan.utilization_before}% -> {plan.utilization_after}%.")
+    else:
+        summary = "No candidate can be covered by existing drivers alone."
+    rejected = [r for r in results if r.route not in plan_routes]
+    if rejected:
+        summary += " Not recommended: " + "; ".join(f"{r.route} ({r.reason})" for r in rejected) + "."
 
-        if feasible:
-            windows = trial  # commit: later candidates can't reuse these minutes
-            used_total += used
-            driving += 2 * cand["durationMin"] * len(assigned)
-            for w, _, e in assigned:
-                span[w.driver_id][1] = max(span[w.driver_id][1], e)  # overtime stretches the duty
-            ot = sum(1 for w, _, _ in assigned if w.kind == "overtime")
-            reason = f"Covered by idle time of {', '.join(names)}" + (f" ({ot} trip(s) on overtime)" if ot else "")
-        else:
-            problems = []
-            if not has_bus:
-                problems.append(f"no spare bus at {cand['from']}")
-            if unstaffed:
-                problems.append(f"{unstaffed} of {len(cand['departures'])} departures unstaffed")
-            reason = "; ".join(problems)
-            reason = reason[0].upper() + reason[1:]
-
-        recs.append(RouteRecommendation(
-            route=cand["routeId"],
-            name=cand["name"],
-            idle_hours_used=hours(used),
-            new_drivers_required=new_drivers,
-            feasible=feasible,
-            assigned_drivers=names,
-            reason=reason,
-        ))
-
-    total_span = sum(e - s for s, e in span.values())
     return OptimizeResponse(
         date=day.date,
-        current_utilization=driver_utilization(day),
-        optimized_utilization=round(100 * driving / total_span, 1) if total_span else 0.0,
-        total_idle_hours_available=hours(sum(w.minutes for w in idle)),
-        total_idle_hours_used=hours(used_total),
-        new_drivers_required=sum(r.new_drivers_required for r in recs),
-        recommendations=recs,
+        allow_overtime=req.allow_overtime,
+        current_utilization=plan.utilization_before,
+        optimized_utilization=plan.utilization_after,
+        total_idle_hours_available=hours(sum(w.minutes for w in idle_windows(day))),
+        total_idle_hours_used=hours(plan.idle_minutes_used),
+        overtime_hours_used=hours(plan.overtime_minutes),
+        new_drivers_required=sum(r.new_drivers_required for r in results),
+        recommended=plan_routes,
+        summary=summary,
+        recommendations=results,
     )

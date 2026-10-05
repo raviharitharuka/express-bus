@@ -7,7 +7,6 @@ from errors import ApiError
 from schemas.emergency import EmergencyRequest, EmergencyResponse, TimelineStep
 from services import data
 from services.idle import Window, idle_windows, overtime_windows
-from services.optimizer import spare_buses
 from services.time_utils import now_hhmm, to_hhmm, to_min
 
 DEADHEAD_KMH = 30  # empty bus / driver transfer speed
@@ -20,7 +19,7 @@ def _eta(km: float) -> int:
 
 def _nearest_spare_bus(station: str, exclude: str | None) -> tuple[str, str] | None:
     for src in sorted(data.station_names(), key=lambda s: data.distance_km(s, station)):
-        spares = [b for b in spare_buses(src) if b != exclude]
+        spares = [b for b in data.spare_buses(src) if b != exclude]
         if spares:
             return src, spares[0]
     return None
@@ -84,7 +83,7 @@ def handle_incident(req: EmergencyRequest) -> EmergencyResponse:
             log(0, f"Spare bus {bus} available at {dest}")
         else:
             log(0, f"{dest} has 0 spare buses; nearest is {source} "
-                   f"({len(spare_buses(source))} spare, {data.distance_km(source, dest)} km)")
+                   f"({len(data.spare_buses(source))} spare, {data.distance_km(source, dest)} km)")
     else:  # DRIVER_SICK: the bus stays, we need a new driver at the incident station
         drivers = data.drivers()
         if not req.driver_id:

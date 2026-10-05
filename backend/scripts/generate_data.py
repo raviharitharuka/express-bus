@@ -63,14 +63,13 @@ ROUTE_PAIRS = [
     ("R10", "South Station", "University"),
 ]
 
-# Candidate express services the optimizer tries to staff from idle time.
-# Departures are from `from`; each is a round trip back to `from`.
+# Candidate express services for the optimizer (POST /optimize).
+# (id, start, end, headwayMin, serviceStart, serviceEnd). Each departure from
+# `start` is a round trip: out, turnaround at `end`, back to `start`.
 EXPRESS = [
-    ("E1", "Central Station", "Airport", ["09:45", "10:45", "11:45"]),
-    ("E2", "University", "Central Station", ["09:30", "10:30", "11:30"]),
-    ("E3", "North Station", "South Station", ["09:00", "10:00", "11:00"]),
-    ("E4", "Airport", "University", ["09:30", "10:30", "11:30", "12:00"]),
-    ("E5", "South Station", "Central Station", ["10:00", "10:45", "11:30", "12:20"]),
+    ("E1", "Central Station", "Airport", 60, "09:30", "12:30"),
+    ("E2", "University", "Central Station", 30, "09:30", "13:30"),
+    ("E3", "North Station", "South Station", 60, "09:00", "12:00"),
 ]
 EXPRESS_TURNAROUND_MIN = 10
 
@@ -89,17 +88,19 @@ def build_routes(dist):
             "frequencyMin": 30 if rid in ("R1", "R2", "R3", "R4") else 60,
         })
     express = []
-    for eid, a, b, deps in EXPRESS:
+    for eid, a, b, headway, first, last in EXPRESS:
         km = dist[a][b]
         express.append({
             "routeId": eid,
             "name": f"{a} - {b} Express",
-            "from": a,
-            "to": b,
+            "startStation": a,
+            "endStation": b,
             "distanceKm": km,
-            "durationMin": round5(km * 2 + 5),  # few stops
+            "tripDurationMin": round5(km * 2 + 5),  # few stops
             "turnaroundMin": EXPRESS_TURNAROUND_MIN,
-            "departures": deps,
+            "headwayMin": headway,
+            "serviceStart": first,
+            "serviceEnd": last,
         })
     return {"routes": routes, "expressCandidates": express}
 
