@@ -514,7 +514,7 @@ All four are paginated the same way.
 | Field               | Type           | Notes                                                        |
 |---------------------|----------------|--------------------------------------------------------------|
 | `items[].dutyId`    | string \| null | Today's duty, `null` if none (weekend, vacation, sick)       |
-| `items[].available` | boolean        | `false` = sick leave today: the driver's duty is uncovered   |
+| `items[].available` | boolean        | `false` = unavailable (sick) until reset: the driver's duties are uncovered on every date |
 | `items[].overridden`| boolean        | Changed since the last reset                                 |
 
 **`GET /admin/buses`** — mock: `admin/buses.json`
@@ -610,7 +610,7 @@ All fields optional; only the ones sent change.
 | `vacationDates`     | string[] | `YYYY-MM-DD`; **replaces** the list                                |
 | `overtimeAvailable` | boolean  |                                                                    |
 | `maxShiftHours`     | number   | 4–13                                                               |
-| `available`         | boolean  | `false` = sick leave today (duty uncovered); `true` = back on duty |
+| `available`         | boolean  | `false` = unavailable (sick) until reset, on every date, so `/optimize` (tomorrow by default), `/dashboard` and the shortage forecast all drop the driver; `true` = back on duty |
 
 **Response `200`**: the updated driver, same shape as a `GET /admin/drivers` item, with `overridden: true`.
 

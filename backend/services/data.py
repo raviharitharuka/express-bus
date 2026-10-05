@@ -69,7 +69,7 @@ def distance_km(a: str, b: str) -> int:
 
 
 def drivers() -> dict[str, dict]:
-    """Drivers with admin overrides applied; `available` is False for drivers on sick leave today."""
+    """Drivers with admin overrides applied; `available` is False for drivers marked unavailable (sick)."""
     return {d["driverId"]: {**d, "available": True, **_driver_changes.get(d["driverId"], {})}
             for d in _load("drivers.json")["drivers"]}
 
@@ -123,7 +123,7 @@ class Day:
     date: str
     day_type: str  # weekday | saturday | sunday
     on_vacation: set[str]
-    sick: set[str] = field(default_factory=set)  # available=False; only applies to today
+    sick: set[str] = field(default_factory=set)  # available=False: off on every date until reset
 
     def active_duties(self) -> list[dict]:
         """Duties scheduled for this day type, whoever is driving."""
@@ -153,7 +153,9 @@ def resolve_day(value: str | None = None, default: date | None = None) -> Day:
         day_type = "sunday" if d.weekday() == 6 else "saturday" if d.weekday() == 5 else "weekday"
     roster = drivers()
     on_vacation = {did for did, drv in roster.items() if iso in drv["vacationDates"]}
-    sick = {did for did, drv in roster.items() if not drv["available"]} if iso == today().isoformat() else set()
+    # A manual "unavailable" holds for every date until reset, so /optimize (tomorrow by default), the
+    # dashboard (today) and the shortage forecast all reflect it, as the frontend's banner promises.
+    sick = {did for did, drv in roster.items() if not drv["available"]}
     return Day(iso, day_type, on_vacation, sick)
 
 

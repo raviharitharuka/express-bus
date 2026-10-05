@@ -288,7 +288,7 @@ export interface AdminDriver {
   overtimeAvailable?: boolean;
   maxShiftHours?: number;
   vacationDates?: string[];
-  /** false = sick leave today. */
+  /** false = unavailable (sick) until reset, on every date. */
   available?: boolean;
   overridden?: boolean;
 }

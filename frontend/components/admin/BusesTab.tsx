@@ -8,6 +8,8 @@ import { useDataSource } from "@/components/DataSource";
 import { BannerButton, ErrorBanner } from "@/components/ErrorBanner";
 import { StatusBadge } from "@/components/StatusBadge";
 import type { Tone } from "@/components/theme";
+import { OptimizeCompare } from "./OptimizeCompare";
+import { ensureBaseline, noteChange } from "./compareStore";
 import { AdminTable, EditedBadge, Pagination, SearchBox, show, td, th } from "./ui";
 import { usePagedList } from "./usePagedList";
 
@@ -37,7 +39,9 @@ export function BusesTab() {
     setSaving(bus.busId);
     setSaveError(null);
     try {
+      await ensureBaseline(); // the "before" result for Re-run optimization
       const updated = await api.patchBus(bus.busId, { status });
+      noteChange();
       list.replaceItem((b) => b.busId === bus.busId, updated);
     } catch (e) {
       setSaveError(`${bus.busId}: ${(e as Error).message}`);
@@ -53,6 +57,8 @@ export function BusesTab() {
         <SearchBox value={list.search} onChange={list.setSearch} placeholder="Search buses, stations, status…" />
         {readOnly && <p className="text-xs text-slate-500">Read-only: editing needs the live backend.</p>}
       </div>
+
+      <OptimizeCompare />
 
       {saveError && (
         <ErrorBanner title="Change not saved" message={saveError}>

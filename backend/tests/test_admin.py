@@ -80,6 +80,14 @@ def test_overrides_reach_idle_dashboard_and_emergency():
     assert em["replacementBus"] != "B027" and em["driver"] != "D011"
 
 
+def test_unavailable_driver_is_off_on_every_date():
+    client.patch("/admin/drivers/D002", json={"available": False})
+    for date in (DATE, "2026-10-06", "2026-10-20"):  # today, /optimize's default (tomorrow), later
+        assert "D002" not in {d["driverId"] for d in data.resolve_day(date).working_duties()}
+    default = client.post("/optimize").json()  # no date: tomorrow
+    assert "D002" not in {a["driver"] for r in default["recommendations"] for a in r["assignments"]}
+
+
 def test_vacation_override_counts_for_shortages():
     # D009, D014, D019 are away on 2026-10-22 (3 missing); add D001 that day -> 4
     client.patch("/admin/drivers/D001", json={"vacationDates": ["2026-10-22"]})

@@ -6,6 +6,8 @@ import { api } from "@/lib/api";
 import type { AdminDriver, DriverPatch } from "@/lib/types";
 import { useDataSource } from "@/components/DataSource";
 import { BannerButton, ErrorBanner } from "@/components/ErrorBanner";
+import { OptimizeCompare } from "./OptimizeCompare";
+import { ensureBaseline, noteChange } from "./compareStore";
 import { AdminTable, EditedBadge, Pagination, SearchBox, show, td, th, Toggle } from "./ui";
 import { usePagedList } from "./usePagedList";
 
@@ -20,7 +22,9 @@ export function DriversTab() {
     setSaving(driver.driverId);
     setSaveError(null);
     try {
+      await ensureBaseline(); // the "before" result for Re-run optimization
       const updated = await api.patchDriver(driver.driverId, patch);
+      noteChange();
       list.replaceItem((d) => d.driverId === driver.driverId, updated);
     } catch (e) {
       setSaveError(`${driver.driverId}: ${(e as Error).message}`);
@@ -36,6 +40,8 @@ export function DriversTab() {
         <SearchBox value={list.search} onChange={list.setSearch} placeholder="Search drivers, stations, duties…" />
         {readOnly && <p className="text-xs text-slate-500">Read-only: editing needs the live backend.</p>}
       </div>
+
+      <OptimizeCompare />
 
       {saveError && (
         <ErrorBanner title="Change not saved" message={saveError}>
@@ -99,7 +105,7 @@ export function DriversTab() {
                     <Toggle
                       checked={d.available === false}
                       onChange={(sick) => save(d, { available: !sick })}
-                      label={`${d.driverId} unavailable (sick) today`}
+                      label={`${d.driverId} unavailable (sick) until reset`}
                       disabled={disabled || d.available === undefined}
                       danger
                     />
