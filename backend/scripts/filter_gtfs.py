@@ -4,7 +4,8 @@ Run from backend/:
     python scripts/filter_gtfs.py                 # pick the weekday automatically
     python scripts/filter_gtfs.py --date 20261006 # or force a date (YYYYMMDD)
 
-Reads data/gtfs/*.txt (repo root) and writes data/filtered/{routes,trips,stop_times,stops}.csv.
+Reads data/gtfs/*.txt (repo root) and writes data/filtered/{routes,trips,stop_times,stops}.csv plus
+meta.json (service date and selection settings, used by build_real_timetable.py).
 
 How "VAG Nürnberg" is identified: the VGN feed has a single agency ("VGN") and
 routes.agency_id is empty, so there is no VAG agency_id. Instead the first part
@@ -15,6 +16,7 @@ operators). VAG city buses are therefore route_type 3, prefix 13, route_desc
 """
 
 import argparse
+import json
 from datetime import date, timedelta
 from pathlib import Path
 
@@ -123,6 +125,12 @@ def main():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     for name, df in [("routes", routes_out), ("trips", trips), ("stop_times", stop_times), ("stops", stops)]:
         df.to_csv(OUT_DIR / f"{name}.csv", index=False)
+    (OUT_DIR / "meta.json").write_text(json.dumps({
+        "serviceDate": day.isoformat(),
+        "routeIdPrefixes": args.prefixes,
+        "routeDesc": VAG_BUS_DESC,
+        "source": "VGN GTFS feed (data/gtfs/)",
+    }, indent=2) + "\n")
     size_kb = sum(f.stat().st_size for f in OUT_DIR.glob("*.csv")) / 1024
 
     # Summary

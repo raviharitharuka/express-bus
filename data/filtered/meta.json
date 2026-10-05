@@ -1,0 +1,8 @@
+{
+  "serviceDate": "2026-07-01",
+  "routeIdPrefixes": [
+    "13"
+  ],
+  "routeDesc": "Stadtbus",
+  "source": "VGN GTFS feed (data/gtfs/)"
+}
