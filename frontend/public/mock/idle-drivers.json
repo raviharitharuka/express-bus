@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-06",
+  "totalDrivers": 20,
+  "idleDriverCount": 8,
+  "totalIdleHours": 22,
+  "drivers": [
+    { "driverId": "D003", "homeStation": "Central Station", "idleHours": 3,   "idleWindows": [{ "start": "07:00", "end": "10:00" }], "recommendedRoute": "E1" },
+    { "driverId": "D005", "homeStation": "Airport",         "idleHours": 2,   "idleWindows": [{ "start": "11:00", "end": "13:00" }], "recommendedRoute": "E1" },
+    { "driverId": "D007", "homeStation": "Central Station", "idleHours": 4,   "idleWindows": [{ "start": "08:30", "end": "10:30" }, { "start": "13:00", "end": "15:00" }], "recommendedRoute": "E1" },
+    { "driverId": "D009", "homeStation": "North Station",   "idleHours": 2.5, "idleWindows": [{ "start": "09:30", "end": "12:00" }], "recommendedRoute": "E3" },
+    { "driverId": "D012", "homeStation": "University",      "idleHours": 3,   "idleWindows": [{ "start": "10:00", "end": "13:00" }], "recommendedRoute": "E2" },
+    { "driverId": "D014", "homeStation": "South Station",   "idleHours": 2,   "idleWindows": [{ "start": "14:00", "end": "16:00" }], "recommendedRoute": "E3" },
+    { "driverId": "D016", "homeStation": "University",      "idleHours": 3.5, "idleWindows": [{ "start": "06:30", "end": "10:00" }], "recommendedRoute": "E2" },
+    { "driverId": "D019", "homeStation": "North Station",   "idleHours": 2,   "idleWindows": [{ "start": "12:00", "end": "14:00" }], "recommendedRoute": "E4" }
+  ]
+}

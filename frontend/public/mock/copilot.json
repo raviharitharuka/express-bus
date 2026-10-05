@@ -1,0 +1,10 @@
+{
+  "question": "Can we launch a new express route tomorrow?",
+  "answer": "Yes. 8 drivers have 22 idle hours tomorrow. E1 (Central Station - Airport), E2 (University - Central Station) and E3 (North Station - South Station) can launch with 0 new drivers. E4 would need 1 extra driver.",
+  "confidence": 92,
+  "followUps": [
+    "Which drivers have unused capacity today?",
+    "What happens if Bus B021 breaks down now?",
+    "Which station will run out of buses tonight?"
+  ]
+}
