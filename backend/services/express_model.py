@@ -7,6 +7,7 @@ Objective (lexicographic via weights):
     1. maximize covered express trips
     2. minimize new drivers needed
     3. minimize overtime minutes
+    4. tie-break: prefer existing drivers over a new hire for individual trips
 
 SIMPLIFIED RULES (demo scope, not legal advice):
 - An express task is a full round trip from the start station: out, turnaround
@@ -47,6 +48,7 @@ DAY_END_MIN = 24 * 60
 
 W_COVERED = 1_000_000  # one covered trip beats any number of hires/overtime
 W_NEW_DRIVER = 10_000  # one hire beats any realistic amount of overtime minutes
+W_NEW_DRIVER_TRIP = 1  # tie-break: among equal plans, give trips to existing drivers
 SOLVER_TIME_LIMIT_S = 5.0
 
 
@@ -254,11 +256,13 @@ def solve(tasks: list[Task], drivers: list[DriverDay], spare_buses: dict[str, in
                 base = _overlap(base_driving, w, w + BREAK_WINDOW_MIN)
                 m.add(base + sum(o * v for o, v in terms) <= MAX_DRIVING_IN_WINDOW_MIN)
 
-    m.maximize(W_COVERED * sum(covered) - W_NEW_DRIVER * sum(new_used.values()) - sum(overtime_terms))
+    new_driver_trips = [v for (_, w), v in x.items() if w.startswith("NEW-")]
+    m.maximize(W_COVERED * sum(covered) - W_NEW_DRIVER * sum(new_used.values()) - sum(overtime_terms)
+               - W_NEW_DRIVER_TRIP * sum(new_driver_trips))
 
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = SOLVER_TIME_LIMIT_S
-    solver.parameters.num_workers = 8
+    solver.parameters.num_workers = 1  # single thread: same input, same answer (models are tiny)
     status = solver.solve(m)
     ok = status in (cp_model.OPTIMAL, cp_model.FEASIBLE)
     return _extract(tasks, drivers, x, slot_kind, solver if ok else None, solver.status_name(status))

@@ -287,7 +287,7 @@ Demo helper: undoes all breakdowns and dispatches since the server started. Resp
 
 ## 4. `POST /copilot`
 
-Natural-language Q&A for dispatchers. Rule-based: the question is matched to an engine (optimize, idle drivers, emergency, spare buses, shortages) and the result is phrased as text.
+Natural-language Q&A for dispatchers. No LLM: keyword matching picks an intent (one point per matching keyword, highest wins), the intent calls an existing service, and the result comes back as text plus a structured `data` payload for the UI.
 
 **Request**
 
@@ -300,20 +300,42 @@ Natural-language Q&A for dispatchers. Rule-based: the question is matched to an 
 ```json
 {
   "question": "Can we launch a new express route tomorrow?",
+  "intent": "launch_route",
   "answer": "Yes, for 2026-10-06. Launch E1, E3 with existing drivers: 6 express trips, 5.5 idle h and 0.0 overtime h used, utilization 66.3% -> 69.4%. Not recommended: E2 (1 new driver(s) needed for 3 trip(s)).",
   "confidence": 90,
-  "followUps": [
-    "Which drivers have unused capacity today?",
-    "What happens if Bus B021 breaks down now?",
-    "Which station will run out of buses tonight?"
+  "data": {
+    "date": "2026-10-06",
+    "recommended": ["E1", "E3"],
+    "currentUtilization": 66.3,
+    "optimizedUtilization": 69.4,
+    "routes": [ { "route": "E1", "feasible": true, "newDriversRequired": 0, "...": "same fields as /optimize recommendations, without assignments" } ]
+  },
+  "suggestedQuestions": [
+    "Which drivers are idle today?",
+    "What happens if bus B021 breaks down at 09:15?",
+    "Which station needs more buses?"
   ]
 }
 ```
 
-| Field        | Type     | Notes                                       |
-|--------------|----------|---------------------------------------------|
-| `confidence` | integer  | 0–100; 40 when the question isn't understood |
-| `followUps`  | string[] | Suggested next questions (up to 3)           |
+**Intents**
+
+| `intent`          | Example question                                   | Service              | `data` payload |
+|-------------------|----------------------------------------------------|----------------------|----------------|
+| `launch_route`    | Can we launch a new express route tomorrow?        | `/optimize` (add "without overtime" to disable overtime) | `date`, `recommended`, `currentUtilization`, `optimizedUtilization`, `routes[]` |
+| `idle_drivers`    | Which drivers are idle at the airport?             | `/idle-drivers` (optional station filter) | `date`, `station`, `drivers[]` (`driverId`, `idleHours`, `freeCapacityHours`, `idleWindows`, `recommendedRoute`) |
+| `breakdown`       | What happens if bus B021 breaks down at 09:15?     | `/emergency` as a **what-if** (bus pool unchanged). Without a bus ID, uses the first running bus at the named station | `hypothetical: true` + the `/emergency` response |
+| `station_buses`   | Which station needs more buses?                    | Fleet status: stations below 2 spare buses, filled from the nearest surplus | `minSparePerStation`, `stations[]` (`station`, `spare`, `active`, `maintenance`, `needsBuses`), `moves[]` (`from`, `to`, `buses`, `distanceKm`) |
+| `driver_shortage` | Are we short of drivers this month?                | 30-day calendar      | `date`, `driversMissing`, `driversOnVacation`, `uncoveredDuties` |
+| `unknown`         | anything else                                      | —                    | `null` |
+
+"tomorrow" in a question switches the date; `HH:MM` sets the breakdown time; station names (`airport`, `central`, `north`, `south`, `university`) are recognized.
+
+| Field                | Type           | Notes                                                        |
+|----------------------|----------------|--------------------------------------------------------------|
+| `confidence`         | integer        | 90 matched, 50–60 matched but missing info or an error, 30 unknown |
+| `data`               | object \| null | Shape depends on `intent` (table above)                      |
+| `suggestedQuestions` | string[]       | 3 related questions; for `unknown`, all 5 example questions  |
 
 ---
 
@@ -346,6 +368,7 @@ Everything the KPI dashboard needs in one call.
   },
   "alerts": [
     { "level": "warning", "message": "Airport has 0 spare buses" },
+    { "level": "info", "message": "Move 2 spare bus(es) North Station -> Airport (4 km)" },
     { "level": "critical", "message": "3 driver(s) short predicted on 2026-10-22" }
   ]
 }
@@ -353,14 +376,15 @@ Everything the KPI dashboard needs in one call.
 
 | Field                              | Type    | Notes                                                       |
 |------------------------------------|---------|-------------------------------------------------------------|
-| `kpis.fleetUtilization`            | number  | Buses assigned to today's duties ÷ 50                       |
+| `kpis.fleetUtilization`            | number  | Buses running today ÷ 50: today's duty buses that aren't broken, plus emergency replacements (live) |
 | `kpis.availableDrivers`            | integer | Drivers with at least one idle window today                 |
 | `kpis.availableBuses`              | integer | Spare buses across all stations                             |
 | `kpis.predictedShortages`          | integer | Drivers missing on the worst upcoming calendar day (vacations) |
 | `kpis.additionalRoutesIdentified`  | integer | Routes in the `/optimize` recommended plan for this date    |
 | `stations[]`                       | array   | Always 5 entries; `totalBuses` sums to 50                   |
-| `stations[].availableBuses`        | integer | Spare buses ready to dispatch                               |
+| `stations[].availableBuses`        | integer | Spare buses ready to dispatch (live, after emergencies)     |
 | `stations[].driversOnDuty`         | integer | Working drivers based at this station today                 |
+| `alerts[]`                         | array   | Stations with 0 spare buses, rebalancing moves (same logic as the copilot's `station_buses`), predicted shortage, buses in maintenance |
 | `alerts[].level`                   | enum    | `info` \| `warning` \| `critical`                           |
 
 ---

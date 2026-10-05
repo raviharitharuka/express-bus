@@ -56,6 +56,10 @@
       "message": "Airport has 0 spare buses"
     },
     {
+      "level": "info",
+      "message": "Move 2 spare bus(es) North Station -> Airport (4 km)"
+    },
+    {
       "level": "critical",
       "message": "3 driver(s) short predicted on 2026-10-22"
     },

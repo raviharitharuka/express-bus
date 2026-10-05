@@ -1,6 +1,10 @@
+from typing import Any, Literal
+
 from pydantic import Field
 
 from schemas.common import CamelModel
+
+Intent = Literal["launch_route", "idle_drivers", "breakdown", "station_buses", "driver_shortage", "unknown"]
 
 
 class CopilotRequest(CamelModel):
@@ -9,6 +13,8 @@ class CopilotRequest(CamelModel):
 
 class CopilotResponse(CamelModel):
     question: str
+    intent: Intent
     answer: str
     confidence: int
-    follow_ups: list[str]
+    data: dict[str, Any] | None
+    suggested_questions: list[str]

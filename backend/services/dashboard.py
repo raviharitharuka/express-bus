@@ -3,6 +3,7 @@
 from schemas.dashboard import Alert, DashboardResponse, Kpis, Recommendation, StationStatus
 from schemas.optimize import OptimizeRequest
 from services import data
+from services.fleet import in_service_buses, rebalancing_moves, station_buses
 from services.idle import driver_utilization, idle_windows
 from services.optimizer import optimize
 
@@ -21,20 +22,20 @@ def get_dashboard(date: str | None) -> DashboardResponse:
     working = day.working_duties()
     buses = data.buses()
     drivers = data.drivers()
-    in_service = {d["busId"] for d in working}
     opt = optimize(OptimizeRequest(date=day.date))
     shortage_day, missing = worst_shortage(day.date)
 
-    stations = []
-    for name in data.station_names():
-        here = [b for b in buses if b["station"] == name]
-        stations.append(StationStatus(
-            name=name,
-            total_buses=len(here),
-            available_buses=sum(b["status"] == "spare" for b in here),
-            maintenance_buses=sum(b["status"] == "maintenance" for b in here),
-            drivers_on_duty=sum(drivers[d["driverId"]]["homeStation"] == name for d in working),
-        ))
+    fleet = station_buses()
+    stations = [
+        StationStatus(
+            name=f.station,
+            total_buses=f.total,
+            available_buses=f.spare,
+            maintenance_buses=f.maintenance,
+            drivers_on_duty=sum(drivers[d["driverId"]]["homeStation"] == f.station for d in working),
+        )
+        for f in fleet
+    ]
 
     if opt.recommended:
         trips = sum(r.trips_covered for r in opt.recommendations if r.route in opt.recommended)
@@ -52,6 +53,8 @@ def get_dashboard(date: str | None) -> DashboardResponse:
         )
 
     alerts = [Alert(level="warning", message=f"{s.name} has 0 spare buses") for s in stations if s.available_buses == 0]
+    alerts += [Alert(level="info", message=f"Move {m.buses} spare bus(es) {m.from_station} -> {m.to_station} ({m.distance_km} km)")
+               for m in rebalancing_moves(fleet)]
     if missing:
         alerts.append(Alert(level="critical" if missing >= 3 else "warning",
                             message=f"{missing} driver(s) short predicted on {shortage_day}"))
@@ -63,9 +66,9 @@ def get_dashboard(date: str | None) -> DashboardResponse:
         date=day.date,
         kpis=Kpis(
             driver_utilization=driver_utilization(day),
-            fleet_utilization=round(100 * len(in_service) / len(buses), 1),
+            fleet_utilization=round(100 * in_service_buses(day) / len(buses), 1),
             available_drivers=len({w.driver_id for w in idle_windows(day)}),
-            available_buses=sum(b["status"] == "spare" for b in buses),
+            available_buses=sum(f.spare for f in fleet),
             predicted_shortages=missing,
             additional_routes_identified=len(opt.recommended),
         ),
