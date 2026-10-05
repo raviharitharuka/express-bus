@@ -8,13 +8,17 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+from errors import ApiError  # noqa: E402
 from services import data  # noqa: E402
 from services.idle import driver_profiles  # noqa: E402
 from services.time_utils import hours, to_hhmm, tomorrow  # noqa: E402
 
 
 def main():
-    day = data.resolve_day(sys.argv[1] if len(sys.argv) > 1 else None, default=tomorrow())
+    try:
+        day = data.resolve_day(sys.argv[1] if len(sys.argv) > 1 else None, default=tomorrow())
+    except ApiError as e:
+        sys.exit(e.message)
     profiles = driver_profiles(day)
     pools = sorted((w for p in profiles for w in p.windows), key=lambda w: (-w.minutes, w.start))
 

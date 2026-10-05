@@ -1,8 +1,9 @@
 from typing import Literal
 
-from pydantic import Field, model_validator
+from pydantic import Field, field_validator, model_validator
 
 from schemas.common import CamelModel
+from services.time_utils import to_hhmm, to_min
 
 
 class ExpressCandidate(CamelModel):
@@ -11,10 +12,15 @@ class ExpressCandidate(CamelModel):
     start_station: str
     end_station: str
     headway_min: int = Field(ge=10, le=240)
-    service_start: str = Field(pattern=r"^\d{2}:\d{2}$")
-    service_end: str = Field(pattern=r"^\d{2}:\d{2}$")
+    service_start: str
+    service_end: str
     trip_duration_min: int = Field(ge=5, le=120)
     turnaround_min: int = Field(default=10, ge=0, le=60)
+
+    @field_validator("service_start", "service_end")
+    @classmethod
+    def valid_time(cls, v: str) -> str:
+        return to_hhmm(to_min(v))  # validates and zero-pads "9:00" -> "09:00"
 
     @model_validator(mode="after")
     def check(self):

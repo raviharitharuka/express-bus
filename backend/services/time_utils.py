@@ -1,10 +1,14 @@
 import os
+import re
 from datetime import date, datetime, timedelta
 
 
 def to_min(hhmm: str) -> int:
-    h, m = hhmm.split(":")
-    return int(h) * 60 + int(m)
+    """'09:15' -> 555. Raises ValueError unless it's a real time of day (H:MM or HH:MM)."""
+    m = re.fullmatch(r"(\d{1,2}):(\d{2})", hhmm.strip())
+    if not m or int(m[1]) > 23 or int(m[2]) > 59:
+        raise ValueError(f"'{hhmm}' is not a valid HH:MM time")
+    return int(m[1]) * 60 + int(m[2])
 
 
 def to_hhmm(minutes: int) -> str:

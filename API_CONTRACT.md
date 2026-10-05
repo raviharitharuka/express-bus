@@ -83,7 +83,7 @@ Idle-time profile of every driver working on a given day: driving time, idle gap
 | `drivers[].idleHours`          | number         | Sum of `idleWindows`                                     |
 | `drivers[].freeCapacityHours`  | number         | `idleHours` + (`maxShiftHours` − duty span): idle gaps plus room to extend the duty |
 | `drivers[].idleWindows`        | array          | Gaps ≥ 60 min between consecutive trips; empty if none   |
-| `idleWindows[].station`        | string         | Where the driver is waiting (may be away from home)      |
+| `drivers[].idleWindows[].station` | string      | Where the driver is waiting (may be away from home)      |
 | `drivers[].recommendedRoute`   | string \| null | First express route with a departure that fits one of the windows |
 
 Sanity check from the command line: `python scripts/top_idle.py [YYYY-MM-DD]` (run in `backend/`) prints the 10 largest idle windows and every driver's driving, idle and free hours.
@@ -177,9 +177,9 @@ Top level = the **recommended plan** (all `recommended` routes solved together),
 | `recommendations[].newDriversRequired` | integer  | 0 if existing capacity covers the route                      |
 | `recommendations[].idleHoursUsed`      | number   | Express trip time placed in idle gaps inside duties          |
 | `recommendations[].overtimeHoursUsed`  | number   | Total extension of rostered duty spans                       |
-| `recommendations[].utilizationBefore` / `utilizationAfter` | number | For that route alone; includes new hires |
-| `assignments[].kind`                   | enum     | `idle` \| `overtime` \| `new-driver` \| `uncovered`           |
-| `assignments[].driver`                 | string \| null | `D001`–`D020`, `NEW-<route>-<n>` for a hire, `null` if uncovered |
+| `recommendations[].utilizationBefore` / `recommendations[].utilizationAfter` | number | For that route alone; includes new hires |
+| `recommendations[].assignments[].kind` | enum     | `idle` \| `overtime` \| `new-driver` \| `uncovered`           |
+| `recommendations[].assignments[].driver` | string \| null | `D001`–`D020`, `NEW-<route>-<n>` for a hire, `null` if uncovered |
 
 **Model** (`backend/services/express_model.py`): objective is (1) maximize covered trips, (2) minimize new drivers, (3) minimize overtime minutes. Hard rules: no overlaps, max shift length, break rule, vacation, overtime only if allowed, spare buses at the start station.
 

@@ -97,7 +97,7 @@ def resolve_day(value: str | None = None, default: date | None = None) -> Day:
     try:
         d = date.fromisoformat(value) if value else (default or today())
     except ValueError:
-        raise ApiError(400, "INVALID_DATE", f"Date '{value}' must be YYYY-MM-DD")
+        raise ApiError(400, "INVALID_DATE", f"Date '{value}' must be a valid YYYY-MM-DD date")
     iso = d.isoformat()
     entry = next((c for c in calendar() if c["date"] == iso), None)
     if entry:
