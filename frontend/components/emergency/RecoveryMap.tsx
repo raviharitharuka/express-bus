@@ -1,5 +1,6 @@
 import { BusFront, MapPin } from "lucide-react";
 import type { Station } from "@/lib/types";
+import { chartColor } from "@/components/theme";
 
 // Schematic positions (% of the map box), roughly following Nuremberg's layout.
 // Placeholder until the Mapbox view lands.
@@ -32,7 +33,7 @@ export function RecoveryMap({
           y1={from.y}
           x2={to.x}
           y2={to.y}
-          stroke="#6366f1"
+          stroke={chartColor.brand}
           strokeWidth={3}
           strokeDasharray="6 5"
           strokeLinecap="round"

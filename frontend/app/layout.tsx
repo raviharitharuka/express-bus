@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { MockDataNotice } from "@/components/DataSource";
 import { Sidebar } from "@/components/Sidebar";
 import "./globals.css";
 
@@ -27,7 +28,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col md:flex-row">
         <Sidebar />
         <main className="min-w-0 flex-1 px-4 py-6 sm:px-8 sm:py-8">
-          <div className="mx-auto max-w-7xl">{children}</div>
+          <div className="mx-auto max-w-7xl">
+            <MockDataNotice />
+            {children}
+          </div>
         </main>
       </body>
     </html>

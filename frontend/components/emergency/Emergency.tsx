@@ -1,14 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { BusFront, CircleCheck, Clock, Loader2, Siren, TriangleAlert, UserRound, Wrench } from "lucide-react";
-import { api } from "@/lib/api";
+import { BusFront, CircleCheck, Clock, Loader2, RotateCcw, Siren, TriangleAlert, UserRound, Wrench } from "lucide-react";
+import { api, ApiError } from "@/lib/api";
 import type { EmergencyRequest, EmergencyResult } from "@/lib/types";
 import { Card } from "@/components/Card";
 import { EmptyState } from "@/components/EmptyState";
-import { ErrorBanner } from "@/components/ErrorBanner";
+import { BannerButton, ErrorBanner } from "@/components/ErrorBanner";
 import { KpiCard } from "@/components/KpiCard";
 import { PageHeader } from "@/components/PageHeader";
+import { CardSkeleton, KpiSkeleton, Skeleton } from "@/components/Skeleton";
+import { StatusBadge } from "@/components/StatusBadge";
 import { RecoveryMap } from "./RecoveryMap";
 
 const SCENARIO: EmergencyRequest = { incidentType: "BREAKDOWN", busId: "B021", station: "Airport" };
@@ -16,19 +18,33 @@ const SCENARIO: EmergencyRequest = { incidentType: "BREAKDOWN", busId: "B021", s
 export function Emergency() {
   const [result, setResult] = useState<EmergencyResult | null>(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<ApiError | Error | null>(null);
 
-  async function simulate() {
+  async function run(action: () => Promise<EmergencyResult | null>) {
     setLoading(true);
     setError(null);
     try {
-      setResult(await api.reportEmergency(SCENARIO));
+      setResult(await action());
     } catch (e) {
-      setError((e as Error).message);
+      setError(e as Error);
     } finally {
       setLoading(false);
     }
   }
+
+  const simulate = () => run(() => api.reportEmergency(SCENARIO));
+  // The backend keeps broken buses in maintenance, so the same breakdown can't be reported twice.
+  const resetAndSimulate = () =>
+    run(async () => {
+      await api.resetEmergency();
+      return api.reportEmergency(SCENARIO);
+    });
+  const reset = () =>
+    run(async () => {
+      await api.resetEmergency();
+      return null;
+    });
+  const busAlreadyOut = error instanceof ApiError && error.code === "BUS_OUT_OF_SERVICE";
 
   return (
     <>
@@ -36,20 +52,49 @@ export function Emergency() {
         title="Emergency Recovery"
         description="Report incidents and dispatch replacement buses and drivers automatically."
         actions={
-          <button
-            onClick={simulate}
-            disabled={loading}
-            className="inline-flex items-center gap-2 rounded-lg bg-rose-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-rose-500 focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-70"
-          >
-            {loading ? <Loader2 className="size-4 animate-spin" /> : <Siren className="size-4" />}
-            {loading ? "Dispatching…" : `Simulate breakdown of Bus ${SCENARIO.busId}`}
-          </button>
+          <div className="flex flex-wrap items-center gap-2">
+            {result && (
+              <button
+                onClick={reset}
+                disabled={loading}
+                title="Undo all breakdowns and dispatches on the backend"
+                className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-70"
+              >
+                <RotateCcw className="size-4" /> Reset demo
+              </button>
+            )}
+            <button
+              onClick={simulate}
+              disabled={loading}
+              className="inline-flex items-center gap-2 rounded-lg bg-rose-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-rose-500 focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-70"
+            >
+              {loading ? <Loader2 className="size-4 animate-spin" /> : <Siren className="size-4" />}
+              {loading ? "Dispatching…" : `Simulate breakdown of Bus ${SCENARIO.busId}`}
+            </button>
+          </div>
         }
       />
 
       {error && (
         <div className="mb-6">
-          <ErrorBanner title="Recovery plan failed" message={error} />
+          <ErrorBanner
+            title={busAlreadyOut ? `Bus ${SCENARIO.busId} is already in maintenance` : "Recovery plan failed"}
+            message={
+              busAlreadyOut
+                ? "The backend keeps simulated breakdowns until it is reset. Reset the demo to run the scenario again."
+                : error.message
+            }
+          >
+            {busAlreadyOut ? (
+              <BannerButton onClick={resetAndSimulate}>
+                <RotateCcw className="size-3.5" /> Reset demo and simulate again
+              </BannerButton>
+            ) : (
+              <BannerButton onClick={simulate}>
+                <RotateCcw className="size-3.5" /> Try again
+              </BannerButton>
+            )}
+          </ErrorBanner>
         </div>
       )}
 
@@ -62,6 +107,7 @@ export function Emergency() {
       ) : (
         !error && (
           <EmptyState
+            tone="critical"
             icon={Siren}
             title="No active incident"
             description={`Simulate a breakdown of Bus ${SCENARIO.busId} at ${SCENARIO.station} to see the automatic recovery plan.`}
@@ -81,25 +127,22 @@ function Results({ result }: { result: EmergencyResult }) {
   return (
     <>
       <div className="mb-6 flex flex-wrap items-center gap-3 rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm shadow-sm">
-        {[result.incidentId, result.incidentType?.replace("_", " ").toLowerCase(), result.destinationStation]
-          .filter(Boolean)
-          .map((part, i) => (
-            <span key={i} className="flex items-center gap-3">
-              {i > 0 && <span className="text-slate-300">•</span>}
-              <span className={i === 0 && result.incidentId ? "font-mono font-medium text-slate-900" : "text-slate-600 capitalize"}>
-                {part}
-              </span>
-            </span>
-          ))}
-        {dispatched ? (
-          <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-medium text-emerald-700 ring-1 ring-emerald-200 ring-inset">
-            <CircleCheck className="size-3.5" /> Dispatched
-          </span>
-        ) : (
-          <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-rose-50 px-2.5 py-0.5 text-xs font-medium text-rose-700 ring-1 ring-rose-200 ring-inset">
-            <TriangleAlert className="size-3.5" /> {result.status === "NO_BUS_AVAILABLE" ? "No bus available" : "No driver available"}
-          </span>
-        )}
+        <span className="font-mono font-medium text-slate-900">{result.incidentId}</span>
+        <span className="text-slate-300">•</span>
+        <span className="text-slate-600 capitalize">{result.incidentType.replace("_", " ").toLowerCase()}</span>
+        <span className="text-slate-300">•</span>
+        <span className="text-slate-600">{result.destinationStation}</span>
+        <span className="ml-auto">
+          {dispatched ? (
+            <StatusBadge tone="positive" icon={CircleCheck}>
+              Dispatched
+            </StatusBadge>
+          ) : (
+            <StatusBadge tone="critical" icon={TriangleAlert}>
+              {result.status === "NO_BUS_AVAILABLE" ? "No bus available" : "No driver available"}
+            </StatusBadge>
+          )}
+        </span>
       </div>
 
       {dispatched && (
@@ -109,21 +152,20 @@ function Results({ result }: { result: EmergencyResult }) {
             value={result.brokenBus ?? "—"}
             hint={`Out of service at ${result.destinationStation}`}
             icon={Wrench}
-            accent="rose"
+            tone="critical"
           />
           <KpiCard
             label="Replacement bus"
             value={result.replacementBus}
             hint={`From ${result.sourceStation}`}
             icon={BusFront}
-            accent="emerald"
+            tone="positive"
           />
           <KpiCard
             label="Driver"
             value={result.driver}
             hint="Idle driver reassigned"
             icon={UserRound}
-            accent="violet"
           />
           <KpiCard
             label="ETA"
@@ -179,19 +221,26 @@ function Results({ result }: { result: EmergencyResult }) {
 }
 
 function ResultsSkeleton() {
-  const block = "animate-pulse rounded-xl border border-slate-200 bg-white";
   return (
-    <>
-      <div className={`${block} mb-6 h-12`} />
+    <div aria-busy="true" aria-label="Building recovery plan">
+      <div className="mb-6 flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-5 py-4 shadow-sm">
+        <Skeleton className="h-4 w-20" />
+        <Skeleton className="h-4 w-24" />
+        <Skeleton className="ml-auto h-5 w-24 rounded-full" />
+      </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {Array.from({ length: 4 }, (_, i) => (
-          <div key={i} className={`${block} h-32`} />
+          <KpiSkeleton key={i} />
         ))}
       </div>
       <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-5">
-        <div className={`${block} h-96 lg:col-span-2`} />
-        <div className={`${block} h-96 lg:col-span-3`} />
+        <CardSkeleton body="rows" className="lg:col-span-2" />
+        <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm lg:col-span-3">
+          <Skeleton className="h-4 w-36" />
+          <Skeleton className="mt-2 h-3 w-56" />
+          <Skeleton className="mt-6 h-72 w-full rounded-lg" />
+        </div>
       </div>
-    </>
+    </div>
   );
 }

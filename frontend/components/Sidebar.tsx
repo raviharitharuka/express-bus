@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Bot, BusFront, LayoutDashboard, Route, Siren, type LucideIcon } from "lucide-react";
-import { USE_MOCK } from "@/lib/api";
+import { DataSourceBadge } from "@/components/DataSource";
 
 const NAV: { href: string; label: string; icon: LucideIcon; subtitle?: string; tooltip?: string }[] = [
   { href: "/", label: "Overview", icon: LayoutDashboard },
@@ -62,10 +62,7 @@ export function Sidebar() {
       </nav>
 
       <div className="mt-auto hidden p-4 md:block">
-        <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-600">
-          <span className={`size-2 rounded-full ${USE_MOCK ? "bg-amber-400" : "bg-emerald-500"}`} />
-          {USE_MOCK ? "Mock data" : "Live backend"}
-        </div>
+        <DataSourceBadge />
       </div>
     </aside>
   );

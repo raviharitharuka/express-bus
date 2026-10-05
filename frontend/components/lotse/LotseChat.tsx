@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Bot, CircleAlert, Loader2, RotateCw, SendHorizontal, User } from "lucide-react";
 import { api } from "@/lib/api";
 import type { LotseResult } from "@/lib/types";
+import { useDataSource } from "@/components/DataSource";
 import { PageHeader } from "@/components/PageHeader";
 import { ResponseCard } from "./ResponseCard";
 
@@ -70,9 +71,7 @@ export function LotseChat() {
           <div className="min-w-0">
             <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900">
               Ask Lotse
-              <span className="flex items-center gap-1 text-xs font-normal text-emerald-700">
-                <span className="size-2 rounded-full bg-emerald-500 ring-2 ring-emerald-100" /> online
-              </span>
+              <OnlineStatus />
             </h2>
             <p className="text-xs text-slate-500">AI dispatch assistant</p>
           </div>
@@ -94,8 +93,20 @@ export function LotseChat() {
                   <div key={m.id} className="flex gap-3">
                     <BotAvatar />
                     {m.status === "loading" && (
-                      <div className="flex items-center gap-2 rounded-2xl rounded-tl-sm border border-slate-200 bg-white px-4 py-3 text-sm text-slate-500 shadow-sm">
-                        <Loader2 className="size-4 animate-spin text-indigo-500" /> Lotse is thinking...
+                      <div
+                        role="status"
+                        className="flex items-center gap-3 rounded-2xl rounded-tl-sm border border-slate-200 bg-white px-4 py-3 text-sm text-slate-500 shadow-sm"
+                      >
+                        <span className="flex gap-1" aria-hidden>
+                          {[0, 150, 300].map((delay) => (
+                            <span
+                              key={delay}
+                              className="size-1.5 animate-bounce rounded-full bg-violet-500"
+                              style={{ animationDelay: `${delay}ms` }}
+                            />
+                          ))}
+                        </span>
+                        Lotse is thinking...
                       </div>
                     )}
                     {m.status === "done" && <ResponseCard result={m.result} onFollowUp={ask} disabled={busy} />}
@@ -194,6 +205,23 @@ function Chip({ label, onClick, disabled }: { label: string; onClick: () => void
     >
       {label}
     </button>
+  );
+}
+
+/** Green "online" while answers come from the backend, amber when falling back to mock data. */
+function OnlineStatus() {
+  const source = useDataSource();
+  const offline = source?.kind === "mock";
+  return (
+    <span
+      title={offline ? source.reason : undefined}
+      className={`flex items-center gap-1 text-xs font-normal ${offline ? "text-amber-700" : "text-emerald-700"}`}
+    >
+      <span
+        className={`size-2 rounded-full ring-2 ${offline ? "bg-amber-400 ring-amber-100" : "bg-emerald-500 ring-emerald-100"}`}
+      />
+      {offline ? "offline · demo answers" : "online"}
+    </span>
   );
 }
 

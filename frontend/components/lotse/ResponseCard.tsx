@@ -3,11 +3,10 @@
 import { useState } from "react";
 import { Bot, Braces } from "lucide-react";
 import type { LotseResult } from "@/lib/types";
+import { tone as tones } from "@/components/theme";
 
 function confidenceTone(confidence: number) {
-  if (confidence >= 80) return { bar: "bg-emerald-500", text: "text-emerald-700" };
-  if (confidence >= 50) return { bar: "bg-amber-500", text: "text-amber-700" };
-  return { bar: "bg-rose-500", text: "text-rose-700" };
+  return tones[confidence >= 80 ? "positive" : confidence >= 50 ? "warning" : "critical"];
 }
 
 export function ResponseCard({

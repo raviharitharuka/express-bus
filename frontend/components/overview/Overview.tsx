@@ -1,13 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   AlertTriangle,
   Bus,
   ChartPie,
   CircleAlert,
+  CircleCheck,
   Gauge,
   Info,
+  RotateCw,
   Route,
   Sparkles,
   UserCheck,
@@ -15,9 +17,12 @@ import {
 import { api } from "@/lib/api";
 import type { Alert, Dashboard } from "@/lib/types";
 import { Card } from "@/components/Card";
-import { ErrorBanner } from "@/components/ErrorBanner";
+import { EmptyState } from "@/components/EmptyState";
+import { BannerButton, ErrorBanner } from "@/components/ErrorBanner";
 import { PageHeader } from "@/components/PageHeader";
 import { KpiCard } from "@/components/KpiCard";
+import { CardSkeleton, KpiSkeleton, Skeleton } from "@/components/Skeleton";
+import { tone, type Tone } from "@/components/theme";
 import { FleetStatusChart, StationFleetChart } from "./charts";
 
 const TOTAL_DRIVERS = 20;
@@ -32,25 +37,38 @@ function formatDate(iso: string) {
   });
 }
 
-const ALERT_STYLES: Record<Alert["level"], { icon: typeof Info; className: string }> = {
-  info: { icon: Info, className: "bg-sky-50 text-sky-700 ring-sky-200" },
-  warning: { icon: AlertTriangle, className: "bg-amber-50 text-amber-800 ring-amber-200" },
-  critical: { icon: CircleAlert, className: "bg-rose-50 text-rose-700 ring-rose-200" },
+const ALERT_STYLES: Record<Alert["level"], { icon: typeof Info; tone: Tone }> = {
+  info: { icon: Info, tone: "info" },
+  warning: { icon: AlertTriangle, tone: "warning" },
+  critical: { icon: CircleAlert, tone: "critical" },
 };
+const ALERT_ORDER: Alert["level"][] = ["critical", "warning", "info"];
 
 export function Overview() {
   const [data, setData] = useState<Dashboard | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
+  const fetchDashboard = useCallback(() => {
     api.getDashboard().then(setData, (e: Error) => setError(e.message));
   }, []);
+
+  useEffect(fetchDashboard, [fetchDashboard]);
+
+  function retry() {
+    setError(null);
+    setData(null);
+    fetchDashboard();
+  }
 
   if (error) {
     return (
       <>
         <PageHeader title="Overview" />
-        <ErrorBanner title="Couldn't load the dashboard" message={error} />
+        <ErrorBanner title="Couldn't load the dashboard" message={error}>
+          <BannerButton onClick={retry}>
+            <RotateCw className="size-3.5" /> Try again
+          </BannerButton>
+        </ErrorBanner>
       </>
     );
   }
@@ -77,28 +95,27 @@ export function Overview() {
           progress={kpis.fleetUtilization}
           hint={`Buses in service of ${TOTAL_BUSES}`}
           icon={ChartPie}
-          accent="sky"
         />
         <KpiCard
           label="Available drivers"
           value={kpis.availableDrivers}
           hint={`With idle capacity, of ${TOTAL_DRIVERS}`}
           icon={UserCheck}
-          accent="emerald"
+          tone="positive"
         />
         <KpiCard
           label="Available buses"
           value={kpis.availableBuses}
           hint="Spare and ready to dispatch"
           icon={Bus}
-          accent="emerald"
+          tone="positive"
         />
         <KpiCard
           label="New express routes"
           value={kpis.additionalRoutesIdentified}
           hint="Feasible with 0 new drivers"
           icon={Route}
-          accent="violet"
+          tone="positive"
         />
       </div>
 
@@ -133,21 +150,33 @@ export function Overview() {
           </div>
         </section>
 
-        <Card title="Alerts" subtitle={`${alerts.length} active`} className="lg:col-span-2">
-          <ul className="space-y-2">
-            {alerts.map((alert) => {
-              const { icon: Icon, className } = ALERT_STYLES[alert.level];
-              return (
-                <li
-                  key={alert.message}
-                  className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm ring-1 ring-inset ${className}`}
-                >
-                  <Icon className="size-4 shrink-0" />
-                  {alert.message}
-                </li>
-              );
-            })}
-          </ul>
+        <Card title="Alerts" subtitle={alerts.length ? `${alerts.length} active` : "None active"} className="lg:col-span-2">
+          {alerts.length === 0 ? (
+            <EmptyState
+              compact
+              icon={CircleCheck}
+              tone="positive"
+              title="All clear"
+              description="No stations, drivers or buses need attention right now."
+            />
+          ) : (
+            <ul className="space-y-2">
+              {[...alerts]
+                .sort((a, b) => ALERT_ORDER.indexOf(a.level) - ALERT_ORDER.indexOf(b.level))
+                .map((alert) => {
+                  const { icon: Icon, tone: t } = ALERT_STYLES[alert.level];
+                  return (
+                    <li
+                      key={alert.message}
+                      className={`flex items-center gap-3 rounded-lg border px-3 py-2.5 text-sm ${tone[t].soft}`}
+                    >
+                      <Icon className="size-4 shrink-0" />
+                      {alert.message}
+                    </li>
+                  );
+                })}
+            </ul>
+          )}
         </Card>
       </div>
     </>
@@ -155,19 +184,21 @@ export function Overview() {
 }
 
 function OverviewSkeleton() {
-  const block = "animate-pulse rounded-xl border border-slate-200 bg-white";
   return (
-    <>
+    <div aria-busy="true" aria-label="Loading dashboard">
       <PageHeader title="Overview" description="Loading operations snapshot…" />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {Array.from({ length: 5 }, (_, i) => (
-          <div key={i} className={`${block} h-32`} />
+          <KpiSkeleton key={i} />
         ))}
       </div>
       <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <div className={`${block} h-80 lg:col-span-2`} />
-        <div className={`${block} h-80`} />
+        <CardSkeleton className="lg:col-span-2" />
+        <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+          <Skeleton className="h-4 w-28" />
+          <Skeleton className="mx-auto mt-8 size-44 rounded-full" />
+        </div>
       </div>
-    </>
+    </div>
   );
 }

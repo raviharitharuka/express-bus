@@ -14,12 +14,13 @@ import {
   YAxis,
 } from "recharts";
 import type { StationStatus } from "@/lib/types";
-import { axisTick, gridStroke, tooltipStyle } from "@/components/chartTheme";
+import { axisTick, axisTickMuted, chartColor, cursorFill, gridStroke, tooltipStyle } from "@/components/theme";
 
+// In service = brand, spare = available (positive), maintenance = needs attention (warning).
 export const FLEET_COLORS = {
-  inService: "#6366f1", // indigo-500
-  spare: "#10b981", // emerald-500
-  maintenance: "#f59e0b", // amber-500
+  inService: chartColor.brand,
+  spare: chartColor.positive,
+  maintenance: chartColor.warning,
 };
 
 function toFleetRows(stations: StationStatus[]) {
@@ -37,8 +38,8 @@ export function StationFleetChart({ stations }: { stations: StationStatus[] }) {
       <BarChart data={toFleetRows(stations)} margin={{ top: 4, right: 8, left: -16, bottom: 0 }} barSize={32}>
         <CartesianGrid vertical={false} stroke={gridStroke} />
         <XAxis dataKey="name" tickLine={false} axisLine={false} tick={axisTick} />
-        <YAxis allowDecimals={false} tickLine={false} axisLine={false} tick={{ fill: "#94a3b8", fontSize: 12 }} />
-        <Tooltip cursor={{ fill: "#f8fafc" }} contentStyle={tooltipStyle} />
+        <YAxis allowDecimals={false} tickLine={false} axisLine={false} tick={axisTickMuted} />
+        <Tooltip cursor={{ fill: cursorFill }} contentStyle={tooltipStyle} />
         <Legend itemSorter={null} iconType="circle" iconSize={8} wrapperStyle={{ fontSize: 12, paddingTop: 8 }} />
         <Bar dataKey="inService" name="In service" stackId="fleet" fill={FLEET_COLORS.inService} />
         <Bar dataKey="spare" name="Spare" stackId="fleet" fill={FLEET_COLORS.spare} />
