@@ -15,5 +15,5 @@ def emergency(req: EmergencyRequest):
 @router.post("/emergency/reset")
 def reset():
     """Undo all breakdowns and dispatches made since the server started (demo helper)."""
-    data.reset_live_state()
+    data.reset_emergency_changes()
     return {"status": "reset"}

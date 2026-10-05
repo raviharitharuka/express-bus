@@ -223,7 +223,7 @@ Reports an incident and returns the recovery plan. **Changes the live bus pool**
 |----------------|--------|----------------------|------------------------------------------------|
 | `incidentType` | enum   | yes                  | `BREAKDOWN` \| `DRIVER_SICK` \| `ROAD_CLOSURE` (returns `501` for now) |
 | `station`      | string | yes                  | Where the incident is; one of the 5 stations. `location` is accepted as an alias |
-| `busId`        | string | for `BREAKDOWN`      | `B001`–`B050`; `409 BUS_OUT_OF_SERVICE` if already in maintenance |
+| `busId`        | string | for `BREAKDOWN`      | `B001`–`B050`; `409 BUS_OUT_OF_SERVICE` if already in maintenance or broken |
 | `driverId`     | string | for `DRIVER_SICK`    | `D001`–`D020`                                  |
 | `time`         | string | no                   | Defaults to now (or `DEMO_TIME`)               |
 
@@ -281,7 +281,7 @@ Reports an incident and returns the recovery plan. **Changes the live bus pool**
 
 ### `POST /emergency/reset`
 
-Demo helper: undoes all breakdowns and dispatches since the server started. Response: `{ "status": "reset" }`.
+Demo helper: undoes all breakdowns and dispatches since the server started. Admin edits (`PATCH /admin/...`) stay; `POST /admin/reset` clears both. Response: `{ "status": "reset" }`.
 
 ---
 
@@ -425,6 +425,217 @@ Everything the KPI dashboard needs in one call.
 | `stations[].driversOnDuty`         | integer | Working drivers based at this station today                 |
 | `alerts[]`                         | array   | Stations with 0 spare buses, rebalancing moves (same logic as Lotse's `station_buses` intent), predicted shortage, buses in maintenance |
 | `alerts[].level`                   | enum    | `info` \| `warning` \| `critical`                           |
+
+---
+
+## 6. Admin
+
+Operator endpoints for inspecting and adjusting the data the engines run on. Overrides are **in-memory**, like emergency changes: they feed straight into `/idle-drivers`, `/optimize`, `/emergency` and `/dashboard`, and disappear on `POST /admin/reset`, a data-source switch or a server restart. Endpoints 1–5 are unchanged. Mocks: `frontend/public/mock/admin/*.json` (synthetic data, 2026-10-05, no overrides).
+
+### `GET /admin/status`
+
+**Response `200`** — mock: `admin/status.json`
+
+```json
+{
+  "dataSource": "synthetic",
+  "counts": {
+    "stations": 5,
+    "drivers": 20,
+    "buses": 50,
+    "routes": 10,
+    "trips": 144
+  },
+  "lastOptimizeMs": 42,
+  "overridesActive": 0
+}
+```
+
+| Field             | Type           | Notes                                                                   |
+|-------------------|----------------|-------------------------------------------------------------------------|
+| `dataSource`      | enum           | `synthetic` \| `gtfs` (see `DATA_SOURCE` in the README)                 |
+| `counts`          | object         | `stations`, `drivers`, `buses`, `routes` (regular lines, not express candidates), `trips` (weekday timetable) |
+| `lastOptimizeMs`  | integer \| null | Duration of the most recent `POST /optimize`; `null` if none since startup |
+| `overridesActive` | integer        | Drivers and buses changed by `PATCH` or by emergencies since the last reset |
+
+### `POST /admin/data-source`
+
+Switches the active dataset at runtime, without a restart. Clears all overrides and emergency changes (the two datasets have different ids). The `.env` value applies again after a restart.
+
+**Request**
+
+```json
+{ "dataSource": "gtfs" }
+```
+
+**Response `200`**: the new status, same shape as `GET /admin/status`.
+
+Errors: `400 INVALID_REQUEST` for any value other than `synthetic` / `gtfs`; `409 DATA_SOURCE_UNAVAILABLE` if the GTFS files are missing (run `scripts/build_real_timetable.py`).
+
+### Lists: `GET /admin/drivers`, `/admin/buses`, `/admin/stations`, `/admin/routes`
+
+All four are paginated the same way.
+
+| Query param | Type    | Default | Notes                 |
+|-------------|---------|---------|-----------------------|
+| `page`      | integer | `1`     | 1-based               |
+| `pageSize`  | integer | `20`    | 1–100                 |
+| `q`         | string  | —       | Optional search: case-insensitive substring match on any text or number field (e.g. `q=north`, `q=D01`, `q=broken`); `total` counts the matches |
+
+| Field      | Type    | Notes                                         |
+|------------|---------|-----------------------------------------------|
+| `page`     | integer | Requested page; past the end returns `items: []` |
+| `pageSize` | integer |                                               |
+| `total`    | integer | Items across all pages                        |
+| `items`    | array   | Sorted by id (stations by their `id`, routes by line number) |
+
+**`GET /admin/drivers`** — mock: `admin/drivers.json`
+
+```json
+{
+  "page": 1,
+  "pageSize": 20,
+  "total": 20,
+  "items": [
+    {
+      "driverId": "D001",
+      "homeStation": "Central Station",
+      "dutyId": "DU001",
+      "overtimeAvailable": true,
+      "maxShiftHours": 10,
+      "vacationDates": [],
+      "available": true,
+      "overridden": false
+    }
+  ]
+}
+```
+
+| Field               | Type           | Notes                                                        |
+|---------------------|----------------|--------------------------------------------------------------|
+| `items[].dutyId`    | string \| null | Today's duty, `null` if none (weekend, vacation, sick)       |
+| `items[].available` | boolean        | `false` = sick leave today: the driver's duty is uncovered   |
+| `items[].overridden`| boolean        | Changed since the last reset                                 |
+
+**`GET /admin/buses`** — mock: `admin/buses.json`
+
+```json
+{
+  "page": 1,
+  "pageSize": 20,
+  "total": 50,
+  "items": [
+    {
+      "busId": "B001",
+      "station": "Central Station",
+      "status": "active",
+      "type": "articulated",
+      "capacity": 120,
+      "overridden": false
+    }
+  ]
+}
+```
+
+| Field             | Type    | Notes                                                                      |
+|-------------------|---------|----------------------------------------------------------------------------|
+| `items[].status`  | enum    | `active` (on a duty today) \| `spare` (ready to dispatch) \| `maintenance` \| `broken` |
+| `items[].overridden` | boolean | Changed by `PATCH` or an emergency since the last reset                 |
+
+**`GET /admin/stations`** — mock: `admin/stations.json`
+
+```json
+{
+  "page": 1,
+  "pageSize": 20,
+  "total": 5,
+  "items": [
+    {
+      "id": "CEN",
+      "name": "Central Station",
+      "lat": 49.4459,
+      "lng": 11.0825,
+      "totalBuses": 16,
+      "spareBuses": 9,
+      "driversBased": 6
+    }
+  ]
+}
+```
+
+| Field                   | Type    | Notes                              |
+|-------------------------|---------|------------------------------------|
+| `items[].totalBuses`    | integer | Buses currently at the station     |
+| `items[].spareBuses`    | integer | Of those, status `spare`           |
+| `items[].driversBased`  | integer | Drivers whose `homeStation` it is  |
+
+**`GET /admin/routes`** — mock: `admin/routes.json`
+
+```json
+{
+  "page": 1,
+  "pageSize": 20,
+  "total": 10,
+  "items": [
+    {
+      "routeId": "R1",
+      "name": "Central Station - Airport",
+      "from": "Central Station",
+      "to": "Airport",
+      "distanceKm": 8,
+      "durationMin": 45,
+      "frequencyMin": 30
+    }
+  ]
+}
+```
+
+Regular lines only (same fields as `routes.json`). Express candidates are tested through `POST /optimize`.
+
+### `PATCH /admin/drivers/{id}`
+
+All fields optional; only the ones sent change.
+
+```json
+{
+  "vacationDates": ["2026-10-12", "2026-10-13"],
+  "overtimeAvailable": false,
+  "maxShiftHours": 9,
+  "available": false
+}
+```
+
+| Field               | Type     | Notes                                                              |
+|---------------------|----------|--------------------------------------------------------------------|
+| `vacationDates`     | string[] | `YYYY-MM-DD`; **replaces** the list                                |
+| `overtimeAvailable` | boolean  |                                                                    |
+| `maxShiftHours`     | number   | 4–13                                                               |
+| `available`         | boolean  | `false` = sick leave today (duty uncovered); `true` = back on duty |
+
+**Response `200`**: the updated driver, same shape as a `GET /admin/drivers` item, with `overridden: true`.
+
+Errors: `404 DRIVER_NOT_FOUND`; `400 INVALID_REQUEST` (bad date, value out of range, empty body).
+
+### `PATCH /admin/buses/{id}`
+
+```json
+{ "status": "maintenance", "station": "North Station" }
+```
+
+| Field     | Type   | Notes                                                                                       |
+|-----------|--------|---------------------------------------------------------------------------------------------|
+| `status`  | enum   | `available` \| `maintenance` \| `broken`. `available` puts the bus back in service: listed as `active` if it has a duty today, otherwise `spare`. `maintenance` and `broken` take it out of the spare pool and off its duty |
+| `station` | string | Moves the bus; one of the active dataset's stations                                          |
+
+**Response `200`**: the updated bus, same shape as a `GET /admin/buses` item, with `overridden: true`.
+
+Errors: `404 BUS_NOT_FOUND`; `404 STATION_NOT_FOUND`; `400 INVALID_REQUEST`.
+
+### `POST /admin/reset`
+
+Clears every admin override **and** every emergency change (same effect as `POST /emergency/reset`), and resets `lastOptimizeMs` to `null`. Keeps the current data source.
+
+**Response `200`**: the status after the reset, same shape as `GET /admin/status`, with `overridesActive: 0`.
 
 ---
 

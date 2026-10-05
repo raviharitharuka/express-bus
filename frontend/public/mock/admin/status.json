@@ -1,0 +1,12 @@
+{
+  "dataSource": "synthetic",
+  "counts": {
+    "stations": 5,
+    "drivers": 20,
+    "buses": 50,
+    "routes": 10,
+    "trips": 144
+  },
+  "lastOptimizeMs": 42,
+  "overridesActive": 0
+}

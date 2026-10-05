@@ -49,7 +49,7 @@ def overtime_windows(day: data.Day) -> list[Window]:
     for duty in day.working_duties():
         drv = drivers[duty["driverId"]]
         start = to_min(duty["start"])
-        end, limit = to_min(duty["end"]), start + drv["maxShiftHours"] * 60
+        end, limit = to_min(duty["end"]), start + round(drv["maxShiftHours"] * 60)
         if drv["overtimeAvailable"] and limit - end >= MIN_IDLE_MIN:
             out.append(Window(drv["driverId"], trips[duty["dutyId"]][-1]["endStation"], end, limit, "overtime"))
     return out
@@ -110,7 +110,7 @@ def driver_profiles(day: data.Day) -> list[DriverProfile]:
             duty_end=end,
             driving_minutes=sum(to_min(t["arrivalTime"]) - to_min(t["departureTime"]) for t in legs),
             windows=by_driver.get(drv["driverId"], []),
-            headroom_minutes=max(0, drv["maxShiftHours"] * 60 - (end - start)),
+            headroom_minutes=max(0, round(drv["maxShiftHours"] * 60) - (end - start)),
         ))
     return out
 

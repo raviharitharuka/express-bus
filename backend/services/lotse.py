@@ -161,12 +161,13 @@ def _driver_shortage(_: str) -> Reply:
     day, missing = worst_shortage(today().isoformat())
     if not missing:
         return Reply("No driver shortage is predicted in the 30-day calendar.", {"date": None, "driversMissing": 0})
-    entry = next(c for c in data.calendar() if c["date"] == day)
+    worst = data.resolve_day(day)
+    absent = sorted(worst.on_vacation | worst.sick)
     return Reply(
         f"Worst predicted shortage: {_plural(missing, 'driver')} missing on {day} "
-        f"({', '.join(entry['driversOnVacation'])} on vacation). Recommendation: activate the overtime pool.",
-        {"date": day, "driversMissing": missing, "driversOnVacation": entry["driversOnVacation"],
-         "uncoveredDuties": entry["uncoveredDuties"]},
+        f"({', '.join(absent)} on vacation or sick). Recommendation: activate the overtime pool.",
+        {"date": day, "driversMissing": missing, "driversOnVacation": sorted(worst.on_vacation),
+         "uncoveredDuties": [d["dutyId"] for d in worst.uncovered_duties()]},
     )
 
 

@@ -1,0 +1,167 @@
+{
+  "page": 1,
+  "pageSize": 20,
+  "total": 50,
+  "items": [
+    {
+      "busId": "B001",
+      "station": "Central Station",
+      "status": "active",
+      "type": "articulated",
+      "capacity": 120,
+      "overridden": false
+    },
+    {
+      "busId": "B002",
+      "station": "Central Station",
+      "status": "active",
+      "type": "articulated",
+      "capacity": 120,
+      "overridden": false
+    },
+    {
+      "busId": "B003",
+      "station": "Central Station",
+      "status": "maintenance",
+      "type": "standard",
+      "capacity": 80,
+      "overridden": false
+    },
+    {
+      "busId": "B004",
+      "station": "Central Station",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80,
+      "overridden": false
+    },
+    {
+      "busId": "B005",
+      "station": "Central Station",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80,
+      "overridden": false
+    },
+    {
+      "busId": "B006",
+      "station": "Central Station",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80,
+      "overridden": false
+    },
+    {
+      "busId": "B007",
+      "station": "Central Station",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80,
+      "overridden": false
+    },
+    {
+      "busId": "B008",
+      "station": "Central Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80,
+      "overridden": false
+    },
+    {
+      "busId": "B009",
+      "station": "Central Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80,
+      "overridden": false
+    },
+    {
+      "busId": "B010",
+      "station": "Central Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80,
+      "overridden": false
+    },
+    {
+      "busId": "B011",
+      "station": "Central Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80,
+      "overridden": false
+    },
+    {
+      "busId": "B012",
+      "station": "Central Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80,
+      "overridden": false
+    },
+    {
+      "busId": "B013",
+      "station": "Central Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80,
+      "overridden": false
+    },
+    {
+      "busId": "B014",
+      "station": "Central Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80,
+      "overridden": false
+    },
+    {
+      "busId": "B015",
+      "station": "Central Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80,
+      "overridden": false
+    },
+    {
+      "busId": "B016",
+      "station": "Central Station",
+      "status": "spare",
+      "type": "standard",
+      "capacity": 80,
+      "overridden": false
+    },
+    {
+      "busId": "B017",
+      "station": "Airport",
+      "status": "maintenance",
+      "type": "standard",
+      "capacity": 80,
+      "overridden": false
+    },
+    {
+      "busId": "B018",
+      "station": "Airport",
+      "status": "active",
+      "type": "articulated",
+      "capacity": 120,
+      "overridden": false
+    },
+    {
+      "busId": "B019",
+      "station": "Airport",
+      "status": "active",
+      "type": "articulated",
+      "capacity": 120,
+      "overridden": false
+    },
+    {
+      "busId": "B020",
+      "station": "Airport",
+      "status": "active",
+      "type": "standard",
+      "capacity": 80,
+      "overridden": false
+    }
+  ]
+}

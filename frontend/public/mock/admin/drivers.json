@@ -1,0 +1,228 @@
+{
+  "page": 1,
+  "pageSize": 20,
+  "total": 20,
+  "items": [
+    {
+      "driverId": "D001",
+      "homeStation": "Central Station",
+      "dutyId": "DU001",
+      "overtimeAvailable": true,
+      "maxShiftHours": 10,
+      "vacationDates": [],
+      "available": true,
+      "overridden": false
+    },
+    {
+      "driverId": "D002",
+      "homeStation": "Central Station",
+      "dutyId": "DU002",
+      "overtimeAvailable": true,
+      "maxShiftHours": 10,
+      "vacationDates": [],
+      "available": true,
+      "overridden": false
+    },
+    {
+      "driverId": "D003",
+      "homeStation": "Central Station",
+      "dutyId": "DU003",
+      "overtimeAvailable": false,
+      "maxShiftHours": 10,
+      "vacationDates": [],
+      "available": true,
+      "overridden": false
+    },
+    {
+      "driverId": "D004",
+      "homeStation": "Central Station",
+      "dutyId": "DU004",
+      "overtimeAvailable": true,
+      "maxShiftHours": 8,
+      "vacationDates": [
+        "2026-10-12",
+        "2026-10-13",
+        "2026-10-14"
+      ],
+      "available": true,
+      "overridden": false
+    },
+    {
+      "driverId": "D005",
+      "homeStation": "Central Station",
+      "dutyId": "DU005",
+      "overtimeAvailable": true,
+      "maxShiftHours": 10,
+      "vacationDates": [],
+      "available": true,
+      "overridden": false
+    },
+    {
+      "driverId": "D006",
+      "homeStation": "Central Station",
+      "dutyId": "DU006",
+      "overtimeAvailable": false,
+      "maxShiftHours": 9,
+      "vacationDates": [],
+      "available": true,
+      "overridden": false
+    },
+    {
+      "driverId": "D007",
+      "homeStation": "Airport",
+      "dutyId": "DU007",
+      "overtimeAvailable": true,
+      "maxShiftHours": 10,
+      "vacationDates": [],
+      "available": true,
+      "overridden": false
+    },
+    {
+      "driverId": "D008",
+      "homeStation": "Airport",
+      "dutyId": "DU008",
+      "overtimeAvailable": false,
+      "maxShiftHours": 10,
+      "vacationDates": [],
+      "available": true,
+      "overridden": false
+    },
+    {
+      "driverId": "D009",
+      "homeStation": "Airport",
+      "dutyId": "DU009",
+      "overtimeAvailable": true,
+      "maxShiftHours": 10,
+      "vacationDates": [
+        "2026-10-19",
+        "2026-10-20",
+        "2026-10-21",
+        "2026-10-22",
+        "2026-10-23"
+      ],
+      "available": true,
+      "overridden": false
+    },
+    {
+      "driverId": "D010",
+      "homeStation": "Airport",
+      "dutyId": "DU010",
+      "overtimeAvailable": true,
+      "maxShiftHours": 8,
+      "vacationDates": [],
+      "available": true,
+      "overridden": false
+    },
+    {
+      "driverId": "D011",
+      "homeStation": "North Station",
+      "dutyId": "DU011",
+      "overtimeAvailable": true,
+      "maxShiftHours": 10,
+      "vacationDates": [],
+      "available": true,
+      "overridden": false
+    },
+    {
+      "driverId": "D012",
+      "homeStation": "North Station",
+      "dutyId": "DU012",
+      "overtimeAvailable": false,
+      "maxShiftHours": 9,
+      "vacationDates": [],
+      "available": true,
+      "overridden": false
+    },
+    {
+      "driverId": "D013",
+      "homeStation": "North Station",
+      "dutyId": "DU013",
+      "overtimeAvailable": true,
+      "maxShiftHours": 10,
+      "vacationDates": [
+        "2026-10-28",
+        "2026-10-29",
+        "2026-10-30"
+      ],
+      "available": true,
+      "overridden": false
+    },
+    {
+      "driverId": "D014",
+      "homeStation": "North Station",
+      "dutyId": "DU014",
+      "overtimeAvailable": true,
+      "maxShiftHours": 8,
+      "vacationDates": [
+        "2026-10-21",
+        "2026-10-22",
+        "2026-10-23"
+      ],
+      "available": true,
+      "overridden": false
+    },
+    {
+      "driverId": "D015",
+      "homeStation": "South Station",
+      "dutyId": "DU015",
+      "overtimeAvailable": true,
+      "maxShiftHours": 10,
+      "vacationDates": [],
+      "available": true,
+      "overridden": false
+    },
+    {
+      "driverId": "D016",
+      "homeStation": "South Station",
+      "dutyId": "DU016",
+      "overtimeAvailable": false,
+      "maxShiftHours": 10,
+      "vacationDates": [],
+      "available": true,
+      "overridden": false
+    },
+    {
+      "driverId": "D017",
+      "homeStation": "South Station",
+      "dutyId": "DU017",
+      "overtimeAvailable": true,
+      "maxShiftHours": 10,
+      "vacationDates": [],
+      "available": true,
+      "overridden": false
+    },
+    {
+      "driverId": "D018",
+      "homeStation": "University",
+      "dutyId": "DU018",
+      "overtimeAvailable": true,
+      "maxShiftHours": 10,
+      "vacationDates": [],
+      "available": true,
+      "overridden": false
+    },
+    {
+      "driverId": "D019",
+      "homeStation": "University",
+      "dutyId": "DU019",
+      "overtimeAvailable": false,
+      "maxShiftHours": 8,
+      "vacationDates": [
+        "2026-10-22",
+        "2026-10-23"
+      ],
+      "available": true,
+      "overridden": false
+    },
+    {
+      "driverId": "D020",
+      "homeStation": "University",
+      "dutyId": "DU020",
+      "overtimeAvailable": true,
+      "maxShiftHours": 9,
+      "vacationDates": [],
+      "available": true,
+      "overridden": false
+    }
+  ]
+}

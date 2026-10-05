@@ -1,0 +1,52 @@
+{
+  "page": 1,
+  "pageSize": 20,
+  "total": 5,
+  "items": [
+    {
+      "id": "AIR",
+      "name": "Airport",
+      "lat": 49.4987,
+      "lng": 11.078,
+      "totalBuses": 5,
+      "spareBuses": 0,
+      "driversBased": 4
+    },
+    {
+      "id": "CEN",
+      "name": "Central Station",
+      "lat": 49.4459,
+      "lng": 11.0825,
+      "totalBuses": 16,
+      "spareBuses": 9,
+      "driversBased": 6
+    },
+    {
+      "id": "NOR",
+      "name": "North Station",
+      "lat": 49.476,
+      "lng": 11.105,
+      "totalBuses": 10,
+      "spareBuses": 5,
+      "driversBased": 4
+    },
+    {
+      "id": "SOU",
+      "name": "South Station",
+      "lat": 49.418,
+      "lng": 11.1,
+      "totalBuses": 10,
+      "spareBuses": 7,
+      "driversBased": 3
+    },
+    {
+      "id": "UNI",
+      "name": "University",
+      "lat": 49.433,
+      "lng": 11.035,
+      "totalBuses": 9,
+      "spareBuses": 5,
+      "driversBased": 3
+    }
+  ]
+}

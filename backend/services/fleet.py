@@ -38,7 +38,7 @@ def station_buses() -> list[StationBuses]:
             total=len(here),
             active=sum(b["status"] == "active" for b in here),
             spare=sum(b["status"] == "spare" for b in here),
-            maintenance=sum(b["status"] == "maintenance" for b in here),
+            maintenance=sum(b["status"] in ("maintenance", "broken") for b in here),
         ))
     return out
 

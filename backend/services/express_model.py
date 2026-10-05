@@ -160,7 +160,7 @@ def build_driver_days(day: data.Day, allow_overtime: bool) -> list[DriverDay]:
             driver_id=drv["driverId"],
             duty_start=start,
             duty_end=end,
-            max_shift=drv["maxShiftHours"] * 60,
+            max_shift=round(drv["maxShiftHours"] * 60),  # whole minutes for CP-SAT
             overtime_ok=overtime_ok,
             driving=[(to_min(t["departureTime"]), to_min(t["arrivalTime"])) for t in legs],
             slots=slots,

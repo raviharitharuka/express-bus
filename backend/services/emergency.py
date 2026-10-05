@@ -121,7 +121,7 @@ def _take_broken_bus_out(req: EmergencyRequest, station: str, t: int, timeline: 
     bus = next((b for b in data.buses() if b["busId"] == req.bus_id), None)
     if not bus:
         raise ApiError(404, "BUS_NOT_FOUND", f"Bus {req.bus_id} does not exist")
-    if bus["status"] == "maintenance":
+    if bus["status"] in ("maintenance", "broken"):
         raise ApiError(409, "BUS_OUT_OF_SERVICE", f"Bus {req.bus_id} is already out of service")
     data.update_bus(req.bus_id, status="maintenance", station=station)
     timeline.add(0, f"Breakdown reported: {req.bus_id} at {station}")

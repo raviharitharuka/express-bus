@@ -1,0 +1,97 @@
+{
+  "page": 1,
+  "pageSize": 20,
+  "total": 10,
+  "items": [
+    {
+      "routeId": "R1",
+      "name": "Central Station - Airport",
+      "from": "Central Station",
+      "to": "Airport",
+      "distanceKm": 8,
+      "durationMin": 45,
+      "frequencyMin": 30
+    },
+    {
+      "routeId": "R2",
+      "name": "Central Station - North Station",
+      "from": "Central Station",
+      "to": "North Station",
+      "distanceKm": 5,
+      "durationMin": 35,
+      "frequencyMin": 30
+    },
+    {
+      "routeId": "R3",
+      "name": "Central Station - South Station",
+      "from": "Central Station",
+      "to": "South Station",
+      "distanceKm": 5,
+      "durationMin": 35,
+      "frequencyMin": 30
+    },
+    {
+      "routeId": "R4",
+      "name": "Central Station - University",
+      "from": "Central Station",
+      "to": "University",
+      "distanceKm": 5,
+      "durationMin": 35,
+      "frequencyMin": 30
+    },
+    {
+      "routeId": "R5",
+      "name": "Airport - North Station",
+      "from": "Airport",
+      "to": "North Station",
+      "distanceKm": 4,
+      "durationMin": 30,
+      "frequencyMin": 60
+    },
+    {
+      "routeId": "R6",
+      "name": "Airport - South Station",
+      "from": "Airport",
+      "to": "South Station",
+      "distanceKm": 12,
+      "durationMin": 55,
+      "frequencyMin": 60
+    },
+    {
+      "routeId": "R7",
+      "name": "Airport - University",
+      "from": "Airport",
+      "to": "University",
+      "distanceKm": 11,
+      "durationMin": 55,
+      "frequencyMin": 60
+    },
+    {
+      "routeId": "R8",
+      "name": "North Station - South Station",
+      "from": "North Station",
+      "to": "South Station",
+      "distanceKm": 9,
+      "durationMin": 45,
+      "frequencyMin": 60
+    },
+    {
+      "routeId": "R9",
+      "name": "North Station - University",
+      "from": "North Station",
+      "to": "University",
+      "distanceKm": 9,
+      "durationMin": 45,
+      "frequencyMin": 60
+    },
+    {
+      "routeId": "R10",
+      "name": "South Station - University",
+      "from": "South Station",
+      "to": "University",
+      "distanceKm": 7,
+      "durationMin": 40,
+      "frequencyMin": 60
+    }
+  ]
+}

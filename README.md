@@ -103,6 +103,49 @@ curl http://localhost:8000/dashboard
 curl http://localhost:8000/health
 ```
 
+## Admin endpoints
+
+Inspect and override the data the engines run on. Overrides live in memory only (the JSON files are never changed) and immediately affect `/idle-drivers`, `/optimize`, `/emergency` and `/dashboard`. Details: section 6 of [API_CONTRACT.md](API_CONTRACT.md).
+
+**`GET /admin/status`** — data source, counts, last `/optimize` time, number of active overrides
+
+```bash
+curl http://localhost:8000/admin/status
+```
+
+**`POST /admin/data-source`** — switch between `synthetic` and `gtfs` at runtime (clears all overrides; `.env` applies again after a restart)
+
+```bash
+curl -X POST http://localhost:8000/admin/data-source -H "Content-Type: application/json" -d '{"dataSource": "synthetic"}'
+```
+
+**`GET /admin/drivers`**, **`/admin/buses`**, **`/admin/stations`**, **`/admin/routes`** — paginated lists with optional `q` search
+
+```bash
+curl "http://localhost:8000/admin/drivers?q=university"
+curl "http://localhost:8000/admin/buses?page=2&pageSize=10"
+curl "http://localhost:8000/admin/stations?q=north"
+curl "http://localhost:8000/admin/routes?q=airport"
+```
+
+**`PATCH /admin/drivers/{id}`** — e.g. put D002 on sick leave today; `/optimize` stops using them
+
+```bash
+curl -X PATCH http://localhost:8000/admin/drivers/D002 -H "Content-Type: application/json" -d '{"available": false}'
+```
+
+**`PATCH /admin/buses/{id}`** — e.g. mark a spare bus broken, or move it (`"station": "Airport"`); `"status": "available"` puts it back
+
+```bash
+curl -X PATCH http://localhost:8000/admin/buses/B027 -H "Content-Type: application/json" -d '{"status": "broken"}'
+```
+
+**`POST /admin/reset`** — clear every override (admin edits and emergency changes)
+
+```bash
+curl -X POST http://localhost:8000/admin/reset
+```
+
 ---
 
 # Executive Summary

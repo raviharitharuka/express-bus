@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 import config
 from errors import register_error_handlers
-from routers import dashboard, emergency, idle_drivers, lotse, optimize
+from routers import admin, dashboard, emergency, idle_drivers, lotse, optimize
 from services import data
 
 data.preload()
@@ -26,6 +26,7 @@ app.include_router(optimize.router)
 app.include_router(emergency.router)
 app.include_router(lotse.router)
 app.include_router(dashboard.router)
+app.include_router(admin.router)
 
 
 @app.get("/health")

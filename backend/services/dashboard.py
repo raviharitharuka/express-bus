@@ -9,12 +9,14 @@ from services.optimizer import optimize
 
 
 def worst_shortage(from_date: str) -> tuple[str | None, int]:
-    """Calendar day (on/after from_date) with the most duties left without a driver."""
-    days = [c for c in data.calendar() if c["date"] >= from_date and c["uncoveredDuties"]]
-    if not days:
+    """Calendar day (on/after from_date) with the most duties left without a driver (vacations, sick leave)."""
+    uncovered = {c["date"]: len(data.resolve_day(c["date"]).uncovered_duties())
+                 for c in data.calendar() if c["date"] >= from_date}
+    uncovered = {d: n for d, n in uncovered.items() if n}
+    if not uncovered:
         return None, 0
-    worst = max(days, key=lambda c: len(c["uncoveredDuties"]))
-    return worst["date"], len(worst["uncoveredDuties"])
+    worst = min(uncovered, key=lambda d: (-uncovered[d], d))  # most missing drivers, earliest date on ties
+    return worst, uncovered[worst]
 
 
 def get_dashboard(date: str | None) -> DashboardResponse:
@@ -58,7 +60,7 @@ def get_dashboard(date: str | None) -> DashboardResponse:
     if missing:
         alerts.append(Alert(level="critical" if missing >= 3 else "warning",
                             message=f"{missing} driver(s) short predicted on {shortage_day}"))
-    maint = [b["busId"] for b in buses if b["status"] == "maintenance"]
+    maint = [b["busId"] for b in buses if b["status"] in ("maintenance", "broken")]
     if maint:
         alerts.append(Alert(level="info", message=f"{len(maint)} buses in maintenance: {', '.join(maint)}"))
 
