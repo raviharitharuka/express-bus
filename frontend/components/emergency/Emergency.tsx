@@ -81,18 +81,23 @@ function Results({ result }: { result: EmergencyResult }) {
   return (
     <>
       <div className="mb-6 flex flex-wrap items-center gap-3 rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm shadow-sm">
-        <span className="font-mono font-medium text-slate-900">{result.incidentId}</span>
-        <span className="text-slate-300">•</span>
-        <span className="text-slate-600 capitalize">{result.incidentType.replace("_", " ").toLowerCase()}</span>
-        <span className="text-slate-300">•</span>
-        <span className="text-slate-600">{result.destinationStation}</span>
+        {[result.incidentId, result.incidentType?.replace("_", " ").toLowerCase(), result.destinationStation]
+          .filter(Boolean)
+          .map((part, i) => (
+            <span key={i} className="flex items-center gap-3">
+              {i > 0 && <span className="text-slate-300">•</span>}
+              <span className={i === 0 && result.incidentId ? "font-mono font-medium text-slate-900" : "text-slate-600 capitalize"}>
+                {part}
+              </span>
+            </span>
+          ))}
         {dispatched ? (
           <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-medium text-emerald-700 ring-1 ring-emerald-200 ring-inset">
             <CircleCheck className="size-3.5" /> Dispatched
           </span>
         ) : (
           <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-rose-50 px-2.5 py-0.5 text-xs font-medium text-rose-700 ring-1 ring-rose-200 ring-inset">
-            <TriangleAlert className="size-3.5" /> No resources available
+            <TriangleAlert className="size-3.5" /> {result.status === "NO_BUS_AVAILABLE" ? "No bus available" : "No driver available"}
           </span>
         )}
       </div>
@@ -101,7 +106,7 @@ function Results({ result }: { result: EmergencyResult }) {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <KpiCard
             label="Broken bus"
-            value={result.brokenBus}
+            value={result.brokenBus ?? "—"}
             hint={`Out of service at ${result.destinationStation}`}
             icon={Wrench}
             accent="rose"

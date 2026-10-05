@@ -38,11 +38,11 @@ export function ResponseCard({
 
       <p className="px-4 py-3 text-sm leading-relaxed text-slate-800">{result.answer}</p>
 
-      {result.followUps.length > 0 && (
+      {result.suggestedQuestions.length > 0 && (
         <div className="border-t border-slate-100 px-4 py-3">
           <p className="mb-2 text-xs font-medium text-slate-500">Suggested follow-ups</p>
           <div className="flex flex-wrap gap-2">
-            {result.followUps.map((q) => (
+            {result.suggestedQuestions.map((q) => (
               <button
                 key={q}
                 onClick={() => onFollowUp(q)}

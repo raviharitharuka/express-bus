@@ -12,8 +12,7 @@ import { KpiCard } from "@/components/KpiCard";
 import { FEASIBLE_COLOR, INFEASIBLE_COLOR, RouteChart } from "./RouteChart";
 
 export function Optimization() {
-  const [allowOvertime, setAllowOvertime] = useState(false);
-  const [maxNewRoutes, setMaxNewRoutes] = useState(4);
+  const [allowOvertime, setAllowOvertime] = useState(true);
   const [result, setResult] = useState<OptimizeResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -22,7 +21,7 @@ export function Optimization() {
     setLoading(true);
     setError(null);
     try {
-      setResult(await api.optimize({ allowOvertime, maxNewRoutes }));
+      setResult(await api.optimize({ allowOvertime }));
     } catch (e) {
       setError((e as Error).message);
     } finally {
@@ -45,18 +44,6 @@ export function Optimization() {
                 className="size-4 rounded border-slate-300 accent-indigo-600"
               />
               Allow overtime
-            </label>
-            <label className="flex items-center gap-2 text-sm text-slate-600">
-              Max routes
-              <select
-                value={maxNewRoutes}
-                onChange={(e) => setMaxNewRoutes(Number(e.target.value))}
-                className="rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-sm text-slate-900 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-              >
-                {[1, 2, 3, 4, 5, 6].map((n) => (
-                  <option key={n}>{n}</option>
-                ))}
-              </select>
             </label>
             <button
               onClick={run}
@@ -99,7 +86,7 @@ export function Optimization() {
 
 function Results({ result }: { result: OptimizeResult }) {
   const { currentUtilization, optimizedUtilization, recommendations } = result;
-  const gainPts = optimizedUtilization - currentUtilization;
+  const gainPts = Math.round((optimizedUtilization - currentUtilization) * 10) / 10;
   const gainRel = currentUtilization > 0 ? (gainPts / currentUtilization) * 100 : 0;
   const feasible = recommendations.filter((r) => r.feasible);
 

@@ -67,7 +67,6 @@ export interface IdleDrivers {
 export interface OptimizeRequest {
   date?: string;
   allowOvertime?: boolean;
-  maxNewRoutes?: number;
 }
 
 export interface RouteRecommendation {
@@ -84,7 +83,10 @@ export interface OptimizeResult {
   optimizedUtilization: number;
   totalIdleHoursAvailable: number;
   totalIdleHoursUsed: number;
+  overtimeHoursUsed: number;
   newDriversRequired: number;
+  recommended: string[];
+  summary: string;
   recommendations: RouteRecommendation[];
 }
 
@@ -97,23 +99,40 @@ export interface EmergencyRequest {
   time?: string;
 }
 
-export interface EmergencyResult {
-  incidentId: string;
-  incidentType: IncidentType;
-  status: "DISPATCHED" | "NO_RESOURCES";
-  brokenBus: string;
-  replacementBus: string;
-  driver: string;
-  sourceStation: Station;
-  destinationStation: Station;
-  distanceKm: number;
-  etaMinutes: number;
+interface EmergencyBase {
+  incidentId?: string;
+  incidentType?: IncidentType;
+  /** null for DRIVER_SICK */
+  brokenBus: string | null;
+  destinationStation?: Station;
   timeline: { time: string; step: string }[];
 }
 
+export type EmergencyResult =
+  | (EmergencyBase & {
+      status: "DISPATCHED";
+      replacementBus: string;
+      driver: string;
+      sourceStation: Station;
+      destinationStation: Station;
+      distanceKm: number;
+      etaMinutes: number;
+    })
+  | (EmergencyBase & {
+      status: "NO_BUS_AVAILABLE" | "NO_DRIVER_AVAILABLE";
+      replacementBus: string | null;
+      driver: null;
+      sourceStation: null;
+      distanceKm: null;
+      etaMinutes: null;
+    });
+
 export interface LotseResult {
   question: string;
+  intent: string;
   answer: string;
   confidence: number;
-  followUps: string[];
+  /** Shape depends on `intent`; null for greeting/unknown. */
+  data: Record<string, unknown> | null;
+  suggestedQuestions: string[];
 }
